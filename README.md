@@ -10,12 +10,27 @@ Make sure you have npm and node installed on your device. You can check on the t
 
 `npm -v` and `node -v`. 
 
+You need to have mongodb installed. If you have brew, you can do this through
+
+`brew install mongodb-community`
+
+There's also some links here for tutorials to install for different OS
+
+https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials
+
 The node version needs to be at least 12. 
 You also want nodemon to have already been installed globally, which you can do with 
 
 `npm i -g nodemon`
 
 ## How to Set Up ##
+Create the data directory for MongoDB by entering into the terminal
+
+`mkdir -p /data/db`
+
+Start up MongoDB by entering
+
+`mongod`
 
 Open up MonogoDB Compass and click Connect without changing the defaults (ex. "hostname: localhost" and "Port: 27017")
 
