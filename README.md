@@ -1,4 +1,4 @@
-## Download First: ##
+## Download First ##
 
 MongoDB Compass
 https://www.mongodb.com/download-center/compass
@@ -15,7 +15,7 @@ You also want nodemon to have already been installed globally, which you can do 
 
 `npm i -g nodemon`
 
-## How to Set Up: ##
+## How to Set Up ##
 
 Open up MonogoDB Compass and click Connect without changing the defaults (ex. "hostname: localhost" and "Port: 27017")
 
@@ -31,7 +31,7 @@ After the repository finishes downloading, cd into the client directory and ente
 
 Then cd into the server directory and repeat the process there.
 
-## How to Run: ##
+## How to Run ##
 
 cd into the client directory and enter 
 
@@ -39,11 +39,11 @@ cd into the client directory and enter
 
 Open up another terminal instance and repeat the same for the server directory
 
-## How to Test: ##
+## How to Test ##
 
-### Just Backend:
+### Just Backend
 Open Postman and click on Create a Request. Click on the Body tag and select "raw" in the drop-down, and then "JSON" in the second drop-down that appears. Enter your inputs in the text box below in a JSON format, enter the URL at the top text field, and set the HTTPS request type in the drop-down next to the top text field. Click Send when you're ready.
 
-### Backend and Frontend:
+### Backend and Frontend
 Go to the appropiate React Component, input any data there, and then enter it. Open up developer mode on the page and check the console for any error messages or other output.
 
