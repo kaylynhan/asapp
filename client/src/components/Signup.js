@@ -6,17 +6,27 @@ import "../App.css";
 
 const Signup = ({history}) => {
 
+
     const handleSignup = (event) => {
-        //Need to add login functionality here
+        event.preventDefault();
+        const {email, password} = event.target.elements;
+        const newUser = {
+            email: email.value,
+            password: password.value
+        }
+        console.log(newUser);
+        axios.post("http://localhost:4000/users/add", newUser)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     }
     return(
         <div className="centered">
             <div className="row">
-                <h1>Log In</h1>
+                <h1>Sign Up</h1>
                 <form onSubmit={handleSignup} >
                     <label>
                         Email
-                        <input name="email" type="email" placeHolder="Email" />
+                        <input name="email" type="email" placeholder="Email" />
                     </label>
                     <label>
                         Password

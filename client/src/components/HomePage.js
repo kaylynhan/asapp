@@ -1,13 +1,13 @@
 import React from 'react';
-import Login from "../components/Login"
+import SignUp from "../components/Signup.js"
 
 class HomePage extends React.Component {
     render() {
         return (
             <div>
                 <p>Homepage TODO need to finsh</p>
-                <p>Sticking Login component here to check connection to server</p>
-                <Login />
+                <p>Sticking SignUp component here to check connection to server</p>
+                <SignUp />
             </div>
         )
     }
