@@ -47,6 +47,9 @@ After the repository finishes downloading, cd into the client directory and ente
 Then cd into the server directory and repeat the process there.
 
 ## How to Run ##
+If not already running, start up MongoDB with
+
+`mongod`
 
 cd into the client directory and enter 
 
