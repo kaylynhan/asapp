@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import userRoutes from "./routes/user.router.js";
+import userRoutes from "./routes/user.route.js";
 
 const PORT = 4000;
 const app = express();
