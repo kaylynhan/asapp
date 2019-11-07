@@ -66,6 +66,24 @@ Open Postman and click on Create a Request. Click on the Body tag and select "ra
 ### Backend and Frontend
 Go to the appropiate React Component, input any data there, and then enter it. Open up developer mode on the page and check the console for any error messages or other output.
 
+## How to Create a New Feature Branch ##
+Make sure you are currently on the master branch. You can check with 
+
+`git branch`
+
+If you're not currently on master, move to master using
+
+`git checkout master`
+
+Now make sure your local master is up to date using
+
+`git fetch origin
+git reset --hard origin/master`
+
+Make your new feature branch that is created off of master with
+
+`git checkout -b [feature's name]`
+
 ## How to Pull Changes to Master ##
 After your branch's new feature is working without errors, you'll want to push the changes to master.
 ### Fix Merge Conflicts
