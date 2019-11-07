@@ -86,7 +86,7 @@ https://github.com/kaylynhan/asapp/pulls
 
 Click on "Create New Pull Request". On the dropdown that says "compare: master", click on it and then select the feature branch whose changes you want to pull to master.
 
-## Approving the Pull Request
+### Approving the Pull Request
 
 You'll need at least one other person to review your pull request and approve it from the Github website. They can do this by going to 
 
