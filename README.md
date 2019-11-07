@@ -78,6 +78,7 @@ If you're not currently on master, move to master using
 Now make sure your local master is up to date using
 
 `git fetch origin`
+
 `git reset --hard origin/master`
 
 Make your new feature branch that is created off of master with
