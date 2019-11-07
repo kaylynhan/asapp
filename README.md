@@ -66,7 +66,7 @@ Open Postman and click on Create a Request. Click on the Body tag and select "ra
 ### Backend and Frontend
 Go to the appropiate React Component, input any data there, and then enter it. Open up developer mode on the page and check the console for any error messages or other output.
 
-## How to Move Changes to Master ##
+## How to Pull Changes to Master ##
 After your branch's new feature is working without errors, you'll want to push the changes to master.
 ### Fix Merge Conflicts
 First within your feature branch pull from master. This is to correct any merge conflicts before pushing to master.
