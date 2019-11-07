@@ -66,3 +66,31 @@ Open Postman and click on Create a Request. Click on the Body tag and select "ra
 ### Backend and Frontend
 Go to the appropiate React Component, input any data there, and then enter it. Open up developer mode on the page and check the console for any error messages or other output.
 
+## How to Move Changes to Master ##
+After your branch's new feature is working without errors, you'll want to push the changes to master.
+### Fix Merge Conflicts
+First within your feature branch pull from master. This is to correct any merge conflicts before pushing to master.
+
+`git pull origin master`
+
+Git will indicate which files have merge conflicts. After fixing them, check with 
+
+`git status`
+
+that all your merge conflicts have been fixed.
+
+### Make a Pull Request on the Github Website
+Open up a browser and go to 
+
+https://github.com/kaylynhan/asapp/pulls
+
+Click on "Create New Pull Request". On the dropdown that says "compare: master", click on it and then select the feature branch whose changes you want to pull to master.
+
+## Approving the Pull Request
+
+You'll need at least one other person to review your pull request and approve it from the Github website. They can do this by going to 
+
+https://github.com/kaylynhan/asapp/pulls
+
+where they can see all current pull requests.
+
