@@ -77,15 +77,16 @@ If you're not currently on master, move to master using
 
 Now make sure your local master is up to date using
 
-`git fetch origin
-git reset --hard origin/master`
+`git fetch origin`
+`git reset --hard origin/master`
 
 Make your new feature branch that is created off of master with
 
 `git checkout -b [feature's name]`
 
+You'll want to directly commit and push all your changes to a feature branch.
 ## How to Pull Changes to Master ##
-After your branch's new feature is working without errors, you'll want to push the changes to master.
+After your branch's new feature is working without errors, you'll want to pull the changes to master.
 ### Fix Merge Conflicts
 First within your feature branch pull from master. This is to correct any merge conflicts before pushing to master.
 
