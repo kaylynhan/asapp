@@ -1,0 +1,25 @@
+
+.Tooltip .__react_component_tooltip {
+  background-color: #888888;
+  color: black;
+  font-size: medium;
+  opacity: 1;
+  line-height: 0;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+circle {
+  fill: grey;
+}
+
+text {
+  fill: white;
+  pointer-events: none;
+}
+
+
+.TooltipDiv {
+  width: 30px;
+  height: 30px;
+}
