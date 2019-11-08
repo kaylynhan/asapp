@@ -1,0 +1,61 @@
+
+#page_container{
+    display:grid;
+    grid-template-areas: 
+        "header header"
+        "LS schedule_area";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows:1fr 7fr;
+    grid-gap:10px;
+    height:200%;
+}
+
+h1, p{
+    text-align:center;
+}
+
+#left_sidebar{
+    display:grid;
+    grid-area:LS;
+    grid-template-rows: 1fr 5fr 1fr 3fr;
+}
+
+#left_sidebar > *{
+    border: black 1px dashed;
+}
+
+#schedule_area{
+    grid-area: schedule_area;
+    display:grid;
+    grid-template-areas:
+        "pref pref"
+        "sort grid_area";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 6fr;
+}
+
+
+#schedule_area > *{
+    border: 1px black dashed;
+}
+
+#preferences{
+    grid-area:pref;
+}
+
+#sort{
+    grid-area:sort;
+}
+
+#grid_area{
+    grid-area:grid_area;
+}
+
+header{
+    grid-area:header;
+}
+
+#page_container > *{
+    border: 1px black solid;
+}
+
