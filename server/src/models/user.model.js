@@ -2,8 +2,13 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-    email: { type: String, match: /^[A-Za-z]+[0-9]*@ucsd\.edu$/ },
-    password: { type: String },
+    email: { type: String, 
+            match: [/^[A-Za-z]+[0-9]*@ucsd\.edu$/, 'You must input a ucsd email!'],
+            required: [true, 'A user must have an email!'] 
+    },
+    password: { type: String, 
+        required: [true, 'A user must have a password!'] 
+    },
     schedules: [new Schema({
         label: { type: String },
         footnotes: { type: String },
