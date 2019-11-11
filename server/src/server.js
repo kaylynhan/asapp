@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import userRoutes from "./routes/user.route.js";
+import courseRoutes from "./routes/course.route.js"
 
 const PORT = 4000;
 const app = express();
@@ -18,6 +19,7 @@ connection.once('open', function() {
 })
 
 app.use('/users', userRoutes);
+app.use('/courses', courseRoutes);
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
