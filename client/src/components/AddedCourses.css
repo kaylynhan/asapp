@@ -1,0 +1,13 @@
+#courseTagContainer {
+    display: grid;
+    grid-template-areas:
+        "needArea wantArea";
+}
+
+#wantArea {
+    grid-area: wantArea;
+}
+
+#needArea {
+    grid-area: needArea;
+}
