@@ -1,5 +1,6 @@
 import React from 'react'
-import CourseTag from './CourseTag'
+import OptionalTag from './OptionalTag'
+import RequiredTag from './RequiredTag'
 import './AddedCourses.css'
 
 class AddedCourses extends React.Component {
@@ -7,13 +8,14 @@ class AddedCourses extends React.Component {
         super(props)
 
         this.state = {
-            wantClasses: ['CSE134B','CSE120', 'MATH20E'],
-            needClasses: ['CSE110', 'CSE101', 'MATH183']
+            optionalClasses: ['CSE134B','CSE120', 'MATH20E'],
+            requiredClasses: ['CSE110', 'CSE101', 'MATH183']
         }
         
         this.onAddItem = this.onAddItem.bind(this)
         this.onChangePriority = this.onChangePriority.bind(this)
-        this.callBackFunction = this.callBackFunction.bind(this)
+        this.requiredCallBack = this.requiredCallBack.bind(this)
+        this.optionalCallBack = this.optionalCallBack.bind(this)
 
     }
 
@@ -22,64 +24,59 @@ class AddedCourses extends React.Component {
     }
 
 
-    onAddItem = () => {
+    onAddItem = (value) => {
         this.setState(state => {
-          const wantClasses = this.state.wantClasses.concat(state.value);
+          const wantClasses = this.state.wantClasses.concat(value);
           return {
             wantClasses,
           }
         })
     }
-    // FIX THIS FUNCTION TO MOVE ELEMENTS FROM ONE ARRAY INTO THE OTHER
-    callBackFunction = (item) => {
-        var index = this.state.needClasses.indexOf(item)
-        if(index == -1) {
-            var index = this.state.wantClasses.indexOf(item)
-            this.setState(state => {
+
+    requiredCallBack = (item) => {
+       
+        this.setState(state => {
+            var newArr = this.state.requiredClasses.filter(function(value) {
+                return value !== item
+            })
+            const requiredClasses = newArr
+            const optionalClasses = this.state.optionalClasses.concat(item)
+            return {
+                requiredClasses,
+                optionalClasses,
+            }
+        })        
+    }
+
+    optionalCallBack = (item) => {
+        this.setState(state => {
                 
-                const wantClasses = this.state.wantClasses.splice(index,1)
-                return {
-                    wantClasses,
-                }
+            const optionalClasses = this.state.optionalClasses.filter(function(value) {
+                return value !== item
             })
-            this.setState(state => {
-                const needClasses = this.state.needClasses.concat(item)
-                return {
-                    needClasses,
-                }
-            })
-        }
-        else {
-            this.setState(state => {
-                const needClasses = this.state.needClasses.splice(index,1)
-                console.log(needClasses)
-                return {
-                    needClasses,
-                }
-            })
-            this.setState(state => {
-                const wantClasses = this.state.wantClasses.concat(item)
-                return {
-                    wantClasses,
-                }
-            })
-        }
+
+            const requiredClasses = this.state.requiredClasses.concat(item)
+            return {
+                optionalClasses,
+                requiredClasses,
+            }
+        })        
     }
 
     render(){
       return(
         <div id='courseTagContainer'>
-            <div id='wantArea'>
-                {this.state.wantClasses.map(item => (
+            <div id='optionalArea'>
+                {this.state.optionalClasses.map(item => (
                     <div key={item}>
-                        <CourseTag name={item} parentCallback={this.callBackFunction}/>
+                        <OptionalTag name={item} parentCallback={this.optionalCallBack}/>
                     </div>
                 ))}
             </div>
-            <div id="needArea">
-                {this.state.needClasses.map(item => (
+            <div id="requiredArea">
+                {this.state.requiredClasses.map(item => (
                     <div key={item}>
-                        <CourseTag name={item} parentCallback={this.callBackFunction}/>
+                        <RequiredTag name={item} parentCallback={this.requiredCallBack}/>
                     </div>
                 ))}
             </div>

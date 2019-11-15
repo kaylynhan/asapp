@@ -1,13 +1,13 @@
 #courseTagContainer {
     display: grid;
     grid-template-areas:
-        "needArea wantArea";
+        "requiredArea optionalArea";
 }
 
-#wantArea {
-    grid-area: wantArea;
+#optionalArea {
+    grid-area: optionalArea;
 }
 
-#needArea {
-    grid-area: needArea;
+#requiredArea {
+    grid-area: requiredArea;
 }
