@@ -20,14 +20,16 @@ let UserSchema = new Schema({
             prereqs: [String],
             final: {
                 day: { type: String },
-                time: [String],
+                start_time: Number,
+                end_time: Number,
                 building: { type: String },
                 room_number: { type: Number }
             },
             meetings: [new Schema({
                 type: { type: String },
                 day: { type: String },
-                time: [String],
+                start_time: Number,
+                end_time: Number,
                 building: { type: String },
                 room_number: { type: Number }
             })]
