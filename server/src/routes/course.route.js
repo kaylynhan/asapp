@@ -5,15 +5,15 @@ const courseRoutes = express.Router();
 export default courseRoutes;
 
 /* Create */
-//Creates a course
+//given a course json, creates a course
 courseRoutes.route('/add').post(function(req, res){
     let course = new Course(
         {
             name: req.body.name,
             units: req.body.units,
-            description: req.body.units,
-            prereqs: req.body.units,
-            section_list: req.body.section_list
+            description: req.body.description,
+            prereqs: req.body.prereqs,
+            sections: req.body.sections
         }
     );
     course.save()
@@ -21,39 +21,38 @@ courseRoutes.route('/add').post(function(req, res){
             res.status(200).send(`Course ${req.body.name} successfully saved`);
         })
         .catch(err =>{
-            res.status(400).send(`Failed to sign up user\n${err}`);
+            res.status(400).send(`Failed to save course ${req.body.name}\n${err}`);
         });
 });
 
-//Creates multiple new courses
+//given an array of course jsons, creates multiple new courses
 courseRoutes.route('/addMany').post(function(req, res){
-    Course.insert(req.courses)
+    Course.insertMany(req.body.courses)
         .then(courses => {
-            res.status(200).send('All courses successfully saved!');
+            res.status(200).send(`All courses successfully saved!\n${req.body.courses}`);
         })
         .catch(err => {
-            res.status(400).send(`Error when attempting to save courses\n${err}`)
+            res.status(400).send(`No courses saved, error encountered\n${err}`);
         });
-
 });
 
 /* Read */
-//Gets a course with all of its info
+//given a course id, gets the course with all of its info
 courseRoutes.route('/').get(function (req, res){
     Course.findOne({_id: req.body.id})
         .then(course => {
             res.status(200).json(course);
         })
         .catch(err => {
-            res.status(400).send(`Failed to get course ${req.body._id}\n${err}`);
+            res.status(400).send(`Failed to get course ${req.body.id}\n${err}`);
         });
 });
 
-//Gets a course's section dlist
+//given a course id, gets just the list of secionts
 courseRoutes.route('/sections').get(function (req, res){
     Course.findOne({_id: req.body.id})
         .then(course => {
-            res.status(200).json(course.section_list);
+            res.status(200).json(course.sections);
         })
         .catch(err => {
             res.status(400).send(`Failed to get section details of course 
@@ -61,9 +60,9 @@ courseRoutes.route('/sections').get(function (req, res){
         });
 });
 
-//Gets all of the courses but without their section details
+//Gets an array of all of the courses but without their section details
 courseRoutes.route('/overviews').get(function (req,res){
-    Course.find({}).select("-section_list")
+    Course.find({}).select("-sections")
         .then(courses => {
             res.status(200).json(courses);
         })
@@ -73,22 +72,22 @@ courseRoutes.route('/overviews').get(function (req,res){
 });
 
 /* Update */
-//Updates the content of a course
+//given a course id, updates the content of a course completely, replacing all fields
 courseRoutes.route('/update').put(function (req, res){
     Course.updateOne(
         {_id: req.body.id},
         {
             name: req.body.name,
             units: req.body.units,
-            description: req.body.units,
-            prereqs: req.body.units,
-            section_list: req.body.section_list
+            description: req.body.description,
+            prereqs: req.body.prereqs,
+            sections: req.body.sections
         }
     );
 });
 
 /* Delete */
-//Deletes a course
+//given a course id, deletes that course
 courseRoutes.route('/remove').delete(function (req, res){
     Course.deleteOne({_id: req.body.id})
     .then(course => {
