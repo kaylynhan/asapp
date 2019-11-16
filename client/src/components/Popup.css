@@ -2,45 +2,53 @@
 .popup {
   display: none;
   position: fixed;
-  padding-top: 0;
-  padding-left: 0;
-  left: 25%;
-  top: 25%;
-  /*width: 50%;*/
-  height: 50%;
-  overflow: hide;
+  overflow: hidden;
   background-color: #444;
   border: 1px solid black;
-
+  box-shadow: 0 0 3vh 1.5vh rgba(0,0,0,0.4);
 }
-.popup-container {
+
+.popupBtn {
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  margin: 1px;
+}
+
+.popupBtn:hover {
+  background-color: white;
+}
+
+.popupContainer {
   width: 100%;
   height: 100%;
   overflow: auto;
   margin: 0%;
-  background-color: #888;
+  background-color: white;
   border: none;
 }
 
-.popup-content {
-  background-color: #888;
+.popupContent {
+  background-color: white;
   margin: auto;
   padding: 0%;
   width: 100%;
-  height: 100%;
   border: none;
+  font-size: 2vh;
 }
 
-.popup-close {
+.popupClose {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 3vh;
   font-weight: normal;
-  padding-right: 2%;
-  padding-bottom: 1%;
+  padding-right: 0.5vh;
+  padding-bottom: 0vh;
+  padding-top: 0vh;
   cursor: default;
+  height: 3.5vh;
+  line-height: 3vh;
 
 }
-.popup-close:hover {
+.popupClose:hover {
   color: white;
 }

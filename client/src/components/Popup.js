@@ -1,15 +1,18 @@
 /*
 Popup: creates a button that when pressed displays a popup with info
-    popup has a close button to close it.
+    -- the popup has a close button to close it.
 
-Format:
-<Popup display="Second Button" info = {modalV3Contents2}/>
-    -- display is what the button shows
-    -- info is what the popup shows
-
-<Popup width="25%" height="25%" display="Second Button" info = {modalV3Contents2}/>
-    -- default is the window is half the size of the screen
-    -- but you can specify what you want to change that. (still working out how)
+FORMAT:
+    <Popup display="ButtonText" info = {PopupContents}/>
+        -- display: what the button shows
+        -- info: what the popup shows
+WITH PROPERTIES:
+    <Popup x="25%" y="25%" width="25%" height="25%" display="ButtonText" info = {PopupContents}/>
+        -- Properties:
+            x,y: the location of the top left corner
+            width,height: the dimensions of the window
+        -- Default Property Values: the window is centered and half the size of the screen
+                ie, x="25%", y="25%", width="50%", height="50%"
 */
 
 
@@ -27,47 +30,64 @@ class Popup extends React.Component {
         this.handleSpanClick = this.handleSpanClick.bind(this);
     }
 
+    // Opens Popup
     handleBtnClick(PopupCount) {
         var popup = document.getElementById("myPopup" + PopupCount)
         var btn = document.getElementById("myPopupBtn" + PopupCount)
         popup.style.display = "block" 
-        //btn.style.display = "none"
-        //btn.style.visibility = "hidden"
         btn.disabled = true;
     }
 
+
+
+    // Closes Popup
     handleSpanClick(PopupCount) {
         var popup = document.getElementById("myPopup" + PopupCount)
         var btn = document.getElementById("myPopupBtn" + PopupCount)
         popup.style.display = "none"
-        //btn.style.display = "block"
-        //btn.style.visibility = "visible"
-        btn.disabled = false;
+        btn.disabled = false
     }
 
     render() {
-        var PopupCount = Popup.PopupCount++;
+        // New popup
+        var PopupCount = ++Popup.PopupCount;
+
+        // Process Popup properties
         var popupStyle = {
             width: this.props.width ? this.props.width : "50%",
             height: this.props.height ? this.props.height : "50%",
+            top: this.props.y ? this.props.y : "25%",
+            left: this.props.x ? this.props.x : "25%",
         }
 
         return (
             <div>
-                <button onClick={() => this.handleBtnClick(PopupCount)} id={"myPopupBtn" + PopupCount}>
+                {/* Popup Button */}
+                <button className="popupBtn"
+                    onClick={() => this.handleBtnClick(PopupCount)}
+                    id={"myPopupBtn" + PopupCount}
+                    >
                     {this.props.display}
                 </button>
-                <div style={popupStyle} id={"myPopup" + PopupCount} class="popup"> 
-                    <span onClick={() => this.handleSpanClick(PopupCount)} class="popup-close">
+                {/* Popup Window */}
+                <div className="popup"
+                    style={popupStyle}
+                    id={"myPopup" + PopupCount}
+                    >
+                    {/* Close Button */}
+                    <span className="popupClose"
+                        onClick={() => this.handleSpanClick(PopupCount)}
+                        >
                         &times;
                     </span>
-                    <div class="popup-container">
-                        <div class="popup-content">
+                    {/* Popup Content Container */}
+                    <div className="popupContainer">
+                        <div className="popupContent">
+                            {/* Popup Content (Property passed in)*/}
                             {this.props.info}
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }
