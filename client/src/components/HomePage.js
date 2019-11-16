@@ -1,6 +1,10 @@
 import React from 'react';
 import SignUp from "../components/Signup.js"
 import "./homepage.css"
+import UnitSlider from "../components/UnitSlider"
+
+import 'rc-slider/assets/index.css';
+
 
 class HomePage extends React.Component {
     render() {
@@ -26,7 +30,14 @@ class HomePage extends React.Component {
                     </div>
                     <div id="schedule_area">
                         <div id="preferences">
-                            <p> Preferences</p>
+                            <div id="unitPref">
+                                <UnitSlider />
+                            </div>
+                            <div id="minGap">
+                            </div>
+                            <div id="restrictCommute"></div>
+                            <div id="profPref"></div>
+
                         </div>
                         <div id="sort">
                             <p> sort_by</p>
