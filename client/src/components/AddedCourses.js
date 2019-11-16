@@ -88,3 +88,4 @@ class AddedCourses extends React.Component {
 }
 
 export default AddedCourses
+
