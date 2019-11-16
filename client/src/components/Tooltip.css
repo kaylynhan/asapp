@@ -1,12 +1,51 @@
 
-.Tooltip .__react_component_tooltip {
-  background-color: #888888;
+/*.tooltip.__react_component_tooltip.type-dark {
+  background-color: gold;
+}*/
+
+.tooltipInfo * {
+  margin: 0;
+}
+
+.tooltipContent {
+  --background-color: #008888;
+  --arrow-color: var(--background-color);
+}
+.tooltip.__react_component_tooltip {
+  /*--background-color: #008888;
+  --arrow-color: var(--background-color);*/
+  background-color: var(--background-color);
   color: black;
-  font-size: medium;
   opacity: 1;
-  line-height: 0;
-  padding-top: 20px;
+  font-size: 1.5vh;
+  position: fixed;
+  line-height: 2vh;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
   padding-bottom: 10px;
+  box-shadow: 0 0 18px 10px rgba(0,0,0,0.3);
+  /*border: 1px solid var(--background-color);*/
+}
+
+.tooltip {
+  overflow-wrap: break-word;
+  display: block;
+  max-width: 40vw;
+
+}
+
+.tooltip.place-right:after {
+  border-right-color: var(--arrow-color) !important;
+}
+.tooltip.place-top:after {
+  border-top-color: var(--arrow-color) !important;
+}
+.tooltip.place-left:after {
+  border-left-color: var(--arrow-color) !important;
+}
+.tooltip.place-bottom:after {
+  border-bottom-color: var(--arrow-color) !important;
 }
 
 circle {
@@ -19,7 +58,7 @@ text {
 }
 
 
-.TooltipDiv {
+.tooltipDiv {
   width: 30px;
   height: 30px;
 }
