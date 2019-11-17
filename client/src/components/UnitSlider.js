@@ -1,23 +1,23 @@
-import 'rc-slider/assets/index.css';
-import 'rc-tooltip/assets/bootstrap.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Tooltip from 'rc-tooltip';
-import Slider from 'rc-slider';
+import "rc-slider/assets/index.css"
+import "rc-tooltip/assets/bootstrap.css"
+import React from "react"
+import ReactDOM from "react-dom"
+import Tooltip from "rc-tooltip"
+import Slider from "rc-slider"
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Range = createSliderWithTooltip(Slider.Range);
-const Handle = Slider.Handle;
+const createSliderWithTooltip = Slider.createSliderWithTooltip
+const Range = createSliderWithTooltip(Slider.Range)
+const Handle = Slider.Handle
 
 class UnitSlider extends React.Component {
   constructor(props) {
-    super(props);
-    this.handle = this.handle.bind(this);
+    super(props)
+    this.handle = this.handle.bind(this)
   }
 
   handle = (props) => {
 
-    const { value, dragging, index, ...restProps } = props;
+    const { value, dragging, index, ...restProps } = props
     return (
       <Tooltip
         prefixCls="rc-slider-tooltip"
@@ -28,8 +28,8 @@ class UnitSlider extends React.Component {
       >
         <Handle value={value} {...restProps} />
       </Tooltip>
-    );
-  };
+    )
+  }
 
 
 
@@ -50,4 +50,5 @@ class UnitSlider extends React.Component {
     )
   }
 }
+
 export default UnitSlider

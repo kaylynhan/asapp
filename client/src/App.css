@@ -13,37 +13,29 @@
 }
 
 .App-logo {
-  height: 9vh;
+  height: 67px;
   float: left;
 }
 
 .App-header {
   padding-top: 1vh;
-  max-height: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
   vertical-align: center;
-  font-size: 2vmin;
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
 }
 
 .NavbarLeft {
   background-color: #0d5b93;
-  min-height: 7vh;
-  max-height: 20vh;
-  width: 5vh;
+  height: 50px;
+  min-width: 1%;
+  max-width: 10%;
   display: flex;
 }
 
 .NavbarRight {
   background-color: #0d5b93;
-  min-height: 7vh;
-  max-height: 20vh;
+  height: 50px;
   min-width: 50vh;
   width: 100%;
   display: flex;
@@ -55,16 +47,16 @@
 .NavBtn {
   background-color: #0d5b93;
   font-family: 'Montserrat';
-  font-size: 2vmin;
+  font-size: 10pt;
   color: #fffacd;
   border: none;
   height: stretch;
   /* width: 15vmin; */
   padding-left: 3vmin;
   padding-right: 3vmin;
+  align-items: center;
 }
 
 .NavBtn:hover {
   background-color: #106cad;
 }
-

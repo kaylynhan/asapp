@@ -1,11 +1,11 @@
 /* Tooltip.js - A tooltip is an info icon with info that appears on hover.
 *       IMPORTANT: The Tooltip REQUIRES a UNIQUE ID as the ID is how it
 *            links the message to the icon.
-*       Tooltip uses the module 'react-tooltip' which may need to be installed.
+*       Tooltip uses the module "react-tooltip" which may need to be installed.
 *       Info can be declared elsewhere or injected directly.
 * Example use case:
 *---ExampleFile.js---
-*       import Tooltip from './Tooltip'
+*       import Tooltip from "./Tooltip"
 *
 *       ... (inside JSX)
 *
@@ -16,18 +16,18 @@
 *           <Tooltip id="UniqueTooltipID" info = {ExampleInfo}/>
 *---ExampleFile.css---
 *       .UniqueTooltipID {
-*           color: blue;
+*           color: blue
 *       }
 */
 
-import React from 'react';
-import ReactTooltip from 'react-tooltip'
-import './Tooltip.css'
+import React from "react"
+import ReactTooltip from "react-tooltip"
+import "./Tooltip.css"
 
 class Tooltip extends React.Component {
 
     // Counter used to form unique IDs for Tooltips
-    static tooltipCount = 0;
+    static tooltipCount = 0
 
     /*var popupStyle = {
         width: this.props.width ? this.props.width : "50%",
@@ -44,18 +44,18 @@ class Tooltip extends React.Component {
             </div>
 
         var tooltipStyle =
-            this.props.arrowColor ? 
+            this.props.arrowColor ?
                 {
                 "--background-color": this.props.backgroundColor ? this.props.backgroundColor : "#888888",
                 "--arrow-color": this.props.arrowColor
                 }
-            : 
+            :
                 {
                 "--background-color": this.props.backgroundColor ? this.props.backgroundColor : "#888888",
                 }
-        
+
         // Create new Tooltip
-        Tooltip.tooltipCount++;
+        Tooltip.tooltipCount++
 
         return (
             <div className="tooltipDiv">
@@ -90,4 +90,4 @@ class Tooltip extends React.Component {
         )
     }
 }
-export default Tooltip;
+export default Tooltip
