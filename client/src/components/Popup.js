@@ -1,6 +1,7 @@
 /*
 Popup: creates a button that when pressed displays a popup with info
     -- the popup has a close button to close it.
+    
 FORMAT:
     <Popup display="ButtonText" info = {PopupContents}/>
         -- display: what the button shows
@@ -14,19 +15,18 @@ WITH PROPERTIES:
                 ie, x="25%", y="25%", width="50%", height="50%"
 */
 
-
-import React from 'react'
-import './Popup.css'
+import React from "react"
+import "./Popup.css"
 
 class Popup extends React.Component {
 
     // Count Popups to give them unique IDs
-    static PopupCount = 0;
+    static PopupCount = 0
 
     constructor(props) {
-        super(props);
-        this.handleBtnClick = this.handleBtnClick.bind(this);
-        this.handleSpanClick = this.handleSpanClick.bind(this);
+        super(props)
+        this.handleBtnClick = this.handleBtnClick.bind(this)
+        this.handleSpanClick = this.handleSpanClick.bind(this)
     }
 
     // Opens Popup
@@ -34,7 +34,7 @@ class Popup extends React.Component {
         var popup = document.getElementById("myPopup" + PopupCount)
         var btn = document.getElementById("myPopupBtn" + PopupCount)
         popup.style.display = "block"
-        btn.disabled = true;
+        btn.disabled = true
     }
 
 
@@ -49,7 +49,7 @@ class Popup extends React.Component {
 
     render() {
         // New popup
-        var PopupCount = ++Popup.PopupCount;
+        var PopupCount = ++Popup.PopupCount
 
         // Process Popup properties
         var popupStyle = {
@@ -77,7 +77,7 @@ class Popup extends React.Component {
                     <span className="popupClose"
                         onClick={() => this.handleSpanClick(PopupCount)}
                         >
-                        &times;
+                        &times
                     </span>
                     {/* Popup Content Container */}
                     <div className="popupContainer">
@@ -92,4 +92,4 @@ class Popup extends React.Component {
     }
 }
 
-export default Popup;
+export default Popup

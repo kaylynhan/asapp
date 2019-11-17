@@ -1,22 +1,62 @@
+/*
+ *
+ *  Colors:
+ *
+ *  Header blue     #0d5b93
+ *  Header yellow   #fffacd
+ *
+ *
+ */
+
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 67px;
+  float: left;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  padding-top: 1vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  vertical-align: center;
 }
 
-.App-link {
-  color: #09d3ac;
+.NavbarLeft {
+  background-color: #0d5b93;
+  height: 50px;
+  min-width: 1%;
+  max-width: 10%;
+  display: flex;
+}
+
+.NavbarRight {
+  background-color: #0d5b93;
+  height: 50px;
+  min-width: 50vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  justify-content: flex-end;
+}
+
+.NavBtn {
+  background-color: #0d5b93;
+  font-family: 'Montserrat';
+  font-size: 10pt;
+  color: #fffacd;
+  border: none;
+  height: stretch;
+  /* width: 15vmin; */
+  padding-left: 3vmin;
+  padding-right: 3vmin;
+  align-items: center;
+}
+
+.NavBtn:hover {
+  background-color: #106cad;
 }
