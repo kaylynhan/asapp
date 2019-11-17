@@ -5,7 +5,7 @@ import UnitSlider from "../components/UnitSlider"
 import 'rc-slider/assets/index.css';
 import GapSlider from './GapSlider.js';
 import ProfDropdown from './ProfDropdown.js';
-import Grid from "./Grid.js"
+import "./table.css"
 
 
 class HomePage extends React.Component {
@@ -45,47 +45,15 @@ class HomePage extends React.Component {
                                 <ProfDropdown title="Avoid Prof"></ProfDropdown>
                             </div>
                         </div>
-                            <div id="sort">
-                                <p> sort_by</p>
-                            </div>
-                            <div id="grid_area">
-                                <p> grid_area</p>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                            </div>
+                        <div id="sort">
+                            <p> sort_by</p>
+                        </div>
+                        <div id="grid_area">
                         </div>
                     </div>
                 </div>
-                )
-            }
-        }
-        
+            </div>
+        )
+    }
+}
 export default HomePage;
