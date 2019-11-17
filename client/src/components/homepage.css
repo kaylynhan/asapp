@@ -39,8 +39,27 @@ h1, p{
     border: 1px black dashed;
 }
 
+#minGap{
+    flex:1
+}
+
+#unitPref{
+    flex:1
+}
+
+#restrictCommute{
+    flex:1
+}
+
+#profPref{
+    flex:1
+}
+
 #preferences{
     grid-area:pref;
+    display:flex;
+    flex-direction: row;
+    margin:20px;
 }
 
 #sort{

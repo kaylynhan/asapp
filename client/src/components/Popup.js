@@ -1,6 +1,7 @@
 /*
 Popup: creates a button that when pressed displays a popup with info
     -- the popup has a close button to close it.
+    
 FORMAT:
     <Popup display="ButtonText" info = {PopupContents}/>
         -- display: what the button shows
@@ -13,7 +14,6 @@ WITH PROPERTIES:
         -- Default Property Values: the window is centered and half the size of the screen
                 ie, x="25%", y="25%", width="50%", height="50%"
 */
-
 
 import React from "react"
 import "./Popup.css"

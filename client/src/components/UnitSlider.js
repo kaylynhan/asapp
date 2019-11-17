@@ -50,4 +50,5 @@ class UnitSlider extends React.Component {
     )
   }
 }
+
 export default UnitSlider
