@@ -1,14 +1,33 @@
-import React from 'react';
+import React from "react"
 import SignUp from "../components/Signup.js"
-import "./homepage.css"
+import "./HomePage.css"
+import NavigationBar from "../components/NavigationBar.js"
+import "../App.css"
+import "./CoursePlan.css"
+import CoursePlan from "./CoursePlan.js"
+import CourseList from "./CourseList.js"
+import UnitSlider from "../components/UnitSlider"
+import Popup from "./Popup.js"
+import Tooltip from "./Tooltip.js"
+/* import "rc-slider/assets/index.css"; */
 
 class HomePage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { showLogin: false };
+    }
+
+    toggleLogin() {
+        this.setState({
+            showLogin: !this.state.showLogin
+        });
+    }
+
     render() {
         return (
-            <div>
                 <div id="page_container">
                     <header>
-                        <h1> Header </h1>
+                        <NavigationBar />
                     </header>
                     <div id="left_sidebar">
                         <div id="search_input">
@@ -16,57 +35,36 @@ class HomePage extends React.Component {
                         </div>
                         <div id="search_result">
                             <p> Search_result</p>
+                            <CourseList />
                         </div>
                         <div id="generate">
-                            <p> Generate Btn</p>
+                            <button class="NavBtn">
+                                Generate Schedules
+                            </button>
                         </div>
                         <div id="need_want">
                             <p> Need vs want</p>
+                            <CoursePlan />
                         </div>
                     </div>
                     <div id="schedule_area">
                         <div id="preferences">
-                            <p> Preferences</p>
+                         <div id="unitPref">
+                          <UnitSlider />
+                          </div>
+                          <div id="minGap">
+                          </div>
+                          <div id="restrictCommute"></div>
+                          <div id="profPref"></div>
                         </div>
                         <div id="sort">
                             <p> sort_by</p>
                         </div>
-                        <div id="grid_area">
+                        <div id="display_area">
                             <p> grid_area</p>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }
