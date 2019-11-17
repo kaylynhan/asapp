@@ -20,6 +20,11 @@ h1, p{
     grid-template-rows: 1fr 5fr 1fr 3fr;
 }
 
+#preferences > *{
+    margin-left:10px;
+    margin-right:10px;
+}
+
 #left_sidebar > *{
     border: black 1px dashed;
 }
@@ -31,7 +36,7 @@ h1, p{
         "pref pref"
         "sort grid_area";
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 1fr 5fr;
 }
 
 
@@ -47,7 +52,7 @@ h1, p{
     flex:1
 }
 
-#restrictCommute{
+#profAvoid{
     flex:1
 }
 

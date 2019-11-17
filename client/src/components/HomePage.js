@@ -7,9 +7,47 @@ import "./CoursePlan.css"
 import CoursePlan from "./CoursePlan.js"
 import CourseList from "./CourseList.js"
 import UnitSlider from "../components/UnitSlider"
+import 'rc-slider/assets/index.css';
+import GapSlider from './GapSlider.js';
+import ProfDropdown from './ProfDropdown.js';
+import "./table.css"
+import Grid from "./Grid.js"
+import ScheduleManager from "./ScheduleManager";
 import Popup from "./Popup.js"
 import Tooltip from "./Tooltip.js"
 /* import "rc-slider/assets/index.css"; */
+
+let sample_schedules = [
+    {
+        'label': "A 6 unit schedule",
+        'footnotes': "I want this schedule",
+        'sections': [
+            {
+                'course_name': 'CSE 110',
+                'section_id': 'asdf'
+            },
+            {
+                'course_name': 'CSE 15L',
+                'section_id': 'asdf'
+            }
+        ]
+    },
+    {
+        'label': "An 8 unit schedule",
+        'footnotes': "I want this schedule",
+        'sections': [
+            {
+                'course_name': 'CSE 110',
+                'section_id': 'asdf'
+            },
+            {
+                'course_name': 'CSE 110',
+                'section_id': 'asdf'
+            }
+        ]
+    }
+]
+
 
 class HomePage extends React.Component {
     constructor(props){
@@ -49,24 +87,24 @@ class HomePage extends React.Component {
                     </div>
                     <div id="schedule_area">
                         <div id="preferences">
-                         <div id="unitPref">
-                          <UnitSlider />
-                          </div>
-                          <div id="minGap">
-                          </div>
-                          <div id="restrictCommute"></div>
-                          <div id="profPref"></div>
+                            <div id="unitPref">
+                                <ScheduleManager schedules={sample_schedules}></ScheduleManager>
+                            </div>
+                            <div id="profPref">
+                                <ProfDropdown title="Pref Prof" />
+                            </div>
+                            <div id="profAvoid">
+                                <ProfDropdown title="Avoid Prof"></ProfDropdown>
+                            </div>
                         </div>
                         <div id="sort">
                             <p> sort_by</p>
                         </div>
-                        <div id="display_area">
-                            <p> grid_area</p>
+                        <div id="grid_area">
                         </div>
                     </div>
                 </div>
         )
     }
 }
-
 export default HomePage;
