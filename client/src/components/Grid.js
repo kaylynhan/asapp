@@ -54,5 +54,5 @@ for (row = 0; row < 30; row++) {
     }
     table.append(tr)
 }
-var grid_area_container = document.getElementById("grid_area")
-grid_area_container.appendChild(table);
+//var grid_area_container = document.getElementById("grid_area")
+//grid_area_container.appendChild(table);

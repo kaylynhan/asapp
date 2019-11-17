@@ -10,7 +10,7 @@ let isMouseDown = false;
 
 // length is the length of the class, a number in minute. Possible values: 50, 80, 170
 // time is the start time of the class, in format of id of the grid table 
-function postCourse(length, time) {
+function postCourse(length, time, courseName, courseType) {
     let elem = document.getElementById(time);
     var rect = elem.getBoundingClientRect();
     console.log(rect.top, rect.right, rect.bottom, rect.left);
@@ -29,8 +29,19 @@ function postCourse(length, time) {
     course.style.top = `${rect.top}px`;
     course.style.right = rect.right;
     course.style.backgroundColor = "rebeccapurple";
-    course.style.opacity = 0.5;
     elem.appendChild(course);
+
+    //add the courseName
+    var courseTitle = document.createElement("p");
+    courseTitle.innerText = courseName;
+    courseTitle.setAttribute("class", "courseTitle");
+
+    var EcourseType = document.createElement("p");
+    EcourseType.innerText = courseType;
+    EcourseType.setAttribute("class", "courseTitle");
+
+    course.appendChild(courseTitle);
+    course.appendChild(EcourseType);
 }
 
 
@@ -96,6 +107,40 @@ function grid_generate() {
     grid_area_container.appendChild(table);
 }
 
+//hard
+function populateSchedule() {
+
+    //Schedule 1
+    /*
+    // CSE 110
+    postCourse(80, "Tu1400", "CSE110", "LE");
+    postCourse(80, "Thur1400", "CSE110", "LE");
+    
+    // CSE 134b
+    postCourse(50, "Mon800", "CSE134b", "LE");
+    postCourse(50, "Wed800", "CSE134b", "LE");
+    postCourse(50, "Fri800", "CSE134b","LE");
+    
+    // MATH 20E
+    postCourse(50, "Mon1600", "MATH20E", "LE");
+    postCourse(50, "Wed1600", "MATH20E", "LE");
+    postCourse(50, "Fri1600", "MATH20E", "LE");
+    */
+
+    //Schedule 2
+    postCourse(50, "Mon1400", "MATH158", "LE");
+    postCourse(50, "Wed1400", "MATH158", "LE");
+    postCourse(50, "Fri1400", "MATH158", "LE");
+
+    postCourse(50, "Mon1100", "MATH140", "LE");
+    postCourse(50, "Wed1100", "MATH140", "LE");
+    postCourse(50, "Fri1100", "MATH140", "LE");
+
+    postCourse(80, "Tu1400", "CSE101", "LE");
+    postCourse(80, "Thur1400", "CSE101", "LE");
+
+}
+
 function log_drag() {
     let outputArr = Array(0);
     let all_data = document.querySelectorAll("td");
@@ -141,8 +186,8 @@ function log_drag() {
 ReactDOM.render(<App />, document.getElementById('root'));
 grid_generate();
 log_drag();
-postCourse(50, "Mon800");
-postCourse(80, "Tu1030");
+populateSchedule();
+
 
 
 
