@@ -1,0 +1,22 @@
+#courseListContainer {
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid red;
+}
+
+#courseListWindow {
+    border: 1px solid green;
+}
+
+#optionalArea {
+    grid-area: optionalArea;
+}
+
+#requiredArea {
+    grid-area: requiredArea;
+}
+
+.ExBtn, .ToggleBtn {
+    padding: 0px;
+    margin: 0px;
+}

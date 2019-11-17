@@ -1,6 +1,11 @@
-import React from 'react';
+import React from "react"
 import SignUp from "../components/Signup.js"
-import "./homepage.css"
+import "./HomePage.css"
+import NavigationBar from "../components/NavigationBar.js"
+import "../App.css"
+import "./CoursePlan.css"
+import CoursePlan from "./CoursePlan.js"
+import CourseList from "./CourseList.js"
 import UnitSlider from "../components/UnitSlider"
 import 'rc-slider/assets/index.css';
 import GapSlider from './GapSlider.js';
@@ -8,7 +13,9 @@ import ProfDropdown from './ProfDropdown.js';
 import "./table.css"
 import Grid from "./Grid.js"
 import ScheduleManager from "./ScheduleManager";
-
+import Popup from "./Popup.js"
+import Tooltip from "./Tooltip.js"
+/* import "rc-slider/assets/index.css"; */
 
 let sample_schedules = [
     {
@@ -41,13 +48,24 @@ let sample_schedules = [
     }
 ]
 
+
 class HomePage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { showLogin: false };
+    }
+
+    toggleLogin() {
+        this.setState({
+            showLogin: !this.state.showLogin
+        });
+    }
+
     render() {
         return (
-            <div>
                 <div id="page_container">
                     <header>
-                        <h1> Header </h1>
+                        <NavigationBar />
                     </header>
                     <div id="left_sidebar">
                         <div id="search_input">
@@ -55,12 +73,16 @@ class HomePage extends React.Component {
                         </div>
                         <div id="search_result">
                             <p> Search_result</p>
+                            <CourseList />
                         </div>
                         <div id="generate">
-                            <p> Generate Btn</p>
+                            <button class="NavBtn">
+                                Generate Schedules
+                            </button>
                         </div>
                         <div id="need_want">
                             <p> Need vs want</p>
+                            <CoursePlan />
                         </div>
                     </div>
                     <div id="schedule_area">
@@ -82,7 +104,6 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }

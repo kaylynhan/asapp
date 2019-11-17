@@ -1,11 +1,11 @@
 /* Tooltip.js - A tooltip is an info icon with info that appears on hover.
 *       IMPORTANT: The Tooltip REQUIRES a UNIQUE ID as the ID is how it
 *            links the message to the icon.
-*       Tooltip uses the module 'react-tooltip' which may need to be installed.
+*       Tooltip uses the module "react-tooltip" which may need to be installed.
 *       Info can be declared elsewhere or injected directly.
 * Example use case:
 *---ExampleFile.js---
-*       import Tooltip from './Tooltip'
+*       import Tooltip from "./Tooltip"
 *
 *       ... (inside JSX)
 *
@@ -16,30 +16,78 @@
 *           <Tooltip id="UniqueTooltipID" info = {ExampleInfo}/>
 *---ExampleFile.css---
 *       .UniqueTooltipID {
-*           color: blue;
+*           color: blue
 *       }
 */
 
-import React from 'react';
-import ReactTooltip from 'react-tooltip'
-import './Tooltip.css'
+import React from "react"
+import ReactTooltip from "react-tooltip"
+import "./Tooltip.css"
 
 class Tooltip extends React.Component {
+
+    // Counter used to form unique IDs for Tooltips
+    static tooltipCount = 0
+
+    /*var popupStyle = {
+        width: this.props.width ? this.props.width : "50%",
+        height: this.props.height ? this.props.height : "50%",
+        top: this.props.y ? this.props.y : "25%",
+        left: this.props.x ? this.props.x : "25%",
+    }*/
+
     render() {
-        var someInfo = <div> <p> someInfo </p><p> somemore </p> </div>
+
+        // Place tooltip info in stylable Div
+        var tooltipInfo = <div className = "tooltipInfo">
+            {this.props.info}
+            </div>
+
+        var tooltipStyle =
+            this.props.arrowColor ?
+                {
+                "--background-color": this.props.backgroundColor ? this.props.backgroundColor : "#888888",
+                "--arrow-color": this.props.arrowColor
+                }
+            :
+                {
+                "--background-color": this.props.backgroundColor ? this.props.backgroundColor : "#888888",
+                }
+
+        // Create new Tooltip
+        Tooltip.tooltipCount++
+
         return (
-            <div className="TooltipDiv">
+            <div className="tooltipDiv">
+                {/* Tooltip Icon */}
                 <svg>
-                    <circle data-tip data-for={this.props.id} cx = "14" cy="14" r="10"/>
-                    <text data-tip data-for={this.props.id} textAnchor="middle" x="14" y="19">?</text>
+                    {/* Circle Background */}
+                    <circle
+                        data-tip data-for={"Tooltip#" + Tooltip.tooltipCount}
+                        cx = "14" cy="14" r="10"
+                    />
+                    {/* Question Mark */}
+                    <text
+                        data-tip data-for={"Tooltip#" + Tooltip.tooltipCount}
+                        textAnchor="middle"
+                        x="14" y="19"
+                    >
+                        ?
+                    </text>
                 </svg>
-                <div className="Tooltip">
-                    <ReactTooltip id={this.props.id}>
-                        {this.props.info}
+                {/* Tooltip Container */}
+                <div className="tooltipContent" style={tooltipStyle}>
+                    <ReactTooltip
+                        id={"Tooltip#" + Tooltip.tooltipCount}
+                        className="tooltip"
+                        effect="solid"
+                    >
+                        {/* Tooltip Info */}
+                        {tooltipInfo}
                     </ReactTooltip>
                 </div>
             </div>
         )
     }
 }
-export default Tooltip;
+export default Tooltip
