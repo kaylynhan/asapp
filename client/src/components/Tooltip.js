@@ -27,6 +27,7 @@ import "./Tooltip.css"
 class Tooltip extends React.Component {
 
     // Counter used to form unique IDs for Tooltips
+
     static tooltipCount = 0
 
     /*var popupStyle = {
