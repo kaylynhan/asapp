@@ -1,15 +1,7 @@
-import React from "react";
-import SignUp from "../components/Signup.js"
-import "./HomePage.css"
-import NavigationBar from "../components/NavigationBar.js"
-import "../App.css";
 // import "./AddedCourses.css"; no file
 // import AddedCourses from "./AddedCourses.js";
-import CourseList from "./CourseList.js";
 import CourseInput from "./CourseInput.js";
 //import UnitSlider from "../components/UnitSlider" no file from that
-import Popup from "./Popup.js"
-import Tooltip from "./Tooltip.js"
 /* import "rc-slider/assets/index.css"; */
 import React from "react"
 import SignUp from "../components/Signup.js"
@@ -114,7 +106,7 @@ class HomePage extends React.Component {
                         <div id="sort">
                             <p> sort_by</p>
                         </div>
-                        <div id="grid_area">
+                       		<div id="grid_area">
                         </div>
                     </div>
                 </div>
