@@ -6,7 +6,40 @@ import 'rc-slider/assets/index.css';
 import GapSlider from './GapSlider.js';
 import ProfDropdown from './ProfDropdown.js';
 import "./table.css"
+import Grid from "./Grid.js"
+import ScheduleManager from "./ScheduleManager";
 
+
+let sample_schedules = [
+    {
+        'label': "A 6 unit schedule",
+        'footnotes': "I want this schedule",
+        'sections': [
+            {
+                'course_name': 'CSE 110',
+                'section_id': 'asdf'
+            },
+            {
+                'course_name': 'CSE 15L',
+                'section_id': 'asdf'
+            }
+        ]
+    },
+    {
+        'label': "An 8 unit schedule",
+        'footnotes': "I want this schedule",
+        'sections': [
+            {
+                'course_name': 'CSE 110',
+                'section_id': 'asdf'
+            },
+            {
+                'course_name': 'CSE 110',
+                'section_id': 'asdf'
+            }
+        ]
+    }
+]
 
 class HomePage extends React.Component {
     render() {
@@ -33,10 +66,7 @@ class HomePage extends React.Component {
                     <div id="schedule_area">
                         <div id="preferences">
                             <div id="unitPref">
-                                <UnitSlider />
-                            </div>
-                            <div id="minGap">
-                                <GapSlider />
+                                <ScheduleManager schedules={sample_schedules}></ScheduleManager>
                             </div>
                             <div id="profPref">
                                 <ProfDropdown title="Pref Prof" />
