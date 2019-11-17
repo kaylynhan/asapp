@@ -1,13 +1,13 @@
-import 'rc-slider/assets/index.css';
-import 'rc-tooltip/assets/bootstrap.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Tooltip from 'rc-tooltip';
-import Slider from 'rc-slider';
+import "rc-slider/assets/index.css"
+import "rc-tooltip/assets/bootstrap.css"
+import React from "react"
+import ReactDOM from "react-dom"
+import Tooltip from "rc-tooltip"
+import Slider from "rc-slider"
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Range = createSliderWithTooltip(Slider.Range);
-const Handle = Slider.Handle;
+const createSliderWithTooltip = Slider.createSliderWithTooltip
+const Range = createSliderWithTooltip(Slider.Range)
+const Handle = Slider.Handle
 
 export const DEFAULT_MIN_UNITS = 4;
 export const DEFAULT_MAX_UNITS = 16;
@@ -67,4 +67,5 @@ export class UnitSlider extends React.Component {
         )
     }
 }
+
 export default UnitSlider

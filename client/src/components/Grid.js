@@ -54,5 +54,10 @@ for (row = 0; row < 30; row++) {
     }
     table.append(tr)
 }
+<<<<<<< HEAD
 //var grid_area_container = document.getElementById("grid_area")
 //grid_area_container.appendChild(table);
+=======
+// var grid_area_container = document.getElementById("grid_area")
+// grid_area_container.appendChild(table);
+>>>>>>> d6d2406777efdd6c8da82b7daf4ad72bbe51ee55

@@ -1,30 +1,42 @@
-import React from 'react';
-import Login from './Login';
-import SchedulePage from './SchedulePage';
-import '../App.css';
-import Logo from '../images/asapp_logo_transparent.png'
+import React from "react"
+import Login from "./Login"
+import SchedulePage from "./SchedulePage"
+import "../App.css"
+import Logo from "../images/asapp_logo_transparent.png"
 
-import {Link, NavLink, Route} from 'react-router-dom'
+import {Link, NavLink, Route} from "react-router-dom"
 
 
  class NavigationBar extends React.Component {
-     constructor(props) {
-         super(props);
-         this.state = {
-            loggedIn: this.props.loggedIn, //temporarily can't login
-         }
-     }
+     constructor(props){
+        super(props)
+        this.state = { showLogin: false }
+    }
+
+    toggleLogin() {
+        this.setState({
+            showLogin: !this.state.showLogin
+        })
+    }
      render() {
          return (
-            <div class="App-header">
-                <div class="NavbarLeft">
+            <div className="App-header">
+                <div className="NavbarLeft">
                 </div>
-                <img src={Logo} class="App-logo" />
-                <div class="NavbarRight">
+                <img src={Logo} className="App-logo" />
+                <div className="NavbarRight">
                 <Link to="/SchedulePage">
-                  <button class="NavBtn"> VIEW SAVED </button>
+                  <button className="NavBtn"> VIEW SAVED </button>
                 </Link>
-                <button class="NavBtn">LOGIN</button>
+                  <button id="login" className="NavBtn" onClick={this.toggleLogin.bind(this)}>LOGIN</button>
+
+                  {this.state.showLogin ?
+                    <Login
+                        text="Login / Create Account"
+                        closeLogin={this.toggleLogin.bind(this)}
+                    />
+                    :null
+                  }
                 <Route
                     path ="./SchedulePage"
                     component={() => <SchedulePage/>}>
@@ -35,4 +47,4 @@ import {Link, NavLink, Route} from 'react-router-dom'
      }
  }
 
-export default NavigationBar;
+export default NavigationBar

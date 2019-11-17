@@ -4,9 +4,7 @@
         "LS header"
         "LS schedule_area";
     grid-template-columns: 1fr 6fr;
-    grid-template-rows:1fr 7fr;
-    grid-gap:2vmin;
-    height: 0px;
+    grid-template-rows:1fr 13fr;
 }
 
 h1, p{
@@ -17,12 +15,7 @@ h1, p{
     min-width: 215px;
     display:grid;
     grid-area:LS;
-    grid-template-rows: 1fr 5fr 1fr 3fr;
-}
-
-#preferences > *{
-    margin-left:10px;
-    margin-right:10px;
+    grid-template-rows: 1fr 6fr 1fr 6fr;
 }
 
 #left_sidebar > *{
@@ -36,7 +29,7 @@ h1, p{
         "pref pref"
         "sort display_area";
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 1fr 6fr;
 }
 
 
@@ -52,7 +45,7 @@ h1, p{
     flex:1
 }
 
-#profAvoid{
+#restrictCommute{
     flex:1
 }
 
