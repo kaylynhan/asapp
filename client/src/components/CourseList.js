@@ -369,7 +369,18 @@ class CourseList extends React.Component {
                     <div key={menu.title}>
                         <details>
                             <summary>{menu.title}</summary>
-                            {menu.options.map(course => (<p>{course.name}</p>))}
+                            {menu.options.map(course => (
+                                <div>
+                                    <details style={{marginLeft:’10%’}}>
+                                        <summary>{course.name}</summary>
+                                        <div style={{marginLeft:’10%’}}>
+                                            Units : {course.units”}<br />
+                                            Prerequisites : {course.prereqs}<br />
+                                            Description : {course.prereqs}
+                                        </div>
+                                    </details>
+                                </div>
+                            ))}
                         </details>
                     </div>
                 ))}
