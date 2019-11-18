@@ -55,7 +55,7 @@ let sample_schedules = [
 
 
 class HomePage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = { showLogin: false };
     }
@@ -68,48 +68,47 @@ class HomePage extends React.Component {
 
     render() {
         return (
-                <div id="page_container">
-                    <header>
-                        <NavigationBar />
-                    </header>
-                    <div id="left_sidebar">
-                        <div id="search_input">
-                            <p> Search_input</p>
-                            <CourseInput />
-                        </div>
-                        <div id="search_result">
-                            <p> Search_result</p>
-                            <CourseList />
-                        </div>
-                        <div id="generate">
-                            <button class="NavBtn">
-                                Generate Schedules
-                            </button>
-                        </div>
-                        <div id="need_want">
-                            <p> Need vs want</p>
-                            <CoursePlan />
-                        </div>
+            <div id="page_container">
+                <header>
+                    <NavigationBar />
+                </header>
+                <div id="left_sidebar">
+                    <div id="search_input">
+                        <p> Search_input</p>
+                        <CourseInput />
                     </div>
-                    <div id="schedule_area">
-                        <div id="preferences">
-                            <div id="unitPref">
-                                <ScheduleManager schedules={sample_schedules}></ScheduleManager>
-                            </div>
-                            <div id="profPref">
-                                <ProfDropdown title="Pref Prof" />
-                            </div>
-                            <div id="profAvoid">
-                                <ProfDropdown title="Avoid Prof"></ProfDropdown>
-                            </div>
-                        </div>
-                        <div id="sort">
-                            <p> sort_by</p>
-                        </div>
-                       		<div id="grid_area">
-                        </div>
+                    <div id="search_result">
+                        <p> Search_result</p>
+                        <CourseList />
+                    </div>
+                    <div id="generate">
+                        <button class="NavBtn">
+                            Generate Schedules
+                            </button>
+                    </div>
+                    <div id="need_want">
+                        <p> Need vs want</p>
+                        <CoursePlan />
                     </div>
                 </div>
+                <div id="schedule_area">
+                    <div id="preferences">
+                        <div id="unitPref">
+                            <ScheduleManager schedules={sample_schedules}></ScheduleManager>
+                        </div>
+                        <div id="profPref">
+                            <ProfDropdown title="Pref Prof" />
+                        </div>
+                        <div id="profAvoid">
+                            <ProfDropdown title="Avoid Prof"></ProfDropdown>
+                        </div>
+                    </div>
+                    <div id="sort">
+                    </div>
+                    <div id="grid_area">
+                    </div>
+                </div>
+            </div>
         )
     }
 }
