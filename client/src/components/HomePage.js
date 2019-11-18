@@ -87,9 +87,13 @@ class HomePage extends React.Component {
                             Generate Schedules
                             </button>
                     </div>
-                    <ScheduleManager schedules={sample_schedules}></ScheduleManager>
+                    <div id="need_want">
+                        <p> Need vs want</p>
+                        <CoursePlan />
+                    </div>
                 </div>
-            </div>
+                <ScheduleManager schedules={sample_schedules}></ScheduleManager>
+        </div>
         )
     }
 }
