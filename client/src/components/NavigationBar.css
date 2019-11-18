@@ -1,0 +1,16 @@
+.reportBug {
+    background-color: #0d5b93;
+    font-family: 'Montserrat';
+    font-size: 10pt;
+    color: #fffacd;
+    border: none;
+    padding-left: 3vmin;
+    padding-right: 3vmin;
+    align-items: center;
+  }
+
+.descrArea {
+    display: block;
+    width: 500px;
+    height: 128px;
+}
