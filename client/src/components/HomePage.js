@@ -104,6 +104,9 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                     <div id="sort">
+
+                        <div id="schedule1" class="schedule">Schedule1</div>
+                        <div id="schedule3" class="schedule">Schedule3</div>
                     </div>
                     <div id="grid_area">
                     </div>

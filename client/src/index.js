@@ -109,9 +109,8 @@ function grid_generate() {
 
 //hard
 function populateSchedule() {
-
-    //Schedule 1
     /*
+    //Schedule 1
     // CSE 110
     postCourse(80, "Tu1400", "CSE110", "LE");
     postCourse(80, "Thur1400", "CSE110", "LE");
@@ -125,8 +124,7 @@ function populateSchedule() {
     postCourse(50, "Mon1600", "MATH20E", "LE");
     postCourse(50, "Wed1600", "MATH20E", "LE");
     postCourse(50, "Fri1600", "MATH20E", "LE");
-    */
-
+*/
     //Schedule 2
     postCourse(50, "Mon1400", "MATH158", "LE");
     postCourse(50, "Wed1400", "MATH158", "LE");

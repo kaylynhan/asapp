@@ -6,7 +6,7 @@ class ProfDropdown extends React.Component {
 
         this.state = {
             // pass in your list of profs here
-            ProfList: ["Bowers, Adam", "Ord, Rick", "Zhang, Danna"]
+            ProfList: ["Bowers, Adam", "Ord, Rick", "Zhang, Danna", "Gillespie, Gary"]
         }
     }
 
