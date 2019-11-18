@@ -1,7 +1,9 @@
 import React from 'react';
 import GapSlider from "./GapSlider";
 import {UnitSlider, DEFAULT_MIN_UNITS, DEFAULT_MAX_UNITS } from "./UnitSlider";
-import axios from "axios";
+import "./ScheduleManager.css"
+import ProfDropdown from "./ProfDropdown";
+import ScheduleList from "./ScheduleList";
 
 class ScheduleManager extends React.Component {
 
@@ -50,10 +52,22 @@ class ScheduleManager extends React.Component {
 
     render() {
         return(
-            <div>
-                <UnitSlider onChange={this.handleUnitSliderChange} />
-                <GapSlider />
-                <button onClick={this.filterOutSchedules}>Filter</button>
+            <div id="schedule_area">
+                <div id="preferences">
+                    <UnitSlider onChange={this.handleUnitSliderChange} />
+                    <GapSlider />
+                    <div id="profPref">
+                        <ProfDropdown title="Pref Prof" />
+                    </div>
+                    <div id="profAvoid">
+                        <ProfDropdown title="Avoid Prof"></ProfDropdown>
+                    </div>
+                    <button onClick={this.filterOutSchedules}>Filter</button>
+                </div>
+                <div id="sort">
+                    <ScheduleList></ScheduleList>
+                </div>
+                <div id="grid_area"></div>
             </div>
         )
     }
