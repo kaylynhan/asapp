@@ -6,12 +6,12 @@
   border: 1px solid black;
   box-shadow: 0 0 3vh 1.5vh rgba(0,0,0,0.4);
 }
-
+/*
 .popupBtn {
   background-color: #ccc;
   border: 1px solid #aaa;
   margin: 1px;
-}
+}*/
 
 .popupBtn:hover {
   background-color: white;
