@@ -1,19 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');
 
-h1 {
-    margin: 0;
-    padding: 0;
-    padding-left: 50px;
-    padding-top: 20px;
-}
-html, body, .app {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.popup {
+.popupL{
     position: fixed;
     width: 100%;
     height: 100%;
@@ -23,8 +9,9 @@ html, body, .app {
     bottom: 0;
     margin: auto;
     background-color: rgba(0,0,0, 0.5);
+    z-index: 1000;
 }
-.popup_inner {
+.popup_innerL {
     position: absolute;
     left: 30%;
     right: 30%;
@@ -52,9 +39,10 @@ html, body, .app {
     padding: 20px;
     border: none;
     background: none;
-    font-family: 'Monoton', cursive;
+    font-family: 'Montserrat';
+    color: #fffacd;
     font-size: larger;
-    color: mediumpurple;
+    margin-bottom: 15px;
 }
 
 #login:hover{
@@ -80,7 +68,7 @@ form {
 }
 
 label,
-input {
+.input {
     display: block;
     width: 100%;
 }
@@ -90,7 +78,7 @@ label {
     height: 22px;
 }
 
-input {
+.input {
     margin-bottom: 20px;
     padding: 10px;
     border-top:0;
@@ -122,27 +110,27 @@ input {
     outline: none;
 }
 
-input:focus{
+.input:focus{
 
 
     /*RAINBOW GRADIENT*/
-    border: 2px solid transparent;
-    border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
-    border-image-slice: 1;
-    border-top:0;
-    border-left:0;
-    border-right:0;
+    /*border: 2px solid transparent;*/
+    /*border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);*/
+    /*border-image-slice: 1;*/
+    /*border-top:0;*/
+    /*border-left:0;*/
+    /*border-right:0;*/
 }
 
 
-button {
+.lBtn {
     padding: 10px 15px;
     background-color: rgb(70, 153, 179);
     color: white;
     border: 1px solid rgb(70, 153, 179);
 }
 
-button:hover {
+.lBtn:hover {
     cursor: pointer;
     background-color: white;
     color: rgb(70, 153, 179);
