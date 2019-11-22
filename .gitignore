@@ -25,3 +25,6 @@ yarn-error.log*
 server/package-lock.json
 client/package-lock.json
 **/package-lock.json
+**/test-with-postman.txt
+**/example.json
+.gitignore
