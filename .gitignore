@@ -27,3 +27,6 @@ client/package-lock.json
 **/package-lock.json
 
 client/.idea
+**/test-with-postman.txt
+**/example.json
+.gitignore
