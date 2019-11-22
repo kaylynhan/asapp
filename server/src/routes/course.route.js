@@ -10,9 +10,11 @@ courseRoutes.route('/add').post(function(req, res){
     let course = new Course(
         {
             name: req.body.name,
-            units: req.body.units,
+            department: req.body.department,
+            number: req.body.number,
             description: req.body.description,
             prereqs: req.body.prereqs,
+            units: req.body.units,
             sections: req.body.sections
         }
     );
@@ -78,9 +80,11 @@ courseRoutes.route('/update').put(function (req, res){
         {_id: req.body.id},
         {
             name: req.body.name,
-            units: req.body.units,
+            department: req.body.department,
+            number: req.body.number,
             description: req.body.description,
             prereqs: req.body.prereqs,
+            units: req.body.units,
             sections: req.body.sections
         }
     );
