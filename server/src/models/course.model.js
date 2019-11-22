@@ -32,7 +32,7 @@ let CourseSchema = new Schema({
             room_num: {type: String}
         }]
     }]
-}, {useNestedStrict: true});
+}, {strict: "throw", useNestedStrict: true});
 
 var Course = mongoose.model('CourseSchema', CourseSchema, 'courses');
 
