@@ -29,10 +29,10 @@ export class Login extends React.Component {
         const { email, password, cPassword } = this.state;
 
         return (
-            <div className='popup'>
+            <div className='popupL'>
 
 
-                <div className='popup_inner'>
+                <div className='popup_innerL'>
 
                     <h1>Login / Create account</h1>
 
@@ -43,8 +43,8 @@ export class Login extends React.Component {
 
 
                     <div className='loginToggle'>
-                        <button onClick={this.toggleSignIn.bind(this)}>Login</button>
-                        <button onClick={this.toggleSignUp.bind(this)}>Sign-up</button>
+                        <button className='lBtn' onClick={this.toggleSignIn.bind(this)}>Login</button>
+                        <button className='lBtn' onClick={this.toggleSignUp.bind(this)}>Sign-up</button>
                     </div>
 
 
@@ -80,7 +80,7 @@ export class Login extends React.Component {
                                         //value={password}
                                         //onChange={this.handleChange}
                                     />
-                                    <button type="submit">Login</button>
+                                    <button className='lBtn' type="submit">Login</button>
                                 </form>
                             </div>
                         </div>
@@ -115,10 +115,11 @@ export class Login extends React.Component {
                                         name="cPassword"
                                         type="password"
                                         placeholder="Confirm your password"
+                                        className='input'
                                         //value={password}
                                         //onChange={this.handleChange}
                                     />
-                                    <button type="submit">Create Account</button>
+                                    <button  className='lBtn'  type="submit">Create Account</button>
                                 </form>
                             </div>
 
