@@ -92,7 +92,7 @@ class HomePage extends React.Component {
                         <CoursePlan />
                     </div>
                 </div>
-                <ScheduleManager schedules={sample_schedules}></ScheduleManager>
+                <ScheduleManager schedule_list={sample_schedules}></ScheduleManager>
         </div>
         )
     }

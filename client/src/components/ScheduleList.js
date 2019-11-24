@@ -7,38 +7,55 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 
+// Also modify switch statement in sortFunction if modifying below sorts
+let SORT_OPTIONS = ["Sort by GPA", "Sort by CAPE Ratings", "Sort by Workload", "Sort by Minimum Days", "Sort by Maximum Average Gap"];
+
 class ScheduleList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            schedule_list: ["Schedule1", "Schedule2", "Schedule3"],
-            showSortMenu: false,
-            sort_options: ["Sort By GPA", "Sort by CAPE Ratings", "Sort by Workload", "Sort by Minimum Days"]
+            sort_options: SORT_OPTIONS
         }
     }
 
-    openSortMenu = () => {
-        this.setState({showSortMenu: true})
+    sortFunction = (event) => {
+        let sort_func_name = event.target.value;
+        switch(sort_func_name) {
+            case "Sort by GPA":
+                break;
+            case "Sort by CAPE Ratings":
+                break;
+            case "Sort by Workload":
+                break;
+            case "Sort by Minimum Days":
+                break;
+            case "Sort by Maximum Average Gap":
+                break;
+            default:
+                console.error(sort_func_name + " is not a valid sort");
+        }
     };
 
     render() {
         return (
             <List>
-                <select>
+                <select onChange={this.sortFunction}>
                     <option value="">Choose Sort Option</option>
                     {
-                        this.state.sort_options.map(options => (
-                            <option value={options}>{options}</option>
+                        this.state.sort_options.map(option => (
+                            <option value={option}>{option}</option>
                         ))
                     }
                 </select>
 
-                {this.state.schedule_list.map(item => (
+                {
+                    this.props.schedule_list.map(item => (
                     <ListItem button>
-                        <ListItemText primary={item} />
+                        <ListItemText primary={item.label} />
                     </ListItem>
-                ))}
+                    ))
+                }
             </List>
         )
     }

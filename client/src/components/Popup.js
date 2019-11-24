@@ -77,7 +77,7 @@ class Popup extends React.Component {
                     <span className="popupClose"
                         onClick={() => this.handleSpanClick(PopupCount)}
                         >
-                        &times
+                        &times;
                     </span>
                     {/* Popup Content Container */}
                     <div className="popupContainer">

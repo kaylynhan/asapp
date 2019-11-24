@@ -25,5 +25,11 @@ yarn-error.log*
 server/package-lock.json
 client/package-lock.json
 **/package-lock.json
+<<<<<<< HEAD
 
 client/.idea
+=======
+>>>>>>> 3065c37671dab2c3117faf131571d803a2354f80
+**/test-with-postman.txt
+**/example.json
+.gitignore

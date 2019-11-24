@@ -13,7 +13,9 @@ class ScheduleManager extends React.Component {
         super(props);
         this.state = {
             minUnits: DEFAULT_MIN_UNITS,
-            maxUnits: DEFAULT_MAX_UNITS
+            maxUnits: DEFAULT_MAX_UNITS,
+            prefProfs: [],
+            avoidProfs: []
         };
     }
 
@@ -21,6 +23,14 @@ class ScheduleManager extends React.Component {
     filterOutSchedules = () => {
         let kept_schedules = [];
 
+        this.filterOutUnits(kept_schedules);
+        // this.filterOutPrefProfessors(kept_schedules);
+        // this.filterOutAvoidProfessors(kept_schedules);
+
+        console.log(kept_schedules);
+    };
+
+    filterOutUnits = (kept_schedules) => {
         let self = this;
 
         // Hardcoded numbers for filtering out units
@@ -29,7 +39,7 @@ class ScheduleManager extends React.Component {
             'CSE 15L': 2
         };
 
-        this.props.schedules.forEach(function (schedule, schedule_index) {
+        this.props.schedule_list.forEach(function(schedule, schedule_index) {
             let total_units = 0;
             schedule['sections'].forEach(function (course, course_index) {
                 // let a = axios.get("http://localhost:4000/course/overviews")
@@ -51,17 +61,37 @@ class ScheduleManager extends React.Component {
         console.log("Updated min/max units in ScheduleManager");
     };
 
+    handlePrefProfChange = (event) => {
+        // console.log(this.state) // Use this to check change in state
+        console.log(event.target)
+        let prof = event.target.value;
+        console.log(prof);
+        this.setState(prevState => ({
+            prefProfs: [...prevState.prefProfs, prof]
+        }));
+        console.log(this.state) // Does not update state right away for some reason. Can check with above
+    };
+
+    handleAvoidProfChange = (event) => {
+        let prof = event.target.value;
+        console.log(prof);
+        this.setState(prevState => ({
+            avoidProfs: [...prevState.avoidProfs, prof]
+        }));
+        console.log(this.state)
+    };
+
     render() {
         return (
             <div id="schedule_area">
                 <div id="preferences">
                     <UnitSlider onChange={this.handleUnitSliderChange} />
-                    <GapSlider />
+                    {/*<GapSlider />*/}
                     <div id="profPref">
-                        <ProfDropdown title="Pref Prof" />
+                        <ProfDropdown title="Pref Prof" onChange={this.handlePrefProfChange} />
                     </div>
                     <div id="profAvoid">
-                        <ProfDropdown title="Avoid Prof"></ProfDropdown>
+                        <ProfDropdown title="Avoid Prof" onChange={this.handleAvoidProfChange} />
                     </div>
                     <button onClick={this.filterOutSchedules}>Filter</button>
                     <label>
@@ -70,7 +100,7 @@ class ScheduleManager extends React.Component {
                     </label>
                 </div>
                 <div id="sort">
-                    <ScheduleList></ScheduleList>
+                    <ScheduleList schedule_list={this.props.schedule_list}/>
                 </div>
                 <div id="grid_area"><ScheduleGrid /></div>
             </div>
