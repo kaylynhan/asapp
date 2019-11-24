@@ -1,9 +1,10 @@
 import React from 'react';
 import GapSlider from "./GapSlider";
-import {UnitSlider, DEFAULT_MIN_UNITS, DEFAULT_MAX_UNITS } from "./UnitSlider";
+import { UnitSlider, DEFAULT_MIN_UNITS, DEFAULT_MAX_UNITS } from "./UnitSlider";
 import "./ScheduleManager.css"
 import ProfDropdown from "./ProfDropdown";
 import ScheduleList from "./ScheduleList";
+import ScheduleGrid from "./ScheduleGrid";
 
 class ScheduleManager extends React.Component {
 
@@ -28,9 +29,9 @@ class ScheduleManager extends React.Component {
             'CSE 15L': 2
         };
 
-        this.props.schedules.forEach(function(schedule, schedule_index) {
+        this.props.schedules.forEach(function (schedule, schedule_index) {
             let total_units = 0;
-            schedule['sections'].forEach(function(course, course_index) {
+            schedule['sections'].forEach(function (course, course_index) {
                 // let a = axios.get("http://localhost:4000/course/overviews")
                 //     .then(res => console.log(res.data))
                 //     .catch(err => console.log(err));
@@ -45,13 +46,13 @@ class ScheduleManager extends React.Component {
     };
 
     handleUnitSliderChange = (value) => {
-        this.setState({minUnits: value[0]});
-        this.setState({maxUnits: value[1]});
+        this.setState({ minUnits: value[0] });
+        this.setState({ maxUnits: value[1] });
         console.log("Updated min/max units in ScheduleManager");
     };
 
     render() {
-        return(
+        return (
             <div id="schedule_area">
                 <div id="preferences">
                     <UnitSlider onChange={this.handleUnitSliderChange} />
@@ -63,11 +64,15 @@ class ScheduleManager extends React.Component {
                         <ProfDropdown title="Avoid Prof"></ProfDropdown>
                     </div>
                     <button onClick={this.filterOutSchedules}>Filter</button>
+                    <label>
+                        Enable Commute Restriction
+                        <input type="checkbox"></input>
+                    </label>
                 </div>
                 <div id="sort">
                     <ScheduleList></ScheduleList>
                 </div>
-                <div id="grid_area"></div>
+                <div id="grid_area"><ScheduleGrid /></div>
             </div>
         )
     }
