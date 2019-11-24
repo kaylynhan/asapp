@@ -26,6 +26,13 @@ EDS 31 is not a valid course
 EDS 129A is not a valid course
 EDS 129A is not a valid course
 ETHN 161 is not a valid course
+HDS 1 is not a valid course
+HDS 1 is not a valid course
+HDS 1 is not a valid course
+HDS 1 is not a valid course
+HDS 1 is not a valid course
+HDS 1 is not a valid course
+HDS 1 is not a valid course
 HIEA 190M is not a valid course
 HIEU 138 is not a valid course
 HILA 169 is not a valid course
@@ -43,6 +50,8 @@ HIUS 124 is not a valid course
 HIUS 141 is not a valid course
 HIUS 168 is not a valid course
 JAPN 140A is not a valid course
+JWSP 104 is not a valid course
+JWSP 104 is not a valid course
 LIAB 1A is not a valid course
 LIAB 1A is not a valid course
 LIAB 1A is not a valid course
@@ -258,6 +267,6 @@ POLI 130 is not a valid course
 POLI 191A is not a valid course
 PSYC 116A is not a valid course
 SE 130A is not a valid course
-SXTH 20A is not a valid course
 USP 177 is not a valid course
 VIS 129B is not a valid course
+WARR 87 is not a valid course

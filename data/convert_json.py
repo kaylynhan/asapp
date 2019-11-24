@@ -14,6 +14,7 @@ import re
 with open('course.json') as in_file:
     course_list = json.load(in_file)
 
+# Fix random whitespace errors
 bad_keys = []
 for key in course_list:
     course = course_list[key]
@@ -21,6 +22,7 @@ for key in course_list:
     course['description'] = course['description'].strip()
     course['prereqs'] = course['prereqs'].strip()
 
+    # Some course numbers start with 0*
     if ' 0' in key:
         bad_keys.append(key)
 
@@ -48,9 +50,10 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
         meeting_type = line[1]
         section_numb = line[2]
         try:
-            potential_units = re.findall('\d+', course_obj['name'])
+            potential_units = re.findall('\(\d+\)', course_obj['name'])
             if len(potential_units) != 1:
                 raise IndexError
+            potential_units = re.findall('\d+', potential_units[0])
             numb_units = int(potential_units[0])
         except IndexError:
             print(f'Cannot parse number of units from {course_obj["name"]}')
@@ -77,6 +80,9 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
 
             time[i] = f'{hour}{minute}'
 
+        if not 'section_dict' in course_list[course_id]:
+            course_list[course_id]['section_dict'] = {}
+
         if section_numb.endswith('00'):
             current_letter = section_numb[0]
             current_lec = {
@@ -87,11 +93,12 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
                 'room_num': room_num,
                 'meeting_type': meeting_type
             }
+            course_list[course_id]['section_dict'][section_numb] = {
+                'section_numb': section_numb,
+                'professor': name,
+                'meetings': [current_lec]
+            }
             continue
-
-        if not 'section_dict' in course_list[course_id]:
-            course_list[course_id]['section_dict'] = {}
-
             
         meeting = {
             'day': day,
