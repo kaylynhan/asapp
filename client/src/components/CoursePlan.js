@@ -2,14 +2,32 @@ import React from "react"
 import OptionalTag from "./OptionalTag"
 import RequiredTag from "./RequiredTag"
 import "./CoursePlan.css"
+import axios from "axios"
 
 class AddedCourses extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            optionalClasses: ['CSE134B','CSE120', 'MATH20E'],
-            requiredClasses: ['CSE110', 'CSE101', 'MATH183']
+            optionalClasses: [
+                'CSE 110',
+                'CSE 100'
+            ],
+            optionalIDs: [
+                '5dcf3980ba95db6aa9429fe3',
+                '5dcf3e650636c96b37bfc810'
+            ],
+            requiredClasses: [
+                'CSE 101',
+                'CSE 123'
+            ],
+            requiredIDs: [
+                '5dcf3e650636c96b37bfc819',
+                '5dd9ecd7f151a092016468fa'
+            ],
+            optCourseInfo: null,
+            reqCourseInfo: null,
+            schedules: null
         }
         
         this.onAddItem = this.onAddItem.bind(this)
@@ -26,6 +44,44 @@ class AddedCourses extends React.Component {
             optionalClasses
           }
         })
+    }
+
+    onGenerateSchedules = () => {
+        // let optIDs = []
+        // let reqIDs = []
+        // for (var course in this.state.optionalClasses){
+        //     optIDs.append(course.id)
+        // }
+        // for (var course in this.state.requiredClasses){
+        //     reqIDs.append(course.id)
+        // }
+
+        axios.get("http://localhost:4000/courses/getMany", 
+        {params: {ids: this.state.optionalIDs}})
+        .then(res => {
+            this.setState({
+                optCourseInfo: res.data
+            })
+        })
+        .catch(err => console.log(err.message));
+
+        axios.get("http://localhost:4000/courses/getMany", 
+        {params: {ids: this.state.requiredIDs}})
+        .then(res => {
+            this.setState({
+                reqCourseInfo: res.data
+            })
+        })
+        .catch(err => console.log(err.message));
+
+        console.log(this.state.optCourseInfo);
+        console.log(this.state.reqCourseInfo);
+
+        // this.setState({
+        //     schedules: generateSchedules(this.state.optCourseInfo,
+        //         this.state.reqCourseInfo)
+        // })
+        
     }
 
     requiredCallBack = (item) => {
@@ -94,6 +150,9 @@ class AddedCourses extends React.Component {
                     </div>
                 ))}
             </div>
+            
+                <button onClick = {this.onGenerateSchedules}>testGenerateSchedules</button>
+            
         </div>
 
       )
