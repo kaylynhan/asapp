@@ -4,67 +4,44 @@ import RequiredTag from "./RequiredTag"
 import "./CoursePlan.css"
 import axios from "axios"
 
-class AddedCourses extends React.Component {
+class CoursePlan extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            optionalClasses: [
-                'CSE 110',
-                'CSE 100'
-            ],
-            optionalIDs: [
-                '5dcf3980ba95db6aa9429fe3',
-                '5dcf3e650636c96b37bfc810'
-            ],
-            requiredClasses: [
-                'CSE 101',
-                'CSE 123'
-            ],
-            requiredIDs: [
-                '5dcf3e650636c96b37bfc819',
-                '5dd9ecd7f151a092016468fa'
-            ],
-            optCourseInfo: null,
-            reqCourseInfo: null,
-            schedules: null
+            requiredClasses: this.props.requiredClasses,
+            optionalClasses: this.props.optionalClasses
         }
-        
-        this.onAddItem = this.onAddItem.bind(this)
-        this.requiredCallBack = this.requiredCallBack.bind(this)
-        this.optionalCallBack = this.optionalCallBack.bind(this)
-        this.removeCallBack = this.removeCallBack.bind(this)
 
-    }
-
-    onAddItem = (value) => {
-        this.setState(state => {
-          const optionalClasses = this.state.wantClasses.concat(value)
-          return {
-            optionalClasses
-          }
-        })
     }
 
     requiredCallBack = (item) => {
         this.setState(state => {
+
+            let obj = this.state.requiredClasses.find(o => o.name === item)
             const requiredClasses = this.state.requiredClasses.filter(function(value) {
-                return value !== item
+                return value.name !== item
             })
-            const optionalClasses = this.state.optionalClasses.concat(item)
+
+            const optionalClasses = this.state.optionalClasses.concat(obj)
+            this.props.callBack(requiredClasses,optionalClasses)
             return {
-                requiredClasses,
-                optionalClasses
+                optionalClasses,
+                requiredClasses
             }
         })        
     }
 
     optionalCallBack = (item) => {
         this.setState(state => {
+
+            let obj = this.state.optionalClasses.find(o => o.name === item)
             const optionalClasses = this.state.optionalClasses.filter(function(value) {
-                return value !== item
+                return value.name !== item
             })
-            const requiredClasses = this.state.requiredClasses.concat(item)
+
+            const requiredClasses = this.state.requiredClasses.concat(obj)
+            this.props.callBack(requiredClasses,optionalClasses)
             return {
                 optionalClasses,
                 requiredClasses
@@ -75,11 +52,12 @@ class AddedCourses extends React.Component {
     removeCallBack = (item) => {
         this.setState(state => {
             const optionalClasses = this.state.optionalClasses.filter(function(value) {
-                return value !== item
+                return value.name !== item
             })
             const requiredClasses = this.state.requiredClasses.filter(function(value) {
-                return value !== item
+                return value.name !== item
             })
+            this.props.callBack(requiredClasses,optionalClasses)
             return {
                 optionalClasses,
                 requiredClasses
@@ -93,9 +71,9 @@ class AddedCourses extends React.Component {
             <div id="optionalArea">
                 <h6>Optional</h6>
                 {this.state.optionalClasses.map(item => (
-                    <div key={item}>
+                    <div key={item.name}>
                         <OptionalTag
-                            name={item}
+                            name={item.name}
                             parentCallback={this.optionalCallBack}
                             removeCallback={this.removeCallBack}/>
                     </div>
@@ -104,15 +82,16 @@ class AddedCourses extends React.Component {
             <div id="requiredArea">
                     <h6>Required</h6>
                 {this.state.requiredClasses.map(item => (
-                    <div key={item}>
+                    <div key={item.name}>
                         <RequiredTag
-                            name={item}
+                            name={item.name}
                             parentCallback={this.requiredCallBack}
                             removeCallback={this.removeCallBack}/>
                     </div>
                 ))}
             </div>
             
+
         </div>
 
       )
@@ -120,4 +99,4 @@ class AddedCourses extends React.Component {
 
 }
 
-export default AddedCourses
+export default CoursePlan
