@@ -87,8 +87,8 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
 
             time[i] = f'{hour}{minute}'
 
-        if not 'section_dict' in course_list[course_id]:
-            course_list[course_id]['section_dict'] = {}
+        if not 'sections' in course_list[course_id]:
+            course_list[course_id]['sections'] = []
 
         if section_numb.endswith('00'):
             current_letter = section_numb[0]
@@ -102,11 +102,12 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
                     'room_num': room_num,
                     'meeting_type': meeting_type
                 })
-            course_list[course_id]['section_dict'][course_id + section_numb] = {
+            course_list[course_id]['sections'].append({
+                'section_id': course_id + section_numb,
                 'section_numb': section_numb,
                 'professor': name,
                 'meetings': current_lec
-            }
+            })
             continue
             
         meetings = []
@@ -121,12 +122,13 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
             })
 
         section = {
+            'section_id': course_id + section_numb,
             'section_numb': section_numb,
             'professor': name,
             'meetings': current_lec + meetings
         }
 
-        course_list[course_id]['section_dict'][course_id + section_numb] = section
+        course_list[course_id]['sections'].append(section)
 
 json_arr = []
 for course in course_list:
