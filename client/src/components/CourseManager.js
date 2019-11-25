@@ -9,12 +9,39 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
-            optionalClasses: [],
-            requiredClasses: [],
+            requiredClasses: [
+                {
+                    name: 'CSE 101',
+                    id: '5dcf3e650636c96b37bfc819',
+                },
+                {
+                    name: 'CSE 123',
+                    id: '5dd9ecd7f151a092016468fa'
+                }
+            ],
+            optionalClasses : [ 
+                {
+                    name: 'CSE 110',
+                    id: '5dcf3980ba95db6aa9429fe3'
+                },
+                {
+                    name: 'CSE 100',
+                    id: '5dcf3e650636c96b37bfc810'
+                }
+            ],
             optCourseInfo: null,
             reqCourseInfo: null,
             schedules: null
         }
+    }
+
+    courseManagerCallBack = (item1FromChild, item2FromChild) => {
+        this.setState(
+            { 
+                requiredClasses: item1FromChild,
+                optionalClasses: item2FromChild
+            }
+        )
     }
 
     componentDidMount () {
@@ -88,6 +115,12 @@ class CourseManager extends React.Component {
         //     schedules: generateSchedules(this.state.optCourseInfo,
         //         this.state.reqCourseInfo)
         // })
+
+        /*  This is the callBack function which will update HomePage's
+            schedule state. Be sure to call it after setting
+            this.state.schedules to the newly generated schedules.
+        */
+        this.props.callBack(this.state.schedules)
     }
 
 
@@ -109,7 +142,7 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="need_want">
                     <p> Need vs want</p>
-                    <CoursePlan />
+                    <CoursePlan requiredClasses={this.state.requiredClasses} optionalClasses={this.state.optionalClasses} callBack={this.courseManagerCallBack}/>
                 </div>
                 <button onClick = {this.onGenerateSchedules}>testGenerateSchedules</button>
             </div>
