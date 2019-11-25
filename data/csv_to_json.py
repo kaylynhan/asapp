@@ -19,6 +19,7 @@ with open('course.json') as in_file:
 bad_keys = []
 for key in course_list:
     course = course_list[key]
+    course['id'] = key
     course['name'] = course['name'].strip()
     course['description'] = course['description'].strip()
     course['prereqs'] = course['prereqs'].strip()
@@ -101,7 +102,7 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
                     'room_num': room_num,
                     'meeting_type': meeting_type
                 })
-            course_list[course_id]['section_dict'][section_numb] = {
+            course_list[course_id]['section_dict'][course_id + section_numb] = {
                 'section_numb': section_numb,
                 'professor': name,
                 'meetings': current_lec
@@ -125,8 +126,15 @@ with open('data.csv') as in_file, open('error.txt', 'w') as error_file:
             'meetings': current_lec + meetings
         }
 
-        course_list[course_id]['section_dict'][section_numb] = section
+        course_list[course_id]['section_dict'][course_id + section_numb] = section
 
+json_arr = []
+for course in course_list:
+    json_arr.append(course_list[course])
 
 with open('total.json', 'w') as out_file:
-    out_file.write(json.dumps(course_list, indent=4))
+    json.dump(json_arr, out_file, indent=4)
+    # out_file.write(json.dumps(course_list[course], indent=4))
+    # out_file.write('\n')
+    # out_file.write(json.dumps(course_list, indent=4))
+    # out_file.write('\n]')
