@@ -46,44 +46,6 @@ class AddedCourses extends React.Component {
         })
     }
 
-    onGenerateSchedules = () => {
-        // let optIDs = []
-        // let reqIDs = []
-        // for (var course in this.state.optionalClasses){
-        //     optIDs.append(course.id)
-        // }
-        // for (var course in this.state.requiredClasses){
-        //     reqIDs.append(course.id)
-        // }
-
-        axios.get("http://localhost:4000/courses/getMany", 
-        {params: {ids: this.state.optionalIDs}})
-        .then(res => {
-            this.setState({
-                optCourseInfo: res.data
-            })
-        })
-        .catch(err => console.log(err.message));
-
-        axios.get("http://localhost:4000/courses/getMany", 
-        {params: {ids: this.state.requiredIDs}})
-        .then(res => {
-            this.setState({
-                reqCourseInfo: res.data
-            })
-        })
-        .catch(err => console.log(err.message));
-
-        console.log(this.state.optCourseInfo);
-        console.log(this.state.reqCourseInfo);
-
-        // this.setState({
-        //     schedules: generateSchedules(this.state.optCourseInfo,
-        //         this.state.reqCourseInfo)
-        // })
-        
-    }
-
     requiredCallBack = (item) => {
         this.setState(state => {
             const requiredClasses = this.state.requiredClasses.filter(function(value) {
@@ -150,8 +112,6 @@ class AddedCourses extends React.Component {
                     </div>
                 ))}
             </div>
-            
-                <button onClick = {this.onGenerateSchedules}>testGenerateSchedules</button>
             
         </div>
 

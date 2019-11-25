@@ -53,8 +53,6 @@ class CourseManager extends React.Component {
         });
     }
 
-
-
     onGenerateSchedules = () => {
         let optIDs = []
         let reqIDs = []

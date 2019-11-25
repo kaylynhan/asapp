@@ -1,5 +1,6 @@
 // import "./AddedCourses.css"; no file
 // import AddedCourses from "./AddedCourses.js";
+import CourseManager from "./CourseManager";
 import CourseInput from "./CourseInput.js";
 //import UnitSlider from "../components/UnitSlider" no file from that
 /* import "rc-slider/assets/index.css"; */
@@ -73,23 +74,7 @@ class HomePage extends React.Component {
                         <NavigationBar />
                     </header>
                     <div id="left_sidebar">
-                        <div id="search_input">
-                            <p> Search_input</p>
-                            <CourseInput />
-                        </div>
-                        <div id="search_result">
-                            <p> Search_result</p>
-                            <CourseList />
-                        </div>
-                        <div id="generate">
-                            <button class="NavBtn">
-                                Generate Schedules
-                            </button>
-                        </div>
-                        <div id="need_want">
-                            <p> Need vs want</p>
-                            <CoursePlan />
-                        </div>
+                        <CourseManager />
                     </div>
                     <div id="schedule_area">
                         <div id="preferences">
