@@ -9,8 +9,8 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
-            optionalCourses: [],
-            requiredCourses: [],
+            optionalClasses: [],
+            requiredClasses: [],
             optCourseInfo: null,
             reqCourseInfo: null,
             schedules: null
