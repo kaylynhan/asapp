@@ -58,7 +58,14 @@ let sample_schedules = [
 class HomePage extends React.Component {
     constructor(props){
         super(props);
-        this.state = { showLogin: false };
+        this.state = { 
+            showLogin: false,
+            schedules: null, 
+        }
+    }
+
+    homePageCallBack = (item) => {
+        this.setState({ schedules: item })
     }
 
     toggleLogin() {
@@ -74,7 +81,7 @@ class HomePage extends React.Component {
                         <NavigationBar />
                     </header>
                     <div id="left_sidebar">
-                        <CourseManager />
+                        <CourseManager callback={this.homePageCallBack}/>
                     </div>
                     <div id="schedule_area">
                         <div id="preferences">
