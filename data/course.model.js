@@ -6,17 +6,17 @@ let CourseSchema = new Schema({
     department: {type: String},
     number: {type: String},
     description: {type: String},
-    prereqs: [String],
+    prereqs: {type: String},
     units: {type: Number},
 	workload: {type: Number},
 	gpa: {type: Number},
-	class_rating: {type: String},	// changed from sections to course
+	class_rating: {type: Number},	// changed from sections to course
     sections: [{
         id: {type: String},
         number: {type: String},
         professor: {type: String},
-        link: {type: Number},
-        prof_rating: {type: String},
+        link: {type: String},
+        prof_rating: {type: Number},
     	workload: {type: Number},
 		gpa: {type: Number},
         final: {

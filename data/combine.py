@@ -29,15 +29,15 @@ def parse_courses():
         course['name'] = course['name'].strip()
         course['description'] = course['description'].strip()
         course['prereqs'] = course['prereqs'].strip()
+        # course['link'] = \
+        #     f'http://cape.ucsd.edu/responses/Results.aspx?courseNumber={course["department"]}+{course["number"]}'
 
         # Some course numbers start with 0*
         if ' 0' in key:
             bad_keys.append(key)
 
     for key in bad_keys:
-        print(key)
         new_key = re.sub('\s+0', ' ', key).strip()
-        print(new_key)
         course_list[new_key] = course_list[key]
         del course_list[key]
 
@@ -121,7 +121,7 @@ def parse_courses():
                         'end_time': time[1],
                         'building': building,
                         'room_num': room_num,
-                        'meeting_type': meeting_type
+                        'type': meeting_type
                     })
 
                 continue
@@ -139,7 +139,7 @@ def parse_courses():
                     'end_time': time[1],
                     'building': building,
                     'room_num': room_num,
-                    'meeting_type': meeting_type
+                    'type': meeting_type
                 })
 
             section = {
@@ -154,6 +154,10 @@ def parse_courses():
     return course_list
 
 
+def parse_CAPE():
+    pass
+
+
 def parse_CAPEs():
     with open('cape.csv') as in_file:
         csv_reader = csv.DictReader(in_file)
@@ -162,7 +166,8 @@ def parse_CAPEs():
         for line in csv_reader:
             total_cape_list.append(line)
 
-    cape_dict = {}
+    cape_dict = {}  # instructor, course_id
+    cape_courses = {}  # course_id
     for cape in total_cape_list:
         cape['Instructor'] = cape['Instructor'].strip()
         cape['Course'] = cape['Course'].split('-')[0].strip()
@@ -176,57 +181,107 @@ def parse_CAPEs():
 
         cape_dict[instructor][course_id].append(cape)
 
-    instructor_cape_dict = {}
+        if course_id not in cape_courses:
+            cape_courses[course_id] = []
+
+        cape_courses[course_id].append(cape)
+
     course_cape_dict = {}
+    for course_id in cape_courses:
+
+        course_total_stats = [0, 0, 0]
+        course_total_capes = [0, 0, 0]
+        recent_cape_link = None
+
+        for cape in cape_courses[course_id]:
+            num_evals = int(cape['Evals Made'])
+            num_enrolled = int(cape['Enroll'])
+
+            if not recent_cape_link:
+                recent_cape_link = cape['cape_link']
+
+            workload = cape['Study Hrs/wk']
+            class_rating = float(cape['Rcmnd Class'].split()[0])
+            gpa = re.findall('\(\d*\.\d+\)', cape['Avg Grade Received'])
+
+            if len(gpa) == 1:
+                gpa = re.findall('\d*\.\d+', gpa[0])[0]
+                gpa = float(gpa)
+
+                course_total_stats[GPA_INDEX] += num_enrolled * gpa
+                course_total_capes[GPA_INDEX] += num_enrolled
+
+            try:
+                workload = float(workload)
+
+                course_total_stats[WORKLOAD_INDEX] += num_evals * workload
+                course_total_capes[WORKLOAD_INDEX] += num_evals
+            except ValueError:
+                print(f'Workload: {workload} cannot be converted to a number')
+
+            # Use class_rating for course ratings
+            course_total_stats[RATING_INDEX] += num_evals * class_rating
+            course_total_capes[RATING_INDEX] += num_evals
+
+        # Account for stats with no available CAPE data
+        for i in range(3):
+            if course_total_capes[i] == 0:
+                course_total_stats[i] = -1
+                course_total_capes[i] = 1
+
+        for i in range(3):
+            course_total_stats[i] /= course_total_capes[i]
+
+        if course_id not in course_cape_dict:
+            course_cape_dict[course_id] = {}
+
+        course_cape_dict[course_id] = {
+            'gpa': course_total_stats[GPA_INDEX],
+            'workload': course_total_stats[WORKLOAD_INDEX],
+            'class_rating': course_total_stats[RATING_INDEX],
+            'link': recent_cape_link
+        }
+
+    instructor_cape_dict = {}
     for instructor in cape_dict:
         instructor_cape_dict[instructor] = {}
         for course_id in cape_dict[instructor]:
 
-            if course_id not in course_cape_dict:
-                course_cape_dict[course_id] = {}
-
-            course_total_stats = [0, 0, 0]
-            course_total_capes = [0, 0, 0]
             instructor_total_stats = [0, 0, 0]
             instructor_total_capes = [0, 0, 0]
+
+            recent_cape_link = None
 
             cape_list = cape_dict[instructor][course_id]
             for cape in cape_list:
                 num_evals = int(cape['Evals Made'])
+                num_enrolled = int(cape['Enroll'])
+
+                if not recent_cape_link:
+                    recent_cape_link = cape['cape_link']
 
                 workload = cape['Study Hrs/wk']
                 prof_rating = float(cape['Rcmnd Instr'].split()[0])
-                class_rating = float(cape['Rcmnd Class'].split()[0])
                 gpa = re.findall('\(\d*\.\d+\)', cape['Avg Grade Received'])
 
                 if len(gpa) == 1:
                     gpa = re.findall('\d*\.\d+', gpa[0])[0]
                     gpa = float(gpa)
 
-                    instructor_total_stats[GPA_INDEX] += num_evals * gpa
-                    course_total_stats[GPA_INDEX] += num_evals * gpa
-
-                    instructor_total_capes[GPA_INDEX] += num_evals
-                    course_total_capes[GPA_INDEX] += num_evals
+                    instructor_total_stats[GPA_INDEX] += num_enrolled * gpa
+                    instructor_total_capes[GPA_INDEX] += num_enrolled
 
                 try:
                     workload = float(workload)
 
                     instructor_total_stats[WORKLOAD_INDEX] += num_evals * workload
-                    course_total_stats[WORKLOAD_INDEX] += num_evals * workload
-
                     instructor_total_capes[WORKLOAD_INDEX] += num_evals
-                    course_total_capes[WORKLOAD_INDEX] += num_evals
                 except ValueError:
                     print(f'Workload: {workload} cannot be converted to a number')
 
                 # Use prof_rating for instructor ratings
-                # Use class_rating for course ratings
                 instructor_total_stats[RATING_INDEX] += num_evals * prof_rating
-                course_total_stats[RATING_INDEX] += num_evals * class_rating
-
                 instructor_total_capes[RATING_INDEX] += num_evals
-                course_total_capes[RATING_INDEX] += num_evals
 
             # Account for stats with no available CAPE data
             for i in range(3):
@@ -234,25 +289,16 @@ def parse_CAPEs():
                     instructor_total_stats[i] = -1
                     instructor_total_capes[i] = 1
 
-                if course_total_capes[i] == 0:
-                    course_total_stats[i] = -1
-                    course_total_capes[i] = 1
-
             for i in range(3):
                 instructor_total_stats[i] /= instructor_total_capes[i]
-                course_total_stats[i] /= course_total_capes[i]
 
             instructor_cape_dict[instructor][course_id] = {
                 'gpa': instructor_total_stats[GPA_INDEX],
                 'workload': instructor_total_stats[WORKLOAD_INDEX],
-                'prof_rating': instructor_total_stats[RATING_INDEX]
+                'prof_rating': instructor_total_stats[RATING_INDEX],
+                'link': recent_cape_link
             }
 
-            course_cape_dict[course_id] = {
-                'gpa': course_total_stats[GPA_INDEX],
-                'workload': course_total_stats[WORKLOAD_INDEX],
-                'class_rating': course_total_stats[RATING_INDEX]
-            }
             # print(instructor_cape_dict[instructor][course_id])
 
     return instructor_cape_dict, course_cape_dict
@@ -260,7 +306,7 @@ def parse_CAPEs():
 
 def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
     to_delete = []
-    missing_courses = []
+    missing_courses = set()
 
     for course_id in course_dict:
         if 'sections' not in course_dict[course_id]:
@@ -273,9 +319,10 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
                 section['gpa'] = instructor_cape_dict[prof][course_id]['gpa']
                 section['workload'] = instructor_cape_dict[prof][course_id]['workload']
                 section['prof_rating'] = instructor_cape_dict[prof][course_id]['prof_rating']
+                section['link'] = instructor_cape_dict[prof][course_id]['link']
             except KeyError:
                 if course_id not in course_cape_dict:
-                    missing_courses.append(course_id)
+                    missing_courses.add(course_id)
                     section['gpa'] = -1
                     section['workload'] = -1
                     section['prof_rating'] = -1
@@ -284,6 +331,7 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
                 section['gpa'] = course_cape_dict[course_id]['gpa']
                 section['workload'] = course_cape_dict[course_id]['workload']
                 section['prof_rating'] = course_cape_dict[course_id]['class_rating']
+                section['link'] = course_cape_dict[course_id]['link']
 
         if course_id not in course_cape_dict:
             course_dict[course_id]['gpa'] = -1
@@ -302,11 +350,21 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
         for course in missing_courses:
             out_file.write(f'{course}\n')
 
+
+def test_case(course_dict):
+    # Take the weighted average of "CSE 110", "Griswold, William G."
+    assert abs(course_dict['CSE 110']['sections'][0]['gpa'] - 3.092997) < 0.001
+
+    print("Test case passed")
+
+
 if __name__ == '__main__':
     instructor_cape_dict, course_cape_dict = parse_CAPEs()
     course_dict = parse_courses()
 
     combine_data(instructor_cape_dict, course_cape_dict, course_dict)
+
+    test_case(course_dict)
 
     json_arr = []
     for course in course_dict:
