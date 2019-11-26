@@ -1,4 +1,5 @@
 import json
+import logging
 import csv
 import re
 import sys
@@ -8,6 +9,9 @@ WORKLOAD_INDEX = 1
 RATING_INDEX = 2
 
 DAYS = ['M', 'W', 'F', 'Tu', 'Th']
+
+MISSING_COURSES = ['CAT 125R']
+logging.basicConfig(filename='combine.log', filemode='w', level=logging.DEBUG, format='%(levelname)s - %(name)s:%(filename)s:%(lineno)d - %(message)s')
 
 
 def parse_courses():
@@ -41,7 +45,18 @@ def parse_courses():
         course_list[new_key] = course_list[key]
         del course_list[key]
 
-    with open('dataWI2020.csv') as in_file, open('error.txt', 'w') as error_file:
+    for course_id in MISSING_COURSES:
+        course = {}
+        course['id'] = course_id
+        course['number'] = course_id.split()[1]
+        course['department'] = course_id.split()[0]
+        course['name'] = 'N/A'
+        course['description'] = 'N/A'
+        course['prereqs'] = ''
+        course['units'] = -1
+        course_list[course_id] = course
+
+    with open('dataWI2020.csv') as in_file:
         csv_reader = csv.reader(in_file)
 
         # Holds the meetings that occur for all sections in a course
@@ -62,8 +77,17 @@ def parse_courses():
             try:
                 course_obj = course_list[course_id]
             except KeyError:
-                error_file.write(f'{course_id} is not a valid course\n')
-                continue
+                logging.warning(f'{course_id} was not found in catalog')
+
+                course = {}
+                course['id'] = course_id
+                course['number'] = course_id.split()[1]
+                course['department'] = course_id.split()[0]
+                course['name'] = 'N/A'
+                course['description'] = 'N/A'
+                course['prereqs'] = ''
+                course['units'] = -1
+                course_list[course_id] = course
 
             meeting_type = line[2]
             section_numb = line[3]
@@ -74,8 +98,11 @@ def parse_courses():
                 potential_units = re.findall('\d+', potential_units[0])
                 numb_units = int(potential_units[0])
             except IndexError:
-                print(f'Cannot parse number of units from {course_obj["name"]}')
-                numb_units = 0
+                numb_units = -1
+
+                if course_obj['name'] == 'N/A':
+                    continue
+                logging.warning(f'Cannot parse number of units from {course_obj["name"]}')
 
             day_str = line[4]
             day = []
@@ -217,7 +244,7 @@ def parse_CAPEs():
                 course_total_stats[WORKLOAD_INDEX] += num_evals * workload
                 course_total_capes[WORKLOAD_INDEX] += num_evals
             except ValueError:
-                print(f'Workload: {workload} cannot be converted to a number')
+                logging.warning(f'Workload: {workload} cannot be converted to a number')
 
             # Use class_rating for course ratings
             course_total_stats[RATING_INDEX] += num_evals * class_rating
@@ -277,7 +304,7 @@ def parse_CAPEs():
                     instructor_total_stats[WORKLOAD_INDEX] += num_evals * workload
                     instructor_total_capes[WORKLOAD_INDEX] += num_evals
                 except ValueError:
-                    print(f'Workload: {workload} cannot be converted to a number')
+                    logging.warning(f'Workload: {workload} cannot be converted to a number')
 
                 # Use prof_rating for instructor ratings
                 instructor_total_stats[RATING_INDEX] += num_evals * prof_rating
@@ -298,8 +325,6 @@ def parse_CAPEs():
                 'prof_rating': instructor_total_stats[RATING_INDEX],
                 'link': recent_cape_link
             }
-
-            # print(instructor_cape_dict[instructor][course_id])
 
     return instructor_cape_dict, course_cape_dict
 
@@ -347,6 +372,7 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
         del course_dict[to_del]
 
     with open('missing_course_capes.txt', 'w') as out_file:
+        missing_courses = sorted(list(missing_courses))
         for course in missing_courses:
             out_file.write(f'{course}\n')
 
@@ -354,8 +380,15 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
 def test_case(course_dict):
     # Take the weighted average of "CSE 110", "Griswold, William G."
     assert abs(course_dict['CSE 110']['sections'][0]['gpa'] - 3.092997) < 0.001
+    assert len(course_dict['CSE 110']['sections']) == 2
+    assert len(course_dict['CSE 120']['sections']) == 2
+    assert len(course_dict['CSE 120']['sections']) == 2
+    assert len(course_dict['BILD 3']['sections']) == 20
+    assert len(course_dict['BILD 3']['sections'][0]['meetings']) == 3
+    assert len(course_dict['BILD 3']['sections'][9]['meetings']) == 3
+    assert len(course_dict['BILD 3']['sections'][10]['meetings']) == 4
 
-    print("Test case passed")
+    print("Test cases passed")
 
 
 if __name__ == '__main__':
