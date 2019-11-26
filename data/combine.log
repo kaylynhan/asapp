@@ -1,5 +1,5 @@
-WARNING - root:combine.py:247 - Workload: N/A cannot be converted to a number
-WARNING - root:combine.py:307 - Workload: N/A cannot be converted to a number
+WARNING - root:combine.py:249 - Workload: N/A cannot be converted to a number
+WARNING - root:combine.py:309 - Workload: N/A cannot be converted to a number
 WARNING - root:combine.py:80 - ANBI 100 was not found in catalog
 WARNING - root:combine.py:80 - ANBI 116 was not found in catalog
 WARNING - root:combine.py:80 - BENG 181 was not found in catalog

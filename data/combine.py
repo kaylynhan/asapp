@@ -148,7 +148,8 @@ def parse_courses():
                         'end_time': time[1],
                         'building': building,
                         'room_num': room_num,
-                        'type': meeting_type
+                        'type': meeting_type,
+                        'id': section_id + section_numb + d
                     })
 
                 continue
@@ -166,7 +167,8 @@ def parse_courses():
                     'end_time': time[1],
                     'building': building,
                     'room_num': room_num,
-                    'type': meeting_type
+                    'type': meeting_type,
+                    'id': section_id + section_numb + d
                 })
 
             section = {
