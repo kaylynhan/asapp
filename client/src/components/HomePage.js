@@ -82,10 +82,6 @@ class HomePage extends React.Component {
         <div id="left_sidebar">
           <CourseManager callback={this.homePageCallBack} />
         </div>
-        <div id="need_want">
-          <p> Need vs want</p>
-          <CoursePlan />
-        </div>
         <div>
           <ScheduleManager schedule_list={sample_schedules}></ScheduleManager>
         </div>
