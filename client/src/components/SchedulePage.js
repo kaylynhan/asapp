@@ -1,5 +1,5 @@
 import React from 'react';
-import "./HomePage.css"
+import "./homepage.css"
 import NavigationBar from "../components/NavigationBar.js"
 import '../App.css';
 import {NavLink, Route} from 'react-router-dom'
