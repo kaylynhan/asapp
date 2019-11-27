@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import SectionDetail from "./SectionDetail";
 
 class GridCell extends React.Component {
   state = {
@@ -13,7 +14,18 @@ class GridCell extends React.Component {
         onMouseOver={this.props.onMouseOver}
         onMouseUp={this.props.onMouseUp}
       >
-        {this.props.id}
+        <SectionDetail
+          time="Mon800"
+          sectionLen={50}
+          CourseId="MATH140A"
+          MeetingType="LE"
+          Section="A01"
+          Professor="Tarek M Elgindi"
+          LectureTime="2:00pm-3:20pm"
+          Building="APM"
+          RoomNumber="B402A"
+          CAPE="CAPE.com"
+        />
       </td>
     );
   }

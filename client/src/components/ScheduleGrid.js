@@ -1,10 +1,12 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
 import ReactDOM from "react-dom";
 import GridCell from "./GridCell";
+import SectionDetail from "./SectionDetail";
 
 class ScheduleGrid extends React.Component {
   constructor(props) {
     super(props);
+    this.tableNode = React.createRef();
     this.state = {
       avoidHour: Array(0),
       isMouseDown: false
@@ -44,10 +46,9 @@ class ScheduleGrid extends React.Component {
   };
 
   handleMouseUp = e => {
-      this.state.isMouseDown = false;
-      this.props.onMouseUp(this.state.avoidHour);
-  }
-
+    this.state.isMouseDown = false;
+    this.props.onMouseUp(this.state.avoidHour);
+  };
   render() {
     let hour = [
       "8am",
@@ -80,52 +81,53 @@ class ScheduleGrid extends React.Component {
     }
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Mon</th>
-            <th>Tu</th>
-            <th>Wed</th>
-            <th>Thus</th>
-            <th>Fri</th>
-          </tr>
-        </thead>
-        {hour.map((hr, i) => (
-          <tbody>
-            <tr>
-              <th id={hr} key={hr}>
-                {hr}
-              </th>
-              {dayOfWeek.map(DOW => (
-                <GridCell
-                  id={`${DOW}${hour_id[2 * i]}`}
-                  key={`${DOW}${hour_id[2 * i]}`}
-                  onMouseDown={this.handleMouseDown}
-                  onMouseOver={this.handleMouseOver}
-                  onMouseUp={this.handleMouseUp}
-                ></GridCell>
-              ))}
-            </tr>
+      <React.Fragment>
+        <table ref={this.tableNode}>
+          <thead>
             <tr>
               <th></th>
-              {dayOfWeek.map(DOW => (
-                <GridCell
-                  id={`${DOW}${hour_id[2 * i + 1]}`}
-                  key={`${DOW}${hour_id[2 * i + 1]}`}
-                  onMouseDown={this.handleMouseDown}
-                  onMouseOver={this.handleMouseOver}
-                  onMouseUp={this.handleMouseUp}
-                >
-                </GridCell>
-              ))}
+              <th>Mon</th>
+              <th>Tu</th>
+              <th>Wed</th>
+              <th>Thus</th>
+              <th>Fri</th>
             </tr>
-          </tbody>
-        ))}
-      </table>
+          </thead>
+          {hour.map((hr, i) => (
+            <tbody>
+              <tr>
+                <th id={hr} key={hr}>
+                  {hr}
+                </th>
+                {dayOfWeek.map(DOW => (
+                  <GridCell
+                    id={`${DOW}${hour_id[2 * i]}`}
+                    key={`${DOW}${hour_id[2 * i]}`}
+                    onMouseDown={this.handleMouseDown}
+                    onMouseOver={this.handleMouseOver}
+                    onMouseUp={this.handleMouseUp}
+                  ></GridCell>
+                ))}
+              </tr>
+              <tr>
+                <th></th>
+                {dayOfWeek.map(DOW => (
+                  <GridCell
+                    id={`${DOW}${hour_id[2 * i + 1]}`}
+                    key={`${DOW}${hour_id[2 * i + 1]}`}
+                    onMouseDown={this.handleMouseDown}
+                    onMouseOver={this.handleMouseOver}
+                    onMouseUp={this.handleMouseUp}
+                  ></GridCell>
+                ))}
+              </tr>
+            </tbody>
+          ))}
+        </table>
+        <sectionDetail></sectionDetail>
+      </React.Fragment>
     );
   }
 }
 
 export default ScheduleGrid;
-

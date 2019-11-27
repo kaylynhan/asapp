@@ -1,5 +1,6 @@
 table {
     width:100%;
+    border-radius: 20%;
 }
 
 td {
@@ -12,4 +13,8 @@ td {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.Course  {
+    text-align:center;
 }
