@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Login.css';
+import axios from 'axios';
 
 export class Login extends React.Component {
     constructor(props) {
@@ -16,6 +17,33 @@ export class Login extends React.Component {
         this.setState({
             showLogin: false
         });
+
+        axios.get("http://localhost:4000/courses/allOverviews")
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+
+        axios.get("http://localhost:4000/courses", {params: {id: "5dcf3e650636c96b37bfc810"}})
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+
+        axios.get("http://localhost:4000/courses/getMany", {
+            params: {ids: ["5dcf3e650636c96b37bfc810", "5dcf3e650636c96b37bfc819"]}
+        })
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+
     }
 
     toggleSignIn() {
