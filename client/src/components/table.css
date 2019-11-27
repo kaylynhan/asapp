@@ -1,15 +1,23 @@
 table {
     width:100%;
+    background-color:;
+    border:white;
 }
 
 td {
     height:40px;
+    background-color:#c7ecfc;
     width:18%;
-    border:1px black solid;
+    border:6px white solid;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
+}
+
+.Course  {
+    text-align:center;
 }

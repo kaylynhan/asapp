@@ -9,12 +9,45 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
-            optionalClasses: [],
-            requiredClasses: [],
+            requiredClasses: [
+                {
+                    name: 'CSE 101',
+                    id: '5dcf3e650636c96b37bfc819',
+                },
+                {
+                    name: 'CSE 123',
+                    id: '5dd9ecd7f151a092016468fa'
+                }
+            ],
+            optionalClasses : [ 
+                {
+                    name: 'CSE 110',
+                    id: '5dcf3980ba95db6aa9429fe3'
+                },
+                {
+                    name: 'CSE 100',
+                    id: '5dcf3e650636c96b37bfc810'
+                }
+            ],
             optCourseInfo: null,
             reqCourseInfo: null,
-            schedules: null
+            schedules: null,
+            search_query: '',
+            search_query_dept: '',
+            search_query_num: '',
+            filtered_catalogue: [],
         }
+        this.handleSearch = this.handleSearch.bind(this)
+        this.filterCatalogue = this.filterCatalogue.bind(this)
+    }
+
+    courseManagerCallBack = (item1FromChild, item2FromChild) => {
+        this.setState(
+            { 
+                requiredClasses: item1FromChild,
+                optionalClasses: item2FromChild
+            }
+        )
     }
 
     componentDidMount () {
@@ -88,19 +121,37 @@ class CourseManager extends React.Component {
         //     schedules: generateSchedules(this.state.optCourseInfo,
         //         this.state.reqCourseInfo)
         // })
+
+        /*  This is the callBack function which will update HomePage's
+            schedule state. Be sure to call it after setting
+            this.state.schedules to the newly generated schedules.
+        */
+        this.props.callBack(this.state.schedules)
     }
 
+    handleSearch(search_query, search_query_dept, search_query_num) {
+        this.setState({
+            search_query: search_query,
+            search_query_dept: search_query_dept,
+            search_query_num: search_query_num,
+        },
+        this.filterCatalogue)
+    }
+
+    filterCatalogue() {
+
+    }
 
     render() {
         return (
             <div>
                 <div id="search_input">
                     <p> Search_input</p>
-                    <CourseInput />
+                    <CourseInput handleSearch={this.handleSearch}/>
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
-                    <CourseList menus = {this.state.catalogue}/>
+                    <CourseList menus = {this.state.catalogue} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
                     <button class="NavBtn">
@@ -109,7 +160,7 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="need_want">
                     <p> Need vs want</p>
-                    <CoursePlan />
+                    <CoursePlan requiredClasses={this.state.requiredClasses} optionalClasses={this.state.optionalClasses} callBack={this.courseManagerCallBack}/>
                 </div>
                 <button onClick = {this.onGenerateSchedules}>testGenerateSchedules</button>
             </div>

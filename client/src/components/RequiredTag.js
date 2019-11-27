@@ -18,10 +18,10 @@ class RequiredTag extends React.Component {
 
       render(){
         return(
-            <div>
-               {this.props.name}
-                <button onClick={this.removeTag} className="ExBtn">X</button>
-                <button onClick={this.toggle} className="ToggleBtn">&#8594;</button>
+            <div className='reqCourse'>
+                <button onClick={this.removeTag} className="ExBtn">x &nbsp;</button>          {/* x Button */}
+                {this.props.name}                                                             {/* Course name */}
+                <button onClick={this.toggle} className="ToggleBtn">&nbsp; &#8594;</button>   {/* -> Arrow */}
             </div>
         )
      }

@@ -1,4 +1,7 @@
 import React from 'react';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
 
 class ProfDropdown extends React.Component {
     constructor(props) {
@@ -6,27 +9,24 @@ class ProfDropdown extends React.Component {
 
         this.state = {
             // pass in your list of profs here
-            ProfList: ["Bowers, Adam", "Ord, Rick", "Zhang, Danna"]
+            ProfList: ["Bowers, Adam", "Ord, Rick", "Zhang, Danna", "Gillespie, Gary"]
         }
     }
 
     render() {
-        var dropDown =
-            <select>
-                <option value="">--Select your Professor--</option>
-                {
-                    this.state.ProfList.map(name => (
-                        <option value={name}>{name}</option>
-                    ))
-                }
-            </select>
-
         return (
             <div>
                 <p style={{textAlign:"center"}}>{this.props.title}</p>
-                {dropDown}
-                {dropDown}
-                {dropDown}
+                {this.state.ProfList.map(item => (
+                    <select onChange={this.props.onChange}>
+                        <option value="">--Select your Professor--</option>
+                        {
+                            this.state.ProfList.map(name => (
+                                <option value={name}>{name}</option>
+                            ))
+                        }
+                    </select>
+                ))}
             </div>
         )
     }

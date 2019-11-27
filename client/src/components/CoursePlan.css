@@ -13,6 +13,72 @@
 }
 
 .ExBtn, .ToggleBtn {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    color: #fff;
 }
+
+/* Needed courses */
+.reqCourse {
+    font-family: Helvetica, Arial, sans-serif;
+    background: #588fe5;
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    padding: 7px;
+
+    /* Rounds the left two corner. Only difference from .reqCourse */
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    margin: 0 30px 10px 0;
+    text-decoration: none;
+}
+
+/* Wanted courses */
+.optCourse {
+    font-family: Helvetica, Arial, sans-serif;
+    background: #588fe5;
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    padding: 7px;
+
+    /* Rounds the right two corner. Only difference from .reqCourse */
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    margin: 0 30px 10px 0;
+    text-decoration: none;
+}
+
+/* Right-pointing triangle that forms the tag shape. Appears after the reqCourse div. */
+.reqCourse:after {
+    display: inline-block;
+    border: 19px solid;
+    border-color: transparent transparent transparent #588fe5;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: -38px;
+    top: 0;
+    content: "";
+}
+
+/* Left-pointing triangle that forms the tag shape. Appears before the optCourse div. */
+.optCourse:before {
+    content:"";
+    float:left;
+    position:absolute;
+    top:0;
+    left:-19px;
+    width:0;
+    height:0;
+    border-color:transparent #588fe5 transparent transparent;
+    border-style:solid;
+    border-width:19px 19px 19px 0;
+}
+
+
