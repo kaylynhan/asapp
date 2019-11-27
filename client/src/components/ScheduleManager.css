@@ -1,0 +1,60 @@
+#schedule_area{
+    grid-area: schedule_area;
+    display:grid;
+    grid-template-areas:
+            "pref pref"
+            "sort display_area";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 6fr;
+}
+
+
+#schedule_area > *{
+    border: 1px black dashed;
+}
+
+#minGap{
+    flex:1
+}
+
+#unitPref{
+    flex:1
+}
+
+#restrictCommute{
+    flex:1
+}
+
+#profPref{
+    flex:1
+}
+
+#preferences{
+    grid-area:pref;
+    display:flex;
+    flex-direction: row;
+    margin:20px;
+}
+
+#sort{
+    grid-area:sort;
+}
+
+#grid_area{
+    grid-area:display_area;
+}
+
+header{
+    grid-area:header;
+}
+
+#page_container > *{
+    border: 1px black solid;
+}
+
+#generate {
+    height: 10vh;
+    padding: 0px;
+    text-align: center;
+}
+
