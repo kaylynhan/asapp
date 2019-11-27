@@ -31,8 +31,14 @@ class CourseManager extends React.Component {
             ],
             optCourseInfo: null,
             reqCourseInfo: null,
-            schedules: null
+            schedules: null,
+            search_query: '',
+            search_query_dept: '',
+            search_query_num: '',
+            filtered_catalogue: [],
         }
+        this.handleSearch = this.handleSearch.bind(this)
+        this.filterCatalogue = this.filterCatalogue.bind(this)
     }
 
     courseManagerCallBack = (item1FromChild, item2FromChild) => {
@@ -123,17 +129,29 @@ class CourseManager extends React.Component {
         this.props.callBack(this.state.schedules)
     }
 
+    handleSearch(search_query, search_query_dept, search_query_num) {
+        this.setState({
+            search_query: search_query,
+            search_query_dept: search_query_dept,
+            search_query_num: search_query_num,
+        },
+        this.filterCatalogue)
+    }
+
+    filterCatalogue() {
+
+    }
 
     render() {
         return (
             <div>
                 <div id="search_input">
                     <p> Search_input</p>
-                    <CourseInput />
+                    <CourseInput handleSearch={this.handleSearch}/>
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
-                    <CourseList menus = {this.state.catalogue}/>
+                    <CourseList menus = {this.state.catalogue} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
                     <button class="NavBtn">
