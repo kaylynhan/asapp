@@ -13,35 +13,34 @@ class ScheduleGrid extends React.Component {
     };
   }
 
-  handleMouseDown = e => {
+  trackExcludedTime = e => {
+    const EXCLUSION_COLOR = "grey";
+    const DEFAULT_COLOR = "#c7ecfc";
     const outputArr = this.state.avoidHour;
-    this.setState({ isMouseDown: true });
-    if (e.target.style.backgroundColor == "grey") {
-      e.target.style.backgroundColor = "white";
+
+    if (e.target.style.backgroundColor == EXCLUSION_COLOR) {
+      // Active color vs deact color constant definition
+
+      e.target.style.backgroundColor = DEFAULT_COLOR;
       let removeIndex = outputArr.findIndex(
         elem => elem == e.target.getAttribute("id")
       );
       outputArr.splice(removeIndex, 1);
     } else {
-      e.target.style.backgroundColor = "grey";
+      e.target.style.backgroundColor = EXCLUSION_COLOR;
       outputArr.push(e.target.getAttribute("id"));
     }
+  };
+
+  handleMouseDown = e => {
+    this.setState({ isMouseDown: true });
+    this.trackExcludedTime(e);
   };
 
   handleMouseOver = e => {
     const outputArr = this.state.avoidHour;
     if (this.state.isMouseDown) {
-      // if the grid is grey, change it to white
-      if (e.target.style.backgroundColor == "grey") {
-        e.target.style.backgroundColor = "white";
-        let removeIndex = outputArr.findIndex(
-          elem => elem == e.target.getAttribute("id")
-        );
-        outputArr.splice(removeIndex, 1);
-      } else {
-        e.target.style.backgroundColor = "grey";
-        outputArr.push(e.target.getAttribute("id"));
-      }
+      this.trackExcludedTime(e);
     }
   };
 

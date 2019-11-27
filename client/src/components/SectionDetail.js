@@ -28,7 +28,6 @@ class SectionDetail extends React.Component {
         <b>{this.props.CourseId}</b>
         <br></br>
         <i>{this.props.MeetingType}</i>
-        <Tooltip info={MeetingDetail}></Tooltip>
       </div>
     );
   };

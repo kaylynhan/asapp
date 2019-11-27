@@ -16,7 +16,6 @@ import "rc-slider/assets/index.css";
 import GapSlider from "./GapSlider.js";
 import ProfDropdown from "./ProfDropdown.js";
 import "./table.css";
-import Grid from "./Grid.js";
 import ScheduleManager from "./ScheduleManager";
 import Popup from "./Popup.js";
 import Tooltip from "./Tooltip.js";
