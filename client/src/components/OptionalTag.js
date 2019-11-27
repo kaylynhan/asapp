@@ -20,10 +20,10 @@ class OptionalTag extends React.Component {
 
       render(){
         return(
-            <div id="CoursePlan">
-                <button onClick={this.toggle} className="ToggleBtn">&#8592;</button>
-                {this.props.name}
-                <button onClick={this.removeTag} className="ExBtn">X</button>
+            <div id="CoursePlan" className='optCourse'>
+                <button onClick={this.toggle} className="ToggleBtn">&#8592; &nbsp;</button>   {/* <- Arrow */}
+                {this.props.name}                                                             {/* Course name */}
+                <button onClick={this.removeTag} className="ExBtn">&nbsp; x</button>          {/* x Button */}
             </div>
         )
      }
