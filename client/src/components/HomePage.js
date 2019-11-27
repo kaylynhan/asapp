@@ -5,7 +5,7 @@ import CourseInput from "./CourseInput.js";
 /* import "rc-slider/assets/index.css"; */
 import React from "react"
 import SignUp from "../components/Signup.js"
-import "./HomePage.css"
+import "./homepage.css"
 import NavigationBar from "../components/NavigationBar.js"
 import "../App.css"
 import "./CoursePlan.css"

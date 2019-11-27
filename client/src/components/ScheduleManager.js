@@ -5,6 +5,7 @@ import "./ScheduleManager.css"
 import ProfDropdown from "./ProfDropdown";
 import ScheduleList from "./ScheduleList";
 import ScheduleGrid from "./ScheduleGrid";
+import ScheduleGridReact from './ScheduleGridReact';
 
 class ScheduleManager extends React.Component {
 
@@ -15,7 +16,8 @@ class ScheduleManager extends React.Component {
             minUnits: DEFAULT_MIN_UNITS,
             maxUnits: DEFAULT_MAX_UNITS,
             prefProfs: [],
-            avoidProfs: []
+            avoidProfs: [], 
+            avoidHours: [],
         };
     }
 
@@ -81,6 +83,11 @@ class ScheduleManager extends React.Component {
         console.log(this.state)
     };
 
+    handleOnMouseUp = (arr) => {
+        this.setState({avoidHours: arr});
+        setTimeout(() => console.log(this.state.avoidHours), 1)
+    };
+
     render() {
         return (
             <div id="schedule_area">
@@ -102,7 +109,7 @@ class ScheduleManager extends React.Component {
                 <div id="sort">
                     <ScheduleList schedule_list={this.props.schedule_list}/>
                 </div>
-                <div id="grid_area"><ScheduleGrid /></div>
+                <div id="grid_area"><ScheduleGrid onMouseUp={this.handleOnMouseUp}/></div>
             </div>
         )
     }

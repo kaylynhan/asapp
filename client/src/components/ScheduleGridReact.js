@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import GridCell from "./GridCell";
 
-class ScheduleGrid extends React.Component {
+class ScheduleGridReact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +14,7 @@ class ScheduleGrid extends React.Component {
   handleMouseDown = e => {
     const outputArr = this.state.avoidHour;
     this.setState({ isMouseDown: true });
+    console.log(e.target.style);
     if (e.target.style.backgroundColor == "grey") {
       e.target.style.backgroundColor = "white";
       let removeIndex = outputArr.findIndex(
@@ -24,6 +25,8 @@ class ScheduleGrid extends React.Component {
       e.target.style.backgroundColor = "grey";
       outputArr.push(e.target.getAttribute("id"));
     }
+    this.props.onMouseUp();
+    console.log(outputArr);
   };
 
   handleMouseOver = e => {
@@ -40,13 +43,15 @@ class ScheduleGrid extends React.Component {
         e.target.style.backgroundColor = "grey";
         outputArr.push(e.target.getAttribute("id"));
       }
+      this.props.onMouseUp();
+      console.log(outputArr);
     }
   };
 
   handleMouseUp = e => {
-      this.state.isMouseDown = false;
-      this.props.onMouseUp(this.state.avoidHour);
-  }
+    this.state.isMouseDown = false;
+    this.props.onMouseUp();
+  };
 
   render() {
     let hour = [
@@ -116,8 +121,7 @@ class ScheduleGrid extends React.Component {
                   onMouseDown={this.handleMouseDown}
                   onMouseOver={this.handleMouseOver}
                   onMouseUp={this.handleMouseUp}
-                >
-                </GridCell>
+                ></GridCell>
               ))}
             </tr>
           </tbody>
@@ -127,5 +131,4 @@ class ScheduleGrid extends React.Component {
   }
 }
 
-export default ScheduleGrid;
-
+export default ScheduleGridReact;
