@@ -1,5 +1,6 @@
 // import "./AddedCourses.css"; no file
 // import AddedCourses from "./AddedCourses.js";
+import CourseManager from "./CourseManager";
 import CourseInput from "./CourseInput.js";
 //import UnitSlider from "../components/UnitSlider" no file from that
 /* import "rc-slider/assets/index.css"; */
@@ -58,7 +59,14 @@ let sample_schedules = [
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { showLogin: false };
+        this.state = { 
+            showLogin: false,
+            schedules: null, 
+        }
+    }
+
+    homePageCallBack = (item) => {
+        this.setState({ schedules: item })
     }
 
     toggleLogin() {
@@ -69,23 +77,12 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div id="page_container">
-                <header>
-                    <NavigationBar />
-                </header>
-                <div id="left_sidebar">
-                    <div id="search_input">
-                        <p> Search_input</p>
-                        <CourseInput />
-                    </div>
-                    <div id="search_result">
-                        <p> Search_result</p>
-                        <CourseList />
-                    </div>
-                    <div id="generate">
-                        <button class="NavBtn">
-                            Generate Schedules
-                            </button>
+                <div id="page_container">
+                    <header>
+                        <NavigationBar />
+                    </header>
+                    <div id="left_sidebar">
+                        <CourseManager callback={this.homePageCallBack}/>
                     </div>
                     <div id="need_want">
                         <p> Need vs want</p>
