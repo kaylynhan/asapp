@@ -1,5 +1,5 @@
-WARNING - root:combine.py:249 - Workload: N/A cannot be converted to a number
-WARNING - root:combine.py:309 - Workload: N/A cannot be converted to a number
+WARNING - root:combine.py:280 - Workload: N/A cannot be converted to a number
+WARNING - root:combine.py:340 - Workload: N/A cannot be converted to a number
 WARNING - root:combine.py:80 - ANBI 100 was not found in catalog
 WARNING - root:combine.py:80 - ANBI 116 was not found in catalog
 WARNING - root:combine.py:80 - BENG 181 was not found in catalog
@@ -7,15 +7,15 @@ WARNING - root:combine.py:80 - BIPN 154 was not found in catalog
 WARNING - root:combine.py:80 - BIPN 162 was not found in catalog
 WARNING - root:combine.py:80 - CHIN 185A was not found in catalog
 WARNING - root:combine.py:80 - COGS 111 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Directed Group Study (2 or 4)
+WARNING - root:combine.py:108 - Cannot parse number of units from Directed Group Study (2 or 4)
 WARNING - root:combine.py:80 - COMM 109I was not found in catalog
 WARNING - root:combine.py:80 - COMM 182 was not found in catalog
 WARNING - root:combine.py:80 - CSE 95 was not found in catalog
 WARNING - root:combine.py:80 - CSE 151A was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Seminar in CSE (1�4)
-WARNING - root:combine.py:105 - Cannot parse number of units from Seminar in CSE (1�4)
+WARNING - root:combine.py:108 - Cannot parse number of units from Seminar in CSE (1�4)
+WARNING - root:combine.py:108 - Cannot parse number of units from Seminar in CSE (1�4)
 WARNING - root:combine.py:80 - CSS 1 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Seminar in CSE (1�4)
+WARNING - root:combine.py:108 - Cannot parse number of units from Seminar in CSE (1�4)
 WARNING - root:combine.py:80 - EDS 30 was not found in catalog
 WARNING - root:combine.py:80 - EDS 119 was not found in catalog
 WARNING - root:combine.py:80 - EDS 121A was not found in catalog
@@ -23,7 +23,7 @@ WARNING - root:combine.py:80 - EDS 122 was not found in catalog
 WARNING - root:combine.py:80 - EDS 128A was not found in catalog
 WARNING - root:combine.py:80 - EDS 129B was not found in catalog
 WARNING - root:combine.py:80 - HDS 60 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Directed Group Study (1�2)
+WARNING - root:combine.py:108 - Cannot parse number of units from Directed Group Study (1�2)
 WARNING - root:combine.py:80 - HIEU 163 was not found in catalog
 WARNING - root:combine.py:80 - HIEU 183 was not found in catalog
 WARNING - root:combine.py:80 - HILD 2B was not found in catalog
@@ -33,7 +33,7 @@ WARNING - root:combine.py:80 - HITO 119 was not found in catalog
 WARNING - root:combine.py:80 - HMNR 100 was not found in catalog
 WARNING - root:combine.py:80 - JAPN 140B was not found in catalog
 WARNING - root:combine.py:80 - JAPN 150A was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Selected Topics in Contemporary Japanese Studies
+WARNING - root:combine.py:108 - Cannot parse number of units from Selected Topics in Contemporary Japanese Studies
 WARNING - root:combine.py:80 - LIAB 1B was not found in catalog
 WARNING - root:combine.py:80 - LIAB 1BX was not found in catalog
 WARNING - root:combine.py:80 - LIAB 1E was not found in catalog
@@ -71,7 +71,7 @@ WARNING - root:combine.py:80 - LISP 16 was not found in catalog
 WARNING - root:combine.py:80 - LISP 18 was not found in catalog
 WARNING - root:combine.py:80 - LTKO 2B was not found in catalog
 WARNING - root:combine.py:80 - MAE 40 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Directed Group Study (1�4)
+WARNING - root:combine.py:108 - Cannot parse number of units from Directed Group Study (1�4)
 WARNING - root:combine.py:80 - MUIR 90H was not found in catalog
 WARNING - root:combine.py:80 - MUS 2B was not found in catalog
 WARNING - root:combine.py:80 - MUS 2BK was not found in catalog
@@ -82,8 +82,8 @@ WARNING - root:combine.py:80 - MUS 95JC was not found in catalog
 WARNING - root:combine.py:80 - MUS 95K was not found in catalog
 WARNING - root:combine.py:80 - MUS 95L was not found in catalog
 WARNING - root:combine.py:80 - MUS 95W was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Chamber Music Performance (2�4/0)
-WARNING - root:combine.py:105 - Cannot parse number of units from Advanced Improvisation Performance (4/0)
+WARNING - root:combine.py:108 - Cannot parse number of units from Chamber Music Performance (2�4/0)
+WARNING - root:combine.py:108 - Cannot parse number of units from Advanced Improvisation Performance (4/0)
 WARNING - root:combine.py:80 - CENG 15 was not found in catalog
 WARNING - root:combine.py:80 - CENG 176A was not found in catalog
 WARNING - root:combine.py:80 - POLI 5D was not found in catalog
@@ -91,10 +91,10 @@ WARNING - root:combine.py:80 - POLI 11D was not found in catalog
 WARNING - root:combine.py:80 - POLI 13D was not found in catalog
 WARNING - root:combine.py:80 - POLI 30D was not found in catalog
 WARNING - root:combine.py:80 - POLI 100X was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Game Theory in Political Science
+WARNING - root:combine.py:108 - Cannot parse number of units from Game Theory in Political Science
 WARNING - root:combine.py:80 - POLI 125D was not found in catalog
 WARNING - root:combine.py:80 - POLI 134 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from The U
+WARNING - root:combine.py:108 - Cannot parse number of units from The U
 WARNING - root:combine.py:80 - POLI 174 was not found in catalog
 WARNING - root:combine.py:80 - POLI 191B was not found in catalog
 WARNING - root:combine.py:80 - PSYC 116B was not found in catalog
@@ -103,19 +103,19 @@ WARNING - root:combine.py:80 - SE 131A was not found in catalog
 WARNING - root:combine.py:80 - SIO 104 was not found in catalog
 WARNING - root:combine.py:80 - SIO 144 was not found in catalog
 WARNING - root:combine.py:80 - SOCI 188 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Assistant Designer (2�6)
-WARNING - root:combine.py:105 - Cannot parse number of units from 
-WARNING - root:combine.py:105 - Cannot parse number of units from 
-WARNING - root:combine.py:105 - Cannot parse number of units from 
-WARNING - root:combine.py:105 - Cannot parse number of units from 
-WARNING - root:combine.py:105 - Cannot parse number of units from Theatre Practicum (4�6)
-WARNING - root:combine.py:105 - Cannot parse number of units from Theatre Practicum (4�6)
-WARNING - root:combine.py:105 - Cannot parse number of units from Advanced Theatre Practicum (4�6)
+WARNING - root:combine.py:108 - Cannot parse number of units from Assistant Designer (2�6)
+WARNING - root:combine.py:108 - Cannot parse number of units from 
+WARNING - root:combine.py:108 - Cannot parse number of units from 
+WARNING - root:combine.py:108 - Cannot parse number of units from 
+WARNING - root:combine.py:108 - Cannot parse number of units from 
+WARNING - root:combine.py:108 - Cannot parse number of units from Theatre Practicum (4�6)
+WARNING - root:combine.py:108 - Cannot parse number of units from Theatre Practicum (4�6)
+WARNING - root:combine.py:108 - Cannot parse number of units from Advanced Theatre Practicum (4�6)
 WARNING - root:combine.py:80 - TMC 120 was not found in catalog
 WARNING - root:combine.py:80 - TWS 22 was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Culture, Tourism, and the Urban Economy: Case Studies of Craft Breweries
-WARNING - root:combine.py:105 - Cannot parse number of units from Life Course Scholars Research and Core Fundamentals
+WARNING - root:combine.py:108 - Cannot parse number of units from Culture, Tourism, and the Urban Economy: Case Studies of Craft Breweries
+WARNING - root:combine.py:108 - Cannot parse number of units from Life Course Scholars Research and Core Fundamentals
 WARNING - root:combine.py:80 - USP 159A was not found in catalog
-WARNING - root:combine.py:105 - Cannot parse number of units from Field Research in Migrant Communities�Practicum
+WARNING - root:combine.py:108 - Cannot parse number of units from Field Research in Migrant Communities�Practicum
 WARNING - root:combine.py:80 - WARR 87 was not found in catalog
 WARNING - root:combine.py:80 - WCWP 160 was not found in catalog
