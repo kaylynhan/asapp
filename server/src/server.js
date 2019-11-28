@@ -5,13 +5,14 @@ import mongoose from 'mongoose';
 import userRoutes from "./routes/user.route.js";
 import courseRoutes from "./routes/course.route.js"
 
-const PORT = 4000;
+const port = process.env.PORT || 4000;
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/asappdb', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/asappdb', 
+    { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
@@ -21,7 +22,7 @@ connection.once('open', function() {
 app.use('/users', userRoutes);
 app.use('/courses', courseRoutes);
 
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
+app.listen(port, function() {
+    console.log("Server is running on Port: " + port);
 });
 
