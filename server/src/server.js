@@ -26,7 +26,10 @@ const connection = mongoose.connection;
 
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
-})
+});
+connection.on('error', (err) => {
+    console.log("MongoDB connection encountered an error:", err);
+});
 
 app.use('/users', userRoutes);
 app.use('/courses', courseRoutes);
