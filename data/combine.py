@@ -455,6 +455,16 @@ def test_case(course_dict):
 	assert 'SIO 180' not in course_dict
 	assert len(course_dict['CSE 167']['sections']) == 1
 	assert len(course_dict['CSE 167']['sections'][0]['meetings']) == 3
+	assert len(course_dict['BENG 161B']['sections']) == 2
+	assert len(course_dict['BENG 161B']['sections'][0]['meetings']) == 4
+	assert len(course_dict['BENG 161B']['sections'][1]['meetings']) == 4
+
+	max_num_sect = 69
+	for course_id in course_dict:
+		if len(course_dict[course_id]['sections']) > max_num_sect:
+			max_num_sect = len(course_dict[course_id]['sections'])
+			print(course_id)
+	print(max_num_sect)
 
 	print("Test cases passed")
 
@@ -472,6 +482,6 @@ if __name__ == '__main__':
 	for course in course_dict:
 		json_arr.append(course_dict[course])
 
-	with open('total.json', 'w') as out_file:
+	with open('combined.json', 'w') as out_file:
 		json.dump(json_arr, out_file, indent=4)
 
