@@ -1,383 +1,62 @@
 import React from 'react'
 import './CourseList.css'
+import Tooltip from "./Tooltip";
+import axios from 'axios';
 
 class CourseList extends React.Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-            menus: [
-                {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "MATH", options: [
-                        {
-                            name: "MATH 100",
-                            department: "MATH",
-                            units: 4,
-                            description: "Description for MATH 100",
-                            prereqs: "Prereqs for MATH 100"
-                        },
-                         {
-                            name: "MATH 101",
-                            department: "MATH",
-                            units: 4,
-                            description: "Description for MATH 101",
-                            prereqs: "Prereqs for MATH 101"
-                        },
-                         {
-                            name: "MATH 110",
-                            department: "MATH",
-                            units: 4,
-                            description: "Description for MATH 110",
-                            prereqs: "Prereqs for MATH 110"
-                        },
-                    ],
-                 },
-                 {
-                    title: "PHYS", options: [
-                        {
-                            name: "PHYS 100",
-                            department: "PHYS",
-                            units: 4,
-                            description: "Description for PHYS 100",
-                            prereqs: "Prereqs for PHYS 101"
-                        },
-                        {
-                            name: "PHYS 101",
-                            department: "PHYS",
-                            units: 4,
-                            description: "Description for PHYS 101",
-                            prereqs: "Prereqs for PHYS 101"
-                        },
-                        {
-                            name: "PHYS 110",
-                            department: "PHYS",
-                            units: 4,
-                            description: "Description for PHYS 110",
-                            prereqs: "Prereqs for PHYS 110"
-                        }
-                    ]
-                },
-                {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-                 {
-                    title: "CSE", options: [
-                        {
-                            name: "CSE 100",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 100",
-                            prereqs: "Prereqs for CSE 100"
-                        },
-                        {
-                            name: "CSE 101",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 101",
-                            prereqs: "Prereqs for CSE 101"
-                        },
-                        {
-                            name: "CSE 110",
-                            department: "CSE",
-                            units: 4,
-                            description: "Description for CSE 110",
-                            prereqs: "Prereqs for CSE 110"
-                        }
-                    ],
-                 },
-            ]
-        } /* end state */
     } /* end constructor */
 
+
     render(){
+        //toDelete
+        /*
+        //popup for section : Math140
+        var ex = <div>
+            <p>Section : A01</p>
+            <p>Professor : Tarek M Elgindi</p>
+            <p>Lecture : Tuesday/Thursday 2:00pm - 3:20pm</p>
+            <p>Building : APM</p>
+            <p>Room Number : B402A</p>
+            <br />
+            <p>Discussion : Monday 6:00pm - 6:50pm</p>
+            <p>Lecture : Tuesday/Thursday 2:00pm - 3:20pm</p>
+            <p>Building : APM</p>
+            <p>Room Number : B402A</p>
+        </div>
+        */
+        //end
       return(
         <div id="courseListContainer">
             <div id="courseListWindow">
-                {this.state.menus.map(menu => (
+                {this.props.menus.map(menu => (
                     <div key={menu.title}>
                         <details>
                             <summary>{menu.title}</summary>
-                            {menu.options.map(course => (<p>{course.name}</p>))}
+                            {menu.options.map(course => (
+                                //code by rel
+                                <div>
+                                    <details style={{marginLeft:'10%'}}>
+                                        <summary>{course.name}</summary>
+                                        <div style={{marginLeft:'10%'}}>
+                                            Units : {course.units}<br />
+                                            Prerequisites : {course.prereqs}<br />
+                                            Description : {course.description}
+                                        </div>
+                                    </details>
+                                </div>
+                                //end rel
+                            ))}
                         </details>
                     </div>
                 ))}
             </div>
+            {/*<Tooltip id="sectionTip" info={ex}/>*/}
         </div>
-        )
+    )
 
-  }
+    }
 }
 
 export default CourseList

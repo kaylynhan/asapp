@@ -9,33 +9,35 @@ let UserSchema = new Schema({
     password: { type: String, 
         required: [true, 'A user must have a password!'] 
     },
-    schedules: [new Schema({
+    schedules: [{
         label: { type: String },
         footnotes: { type: String },
-        sections: [new Schema({
-            section_id: { type: String },
-            professor: { type: String },
-            units: { type: Number },
-            description: { type: String },
-            prereqs: [String],
+        sections: [{
+            id: {type: String},
+            number: {type: String},
+            professor: {type: String},
+            cape: {type: Number},
+            gpa: {type: Number},
+            workload: {type: Number},
             final: {
-                day: { type: String },
+                date: {type: String},
                 start_time: Number,
                 end_time: Number,
-                building: { type: String },
-                room_number: { type: Number }
+                building: {type: String},
+                room_num: {type: String}
             },
-            meetings: [new Schema({
-                type: { type: String },
-                day: { type: String },
+            meetings: [{
+                id: {type: String},
+                type: {type: String},
+                day: {type: String},
                 start_time: Number,
                 end_time: Number,
-                building: { type: String },
-                room_number: { type: Number }
-            })]
-        })]
-    })]
-});
+                building: {type: String},
+                room_num: {type: String}
+            }]
+        }]
+    }]
+}, {strict: "throw", useNestedStrict: true});
 
 var User = mongoose.model('UserSchema', UserSchema, 'users');
 
