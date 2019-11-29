@@ -53,6 +53,7 @@ class CourseManager extends React.Component {
     componentDidMount () {
         axios.get("http://localhost:4000/courses/allOverviews")
         .then(res => {
+            console.log("res of axios is", res)
             let deptArray = [];
             let courseArray = [];
             for (var i = 0; i < res.data.length; i++){
@@ -79,7 +80,6 @@ class CourseManager extends React.Component {
             this.setState({
                 catalogue: courseMenu
             })
-            console.log(this.state.catalogue)
         })
         .catch(err => {
             console.log(err.message);
