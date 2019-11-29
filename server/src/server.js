@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'production'){
-    uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/test?retryWrites=true&w=majority'
+    uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/asapp?retryWrites=true&w=majority'
     app.use(express.static('../client/build/'));
 
     app.get('*', (req, res) => {
