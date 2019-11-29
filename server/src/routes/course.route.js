@@ -93,7 +93,7 @@ courseRoutes.route('/allOverviews').get(function (req,res){
     console.log("get allOverviews called")
     Course.find({}).select("-sections")
         .then(courses =>{
-            res.status(200).json(courses);
+            res.status(404).json(courses);
         })
         .catch(err => {
             res.status(400).send(`Failed to get courses' overviews\n${err}`)
