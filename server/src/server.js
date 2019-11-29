@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'production'){
     console.log("production accessed")
 }
 console.log("after production loop")
+console.log("uri is", uri)
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;
 
