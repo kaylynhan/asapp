@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import userRoutes from "./routes/user.route.js";
-import courseRoutes from "./routes/course.route.js"
+import courseRoutes from "./routes/course.route.js";
+import path from 'path';
 
 const port = process.env.PORT || 4000;
 const app = express();
