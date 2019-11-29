@@ -7,22 +7,20 @@ import courseRoutes from "./routes/course.route.js"
 
 const port = process.env.PORT || 4000;
 const app = express();
-let uri = 'mongodb://127.0.0.1:27017/asappdb';
+const uri = process.env.PROD_MONGODB || 'mongodb://127.0.0.1:27017/asappdb';
+// let uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/asapp?retryWrites=true&w=majority'
 
 app.use(cors());
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'production'){
-    uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/asapp?retryWrites=true&w=majority'
     app.use(express.static('../client/build/'));
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
-    console.log("production accessed")
 }
-console.log("after production loop")
-console.log("uri is", uri)
+
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;
 
