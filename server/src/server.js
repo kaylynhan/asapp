@@ -7,7 +7,7 @@ import courseRoutes from "./routes/course.route.js"
 
 const port = process.env.PORT || 4000;
 const app = express();
-const uri = process.env.PROD_MONGODB || 'mongodb://127.0.0.1:27017/asappdb';
+const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/asappdb';
 // let uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/asapp?retryWrites=true&w=majority'
 
 app.use(cors());
