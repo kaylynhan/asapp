@@ -7,8 +7,8 @@ import courseRoutes from "./routes/course.route.js"
 
 const port = process.env.PORT || 4000;
 const app = express();
-const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/asappdb';
-// let uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/asapp?retryWrites=true&w=majority'
+// const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/asappdb';
+let uri ='mongodb+srv://heroku-asapp:thanksgivingchevrolet@asapp-8pzku.mongodb.net/asapp?retryWrites=true&w=majority'
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,6 +19,8 @@ if (process.env.NODE_ENV === 'production'){
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
+}else{
+    uri = 'mongodb://127.0.0.1:27017/asappdb'
 }
 
 mongoose.connect(uri, { useNewUrlParser: true });
