@@ -63,7 +63,6 @@ courseRoutes.route('/sections').get(function (req, res){
 
 ///given a course id in params, gets just the fields with top-level values
 courseRoutes.route('/overview').get(function (req, res){
-    console.log("get /overview called")
     Course.findById(req.query.id).select("-sections")
         .then(course => {
             res.status(200).json(course);
@@ -91,8 +90,9 @@ courseRoutes.route('/getMany').get(function (req, res){
 
 //Gets an array of all of the courses but without their section details
 courseRoutes.route('/allOverviews').get(function (req,res){
+    console.log("get allOverviews called")
     Course.find({}).select("-sections")
-        .then(courses => {
+        .then(courses =>{
             res.status(200).json(courses);
         })
         .catch(err => {
