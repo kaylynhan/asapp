@@ -161,15 +161,17 @@ class ScheduleManager extends React.Component {
     };
   };
 
-  renderSchedule = schedule => {
+  populateMeetings = schedule => {
     if (this.state.currentSchedule !== null) {
+      let outputArr = Array(0);
       schedule.map(course => {
         course.sections.map(section => {
           section.meetings.map(meeting => {
-            this.renderMeeting(meeting);
+            outputArr.push(meeting);
           });
         });
       });
+      return outputArr;
     }
   };
 
@@ -181,14 +183,12 @@ class ScheduleManager extends React.Component {
       Th: "Thur",
       F: "Fri"
     };
-    // if encounter bad data
-    if (meeting.start_time === 0 || meeting.day === "TBA") {
-      return;
-    }
 
-    //let x = document.getElementById(meeting['start_time']);
     if (this.state.currentSchedule !== null) {
       //let meeting = this.state.currentSchedule[0]["sections"][0]["meetings"][0];
+      if (meeting.start_time === 0 || meeting.day === "TBA") {
+        return;
+      }
       let grid_id = class_days[meeting["day"]] + meeting["start_time"];
       let course_elem = document.getElementById(grid_id);
       var bodyRect = document.body.getBoundingClientRect(),
@@ -199,17 +199,17 @@ class ScheduleManager extends React.Component {
           top={courseRect.top - bodyRect.top}
         ></SectionDetail>
       );
-      console.log(courseRect.left - bodyRect.left);
       return section_detail;
     }
   };
 
   clickedSchedule = schedule => {
     this.setState({ currentSchedule: schedule });
-    //console.log(schedule)
   };
 
   render() {
+    let meetings = this.populateMeetings(this.state.currentSchedule);
+    console.log(meetings);
     return (
       <div id="schedule_area">
         <div id="preferences">
@@ -242,7 +242,7 @@ class ScheduleManager extends React.Component {
         <div id="grid_area">
           <ScheduleGrid onMouseUp={this.handleOnMouseUp} />
         </div>
-        {this.renderSchedule(this.state.currentSchedule)}
+        {meetings ? meetings.map(meeting => this.renderMeeting(meeting)) : false}
       </div>
     );
   }
