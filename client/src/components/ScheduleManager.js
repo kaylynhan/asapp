@@ -7,7 +7,6 @@ import ScheduleList from "./ScheduleList";
 import ScheduleGrid from "./ScheduleGrid";
 import ScheduleGridReact from "./ScheduleGridReact";
 
-
 class ScheduleManager extends React.Component {
     // props is a object containing several schedules
     constructor(props) {
@@ -18,15 +17,70 @@ class ScheduleManager extends React.Component {
             prefProfs: [],
             avoidProfs: [],
             avoidHours: [],
-            filteredSchedules: [],
+            filteredSchedules: this.props.schedule_list,
             currentSchedule: null
         };
+
+        this.state.filteredSchedules.forEach(function(schedule) {
+            let gpa = 0;
+            let numb = 0;
+            schedule.filter(course => course['gpa'] !== -1).forEach(function(course) {
+                gpa += course['gpa'];
+                numb += 1;
+            });
+            if (numb !== 0) {
+                schedule['gpa'] = gpa / numb;
+            } else {
+                schedule['gpa'] = -1;
+            }
+
+            let class_rating = 0;
+            numb = 0;
+            schedule.filter(course => course['class_rating'] !== -1).forEach(function(course) {
+                class_rating += course['class_rating'];
+                numb += 1;
+            });
+            if (numb !== 0) {
+                schedule['class_rating'] = class_rating / numb;
+            } else {
+                schedule['class_rating'] = -1
+            }
+
+            let workload = 0;
+            schedule.filter(course => course['workload'] !== -1).forEach(function(course) {
+                workload += course['workload'];
+            });
+            schedule['workload'] = workload;
+
+            let class_days = {
+                'M': false,
+                'Tu': false,
+                'W': false,
+                'Th': false,
+                'F': false
+            };
+            schedule.forEach(function(course) {
+                course['sections'][0]['meetings'].forEach(function(meeting) {
+                    if (meeting['day'] in class_days) {
+                        class_days[meeting['day']] = true
+                    }
+                });
+            });
+
+            let num_days = 0;
+            Object.values(class_days).forEach(function(value) {
+                if (value === true) {
+                    num_days += 1
+                }
+            });
+            schedule['num_days'] = num_days;
+        });
     }
 
     // prints an array of schedules that match the given filters
     filterOutSchedules = () => {
         let totalSchedules = this.props.schedule_list;
-        console.log(totalSchedules)
+        console.log(totalSchedules);
 
         let filteredSchedules = this.filterOutUnits(totalSchedules);
         // this.filterOutPrefProfessors(kept_schedules);
