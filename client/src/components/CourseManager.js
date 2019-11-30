@@ -51,7 +51,7 @@ class CourseManager extends React.Component {
     }
 
     componentDidMount () {
-        axios.get("http://localhost:4000/courses/allOverviews")
+        axios.get("/courses/allOverviews")
         .then(res => {
             let deptArray = [];
             let courseArray = [];
@@ -81,7 +81,6 @@ class CourseManager extends React.Component {
             this.setState({
                 catalogue: courseMenu
             })
-            console.log(this.state.catalogue)
         })
         .catch(err => {
             console.log(err.message);
@@ -98,7 +97,7 @@ class CourseManager extends React.Component {
             reqIDs.append(course.id)
         }
 
-        axios.get("http://localhost:4000/courses/getMany", 
+        axios.get("/courses/getMany", 
         {params: {ids: this.state.optionalIDs}})
         .then(res => {
             this.setState({
@@ -107,7 +106,7 @@ class CourseManager extends React.Component {
         })
         .catch(err => console.log(err.message));
 
-        axios.get("http://localhost:4000/courses/getMany", 
+        axios.get("/courses/getMany", 
         {params: {ids: this.state.requiredIDs}})
         .then(res => {
             this.setState({

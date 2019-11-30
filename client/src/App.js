@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import HomePage from "./components/HomePage";
 import SchedulePage from './components/SchedulePage';
-//import NavigationBar from "./components/NavigationBar";
 
 
 class App extends React.Component {
