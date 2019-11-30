@@ -15,26 +15,56 @@ class ScheduleList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sort_options: SORT_OPTIONS
+            sort_options: SORT_OPTIONS,
+            schedule_list: this.props.schedule_list
         }
     }
 
     sortFunction = (event) => {
         let sort_func_name = event.target.value;
+
+        let schedule_list = this.props.schedule_list;
+
         switch(sort_func_name) {
             case "Sort by GPA":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule2['gpa'] - schedule1['gpa']; // Best to worst
+                    }
+                );
+                console.log("Sorting by GPA");
                 break;
             case "Sort by CAPE Ratings":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule2['class_rating'] - schedule1['class_rating'];
+                    }
+                );
+                console.log("Sorting by CAPE Ratings");
                 break;
             case "Sort by Workload":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule1['workload'] - schedule2['workload'];
+                    }
+                );
+                console.log("Sorting by Workload");
                 break;
             case "Sort by Minimum Days":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule1['num_days'] - schedule2['num_days'];
+                    }
+                );
+                console.log("Sorting by Minimum Days");
                 break;
             case "Sort by Maximum Average Gap":
                 break;
             default:
                 console.error(sort_func_name + " is not a valid sort");
         }
+
+        this.setState({schedule_list: schedule_list})
     };
 
     render() {
@@ -50,10 +80,11 @@ class ScheduleList extends React.Component {
                 </select>
 
                 {
-                    this.props.schedule_list.map(item => (
-                    <ListItem button>
-                        <ListItemText primary={item.label} />
-                    </ListItem>
+                    this.state.schedule_list.map((item, index) => (
+                        <ListItem onClick={() => this.props.onClick(item)} button>
+                            <ListItemText primary={`GPA: ${item['gpa']}\nCape: ${item['class_rating']}\n
+                            Workload: ${item['workload']}\nDays: ${item['num_days']}`}  />
+                        </ListItem>
                     ))
                 }
             </List>

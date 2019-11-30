@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import Tooltip from "./Tooltip.js";
+import { red } from "@material-ui/core/colors";
 
 class SectionDetail extends React.Component {
   constructor(props) {
@@ -24,7 +25,19 @@ class SectionDetail extends React.Component {
     );
 
     return (
-      <div className={"Course"}>
+      <div
+        className={"Course"}
+        style={{
+          position:"absolute",
+          left: this.props.left,
+          top: this.props.top,
+          backgroundColor:"#f7edc1",
+          height:"80px",
+          width:"150px",
+          borderRadius:"10px",
+
+        }}
+      >
         <b>{this.props.CourseId}</b>
         <br></br>
         <i>{this.props.MeetingType}</i>
