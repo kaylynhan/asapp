@@ -167,15 +167,21 @@ class ScheduleManager extends React.Component {
       schedule.map(course => {
         course.sections.map(section => {
           section.meetings.map(meeting => {
-            outputArr.push(meeting);
+            let courseID = course["department"] + " " + course["number"];
+            outputArr.push({
+              meeting: meeting,
+              section: section,
+              course: course
+            });
           });
         });
       });
+      console.log(outputArr);
       return outputArr;
     }
   };
 
-  renderMeeting = meeting => {
+  renderMeeting = meeting_course_section => {
     let class_days = {
       M: "Mon",
       Tu: "Tu",
@@ -183,6 +189,9 @@ class ScheduleManager extends React.Component {
       Th: "Thur",
       F: "Fri"
     };
+    let meeting = meeting_course_section["meeting"];
+    let course = meeting_course_section["course"];
+    let section = meeting_course_section["section"];
 
     if (this.state.currentSchedule !== null) {
       //let meeting = this.state.currentSchedule[0]["sections"][0]["meetings"][0];
@@ -197,6 +206,9 @@ class ScheduleManager extends React.Component {
         <SectionDetail
           left={courseRect.left - bodyRect.left}
           top={courseRect.top - bodyRect.top}
+          course={course}
+          meeting={meeting}
+          section={section}
         ></SectionDetail>
       );
       return section_detail;
@@ -205,6 +217,7 @@ class ScheduleManager extends React.Component {
 
   clickedSchedule = schedule => {
     this.setState({ currentSchedule: schedule });
+    console.log(this.state.currentSchedule);
   };
 
   render() {
@@ -242,7 +255,9 @@ class ScheduleManager extends React.Component {
         <div id="grid_area">
           <ScheduleGrid onMouseUp={this.handleOnMouseUp} />
         </div>
-        {meetings ? meetings.map(meeting => this.renderMeeting(meeting)) : false}
+        {meetings
+          ? meetings.map(meeting => this.renderMeeting(meeting))
+          : false}
       </div>
     );
   }

@@ -11,15 +11,20 @@ class SectionDetail extends React.Component {
   // props should have time, sectionLen, courseId, MeetingType
   // Section number, Professor, Lecture Time, Building, Room Number, CAPE website
   renderSection = () => {
-    var MeetingDetail = (
+
+    // 60 minutes is 40 px on the screen
+    const MIN_TO_PIX = 80 / 60;
+    const course = this.props.course;
+    const meeting = this.props.meeting;
+    const section = this.props.section;
+
+    var meetingDetail = (
       <ul>
-        <li>Professor: {this.props.Professor} </li>
-        <li>Lecture Time: {this.props.LectureTime}</li>
-        <li>Building: {this.props.Building}</li>
-        <li>Room Number: {this.props.RoomNumber}</li>
+        <li>Professor: {section.professor} </li>
+        <li>Building: {meeting.building}</li>
+        <li>Room Number: {meeting.room_num}</li>
         <li>
-          CAPE: <a href={this.props.CAPE} />
-          {this.props.CAPE}
+          CAPE: <a href={section.link} target="_blank" >Link to CAPE</a>
         </li>
       </ul>
     );
@@ -28,19 +33,19 @@ class SectionDetail extends React.Component {
       <div
         className={"Course"}
         style={{
-          position:"absolute",
+          position: "absolute",
           left: this.props.left,
           top: this.props.top,
-          backgroundColor:"#f7edc1",
-          height:"80px",
-          width:"150px",
-          borderRadius:"10px",
-
+          backgroundColor: "#f7edc1",
+          height: (meeting.end_time - meeting.start_time) * MIN_TO_PIX,
+          width: "150px",
+          borderRadius: "10px"
         }}
       >
-        <b>{this.props.CourseId}</b>
+        <b>{course["department"] + " " + course["number"]}</b>
         <br></br>
-        <i>{this.props.MeetingType}</i>
+        <i>{meeting.type}</i>
+        <Tooltip info={meetingDetail} style={{margin:"0 auto"}}></Tooltip>
       </div>
     );
   };

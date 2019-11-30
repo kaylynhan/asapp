@@ -56,6 +56,11 @@ text {
   pointer-events: none;
 }
 
+svg{
+  width:25px;
+  height:25px;
+}
+
 
 .tooltipDiv {
   width: 30px;
