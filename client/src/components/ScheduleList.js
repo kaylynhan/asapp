@@ -50,9 +50,9 @@ class ScheduleList extends React.Component {
                 </select>
 
                 {
-                    this.props.schedule_list.map(item => (
-                    <ListItem button>
-                        <ListItemText primary={item.label} />
+                    this.props.schedule_list.map((item, index) => (
+                    <ListItem onClick={() => this.props.onClick(item)} button>
+                        <ListItemText primary={"Schedule " + index}  />
                     </ListItem>
                     ))
                 }
