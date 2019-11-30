@@ -204,6 +204,7 @@ class ScheduleManager extends React.Component {
       let course_elem = document.getElementById(grid_id);
       var bodyRect = document.body.getBoundingClientRect(),
         courseRect = course_elem.getBoundingClientRect();
+        var width = courseRect.right - courseRect.left;
       let section_detail = (
         <SectionDetail
           left={courseRect.left - bodyRect.left}
@@ -211,6 +212,7 @@ class ScheduleManager extends React.Component {
           course={course}
           meeting={meeting}
           section={section}
+          width = {width}
         ></SectionDetail>
       );
       return section_detail;
