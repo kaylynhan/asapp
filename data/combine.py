@@ -15,6 +15,25 @@ MISSING_COURSES = ['CAT 125R']
 logging.basicConfig(filename='combine.log', filemode='w', level=logging.DEBUG, format='%(levelname)s - %(name)s:%(filename)s:%(lineno)d - %(message)s')
 
 
+def format_time(time):
+	for i in range(len(time)):
+		t = time[i]
+		if t == 'TBA':
+			time[0] = 'TBA'
+			time.append('TBA')
+			continue
+
+		hour = int(re.findall('\d+', t.split(':')[0])[0])
+		if 'p' in t and hour != 12:
+			hour += 12
+
+		minute = re.findall('\d+', t.split(':')[1])[0]
+		if hour < 10:
+			hour = f'0{hour}'
+
+		time[i] = f'{hour}{minute}'
+
+
 def parse_courses():
 	with open('course.json') as in_file:
 		course_list = json.load(in_file)
@@ -124,22 +143,7 @@ def parse_courses():
 
 			course_list[course_id]['units'] = numb_units
 
-			for i in range(len(time)):
-				t = time[i]
-				if t == 'TBA':
-					time[0] = 'TBA'
-					time.append('TBA')
-					continue
-
-				hour = int(re.findall('\d+', t.split(':')[0])[0])
-				if 'p' in t and hour != 12:
-					hour += 12
-
-				minute = re.findall('\d+', t.split(':')[1])[0]
-				if hour < 10:
-					hour = f'0{hour}'
-
-				time[i] = f'{hour}{minute}'
+			format_time(time)
 
 			# New course_meetings for following must be made
 			if course_id != curr_course_id or curr_section_char != meeting_code[0]:
@@ -424,7 +428,8 @@ def parse_finals(course_dict):
 			course_id = re.sub(' +', ' ', line['Course Name'])
 			section_code = line['Section Number'][0]
 			date = line['Date']
-			time = line['Time']
+			time = line['Time'].split('-')
+			format_time(time)
 
 			if course_id not in course_dict:
 				logging.error(f'{course_id} is not a valid course')
@@ -435,10 +440,9 @@ def parse_finals(course_dict):
 				if section['number'][0] == section_code:
 					section['final'] = {
 						'date': date,
-						'time': time
+						'start_time': time[0],
+						'end_time': time[1]
 					}
-					if course_id == 'CSE 110':
-						print(section)
 
 
 def fix_meeting_unique_id(course_dict):
