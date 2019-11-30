@@ -90,9 +90,10 @@ courseRoutes.route('/getMany').get(function (req, res){
 
 //Gets an array of all of the courses but without their section details
 courseRoutes.route('/allOverviews').get(function (req,res){
+    console.log("get allOverviews called")
     Course.find({}).select("-sections")
-        .then(courses => {
-            res.status(200).json(courses);
+        .then(courses =>{
+            res.status(200).json(courses); 
         })
         .catch(err => {
             res.status(400).send(`Failed to get courses' overviews\n${err}`)
