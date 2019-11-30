@@ -206,6 +206,12 @@ def parse_courses():
 				'meetings': course_meetings + section_meetings
 			}
 
+			# lecture_code = 0
+			# for meeting in course_meetings:
+			# 	if meeting['type'] == 'LE':
+			# 		lecture_code = meeting['code'][0]
+			# section['lecture_code'] = lecture_code
+
 			recent_section = section
 			recent_course_id = course_id
 
@@ -411,14 +417,14 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
 
 
 def parse_finals(course_dict):
-	with open('final.csv') as in_file:
+	with open('final_data.csv') as in_file:
 		csv_reader = csv.DictReader(in_file)
 
 		for line in csv_reader:
-			course_id = line['CourseName']
-			section_id = line['sectionNumber']
-			date = line['finalDate']
-			time = line['finalTime']
+			course_id = re.sub(' +', ' ', line['Course Name'])
+			section_code = line['Section Number'][0]
+			date = line['Date']
+			time = line['Time']
 
 			if course_id not in course_dict:
 				logging.error(f'{course_id} is not a valid course')
@@ -426,8 +432,13 @@ def parse_finals(course_dict):
 
 			course = course_dict[course_id]
 			for section in course['sections']:
-				if section['id'] == section_id:
-					pass
+				if section['number'][0] == section_code:
+					section['final'] = {
+						'date': date,
+						'time': time
+					}
+					if course_id == 'CSE 110':
+						print(section)
 
 
 def fix_meeting_unique_id(course_dict):
@@ -465,6 +476,7 @@ if __name__ == '__main__':
 
 	combine_data(instructor_cape_dict, course_cape_dict, course_dict)
 	fix_meeting_unique_id(course_dict)
+	parse_finals(course_dict)
 
 	test_case(course_dict)
 
@@ -472,6 +484,6 @@ if __name__ == '__main__':
 	for course in course_dict:
 		json_arr.append(course_dict[course])
 
-	with open('total.json', 'w') as out_file:
+	with open('combined.json', 'w') as out_file:
 		json.dump(json_arr, out_file, indent=4)
 
