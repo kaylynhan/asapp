@@ -23,36 +23,7 @@ import Tooltip from "./Tooltip.js";
 import ScheduleList from "./ScheduleList";
 /* import "rc-slider/assets/index.css"; */
 
-let sample_schedules = [
-  {
-    label: "A 6 unit schedule",
-    footnotes: "I want this schedule",
-    sections: [
-      {
-        course_name: "CSE 110",
-        section_id: "asdf"
-      },
-      {
-        course_name: "CSE 15L",
-        section_id: "asdf"
-      }
-    ]
-  },
-  {
-    label: "An 8 unit schedule",
-    footnotes: "I want this schedule",
-    sections: [
-      {
-        course_name: "CSE 110",
-        section_id: "asdf"
-      },
-      {
-        course_name: "CSE 110",
-        section_id: "asdf"
-      }
-    ]
-  }
-];
+import sample_schedules from '../test/sampleSchedules';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -83,7 +54,7 @@ class HomePage extends React.Component {
           <CourseManager callback={this.homePageCallBack} />
         </div>
         <div>
-          <ScheduleManager schedule_list={sample_schedules}></ScheduleManager>
+          <ScheduleManager schedule_list={sample_schedules}/>
         </div>
       </div>
     );
