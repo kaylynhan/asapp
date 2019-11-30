@@ -3,6 +3,7 @@ import axios from 'axios';
 import CourseInput from "./CourseInput.js";
 import CourseList from "./CourseList.js";
 import CoursePlan from "./CoursePlan.js"
+import CourseListTag from "./CourseListTag"
 import {generateSchedules} from "./scheduleGenerator.js"
 
 class CourseManager extends React.Component {
@@ -10,6 +11,11 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
+            tagCourse:
+                {
+                    name: 'CSE 110',
+                    id: '5dcf3980ba95db6aa9429fe3'
+                },
 			/*
             requiredClasses: [
                 {
@@ -215,6 +221,39 @@ class CourseManager extends React.Component {
 
     }
 
+    addCourse = item => {
+        this.setState(state => {
+            let req = this.state.requiredClasses.find(o => o.name === item.name);
+            let opt = this.state.optionalClasses.find(o => o.name === item.name);
+            var newArr = this.state.requiredClasses
+            function containsObject(obj, list) {
+                var i;
+                for (i = 0; i < list.length; i++) {
+                    if (list[i] === obj) {
+                        return true;
+                    }
+                }
+            
+                return false;
+            }
+            console.log(this.state.optionalClasses)
+            if(opt == undefined){
+                console.log("NOT IN REQ")
+            }
+            if(req == undefined
+             && opt == undefined) {
+                    newArr = newArr.concat(item)
+                }
+            
+            
+            const requiredClasses = newArr
+            return {
+                requiredClasses
+            }
+            
+        })
+    }
+
     render() {
         return (
             <div>
@@ -224,6 +263,9 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
+                    <div id="tag">
+                    <CourseListTag courseObj={this.state.tagCourse} addCourse={this.addCourse}/>
+                    </div>
                     <CourseList menus = {this.state.catalogue} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
