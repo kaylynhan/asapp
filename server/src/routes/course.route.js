@@ -93,11 +93,10 @@ courseRoutes.route('/allOverviews').get(function (req,res){
     console.log("get allOverviews called")
     Course.find({}).select("-sections")
         .then(courses =>{
-            console.log("courses retrieved successfully")
+            // console.log("courses retrieved successfully")
             res.status(200).json(courses); //even after changing this, res status 200 on heroku
         })
         .catch(err => {
-            console.log("err in allOverviews is", err)
             res.status(400).send(`Failed to get courses' overviews\n${err}`)
         });
 });
