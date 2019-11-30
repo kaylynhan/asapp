@@ -53,7 +53,6 @@ class CourseManager extends React.Component {
     componentDidMount () {
         axios.get("/courses/allOverviews")
         .then(res => {
-            console.log("res of axios is", res)
             let deptArray = [];
             let courseArray = [];
             for (var i = 0; i < res.data.length; i++){
