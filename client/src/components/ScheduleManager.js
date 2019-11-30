@@ -106,6 +106,8 @@ class ScheduleManager extends React.Component {
       let total_units = 0;
       schedule.forEach(function(course, course_index) {
         // let a = axios.get("http://localhost:4000/course/overviews")
+       // schedule["sections"].forEach(function(course, course_index) {
+        // let a = axios.get("/course/overviews")
         //     .then(res => console.log(res.data))
         //     .catch(err => console.log(err));
         total_units += course["units"];
