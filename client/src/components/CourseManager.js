@@ -93,7 +93,9 @@ class CourseManager extends React.Component {
                 courseMenu.push(courseJSON);
             }
             courseMenu.sort(function(a, b){
-                return (a > b.title ? 1 : a.title < b.title ? -1 : 0);
+                let valA = a.title.toLowerCase();
+                let valB = b.title.toLowerCase();
+                return (valA > valB ? 1 : valA < valB ? -1 : 0);
             });
             this.setState({
                 catalogue: courseMenu
