@@ -1,0 +1,21 @@
+{
+  "name": "asapp",
+  "version": "1.0.0",
+  "description": "UCSD Course Scheduler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm install && npm run start",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaylynhan/asapp.git"
+  },
+  "author": "BIT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaylynhan/asapp/issues"
+  },
+  "homepage": "https://github.com/kaylynhan/asapp#readme"
+}
