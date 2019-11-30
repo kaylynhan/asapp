@@ -44,7 +44,7 @@ class ScheduleManager extends React.Component {
     this.props.schedule_list.forEach(function(schedule, schedule_index) {
       let total_units = 0;
       schedule["sections"].forEach(function(course, course_index) {
-        // let a = axios.get("http://localhost:4000/course/overviews")
+        // let a = axios.get("/course/overviews")
         //     .then(res => console.log(res.data))
         //     .catch(err => console.log(err));
         total_units += course_unit[course["course_name"]];
