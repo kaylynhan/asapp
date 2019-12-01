@@ -1,0 +1,369 @@
+[
+  [
+    {
+      "name": "Principles of Computer Operating Systems (4)",
+      "department": "CSE",
+      "number": "120",
+      "description": "Basic functions of operating systems; basic kernel structure, concurrency, memory management, virtual memory, file systems, process scheduling, security and protection.",
+      "prereqs": "CSE 30 and CSE 101 and CSE 110; restricted to students with sophomore, junior, or senior standing. Graduate students will be allowed as space permits.",
+      "units": 4,
+      "class_rating": 96,
+      "gpa": 2.96,
+      "workload": 9.64,
+      "sections": [
+        {
+          "id": 995112,
+          "professor": "Pasquale, Joseph",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961496",
+          "prof_rating": "98",
+          "workload": 9.64,
+          "gpa": 2.96,
+          "final": {
+            "date": "03/14/2020S",
+            "start_time": 1900,
+            "end_time": 2159,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "W",
+              "start_time": 1700,
+              "end_time": 1820,
+              "building": "CENTR",
+              "room_num": "119"
+            },
+            {
+              "number": "A01",
+              "type": "DI",
+              "day": "Tu",
+              "start_time": 1900,
+              "end_time": 1950,
+              "building": "PCYNH",
+              "room_num": "109"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Online Database Analytics Applications (4)",
+      "department": "CSE",
+      "number": "135",
+      "description": "Database, data warehouse, and data cube design; SQL programming and querying with emphasis on analytics; online analytics applications, visualizations, and data exploration; performance tuning.",
+      "prereqs": "CSE 100 or MATH 176; restricted to students with sophomore, junior, or senior standing within the CS25, CS26, CS27, CS28, and EC26 majors. Graduate students will be allowed as space permits.",
+      "units": 4,
+      "class_rating": 83,
+      "gpa": 2.96,
+      "workload": 9.64,
+      "sections": [
+        {
+          "id": "995122",
+          "professor": "Powell, Thomas Allan",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961510",
+          "prof_rating": "79",
+          "workload": 9.5,
+          "gpa": 2.96,
+          "final": {
+            "date": "03/16/2020M",
+            "start_time": 800,
+            "end_time": 1059,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "id": "A00",
+              "type": "LE",
+              "day": "M",
+              "start_time": 800,
+              "end_time": 850,
+              "building": "CENTR",
+              "room_num": "105"
+            },
+            {
+              "id": "A01",
+              "type": "DI",
+              "day": "Tu",
+              "start_time": 1100,
+              "end_time": 1150,
+              "building": "CENTR",
+              "room_num": "214"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Components and Design Techniques for Digital Systems (4)",
+      "department": "CSE",
+      "number": "140",
+      "description": "Design of Boolean logic and finite state machines; two-level, multilevel combinational logic design, combinational modules and modular networks, Mealy and Moore machines, analysis and synthesis of canonical forms, sequential modules.",
+      "prereqs": "CSE 20 or MATH 15A or MATH 109 and CSE 30; CSE 140L must be taken concurrently; restricted to students with junior or senior standing. All other students will be allowed as space permits.",
+      "units": 4,
+      "class_rating": 88,
+      "gpa": 2.00,
+            "workload": 10.5,
+      "sections": [
+        {
+          "id": 995124,
+          "professor": "Eldon, John",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961496",
+          "prof_rating": "75",
+          "workload": 10.5,
+          "gpa": 3.09,
+          "final": {
+            "date": "03/18/2020W",
+            "start_time": 1130,
+            "end_time": 1429,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "F",
+              "start_time": 1200,
+              "end_time": 1250,
+              "building": "CENTR",
+              "room_num": "216"
+            },
+            {
+              "number": "A01",
+              "type": "DI",
+              "day": "W",
+              "start_time": 1500,
+              "end_time": 1550,
+              "building": "CENTR",
+              "room_num": "109"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Digital Systems Laboratory (2)",
+      "department": "CSE",
+      "number": "140L",
+      "description": "Implementation with computer-aided design tools for combinational logic minimization and state machine synthesis. Hardware construction of a small digital system.",
+      "prereqs": "CSE 20 or MATH 15A or MATH 109 and CSE 30; CSE 140 must be taken concurrently; restricted to students with junior or senior standing. All other students will be allowed as space permits.",
+      "units": 2,
+      "class_rating": 80,
+      "gpa": 1.50,
+      "workload": 10,
+      "sections": [
+        {
+          "id": 995128,
+          "professor": "Staff",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961496",
+          "prof_rating": "N/A",
+          "workload": 10,
+          "gpa": 3,
+          "final": {
+            "date": "03/20/2020F",
+            "start_time": 1500,
+            "end_time": 1729,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "M",
+              "start_time": 1600,
+              "end_time": 1650,
+              "building": "PCYNCH",
+              "room_num": "106"
+            },
+            {
+              "number": "A01",
+              "type": "DI",
+              "day": "M",
+              "start_time": 1700,
+              "end_time": 1750,
+              "building": "PCYNCH",
+              "room_num": "109"
+            },
+            {
+              "number": "A50",
+              "type": "LA",
+              "day": "TBA",
+              "start_time": 0,
+              "end_time": 0,
+              "building": "TBA",
+              "room_num": "TBA"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "name": "Principles of Computer Operating Systems (4)",
+      "department": "CSE",
+      "number": "15L",
+      "description": "Basic functions of operating systems; basic kernel structure, concurrency, memory management, virtual memory, file systems, process scheduling, security and protection.",
+      "prereqs": "CSE 30 and CSE 101 and CSE 110; restricted to students with sophomore, junior, or senior standing. Graduate students will be allowed as space permits.",
+      "units": 2,
+      "class_rating": 96,
+      "gpa": 3.09,
+      "workload": 9.64,
+      "sections": [
+        {
+          "id": 995112,
+          "professor": "Pasquale, Joseph",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961496",
+          "prof_rating": "98",
+          "workload": 9.64,
+          "gpa": 2.96,
+          "final": {
+            "date": "03/14/2020S",
+            "start_time": 1900,
+            "end_time": 2159,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "M",
+              "start_time": 1700,
+              "end_time": 1820,
+              "building": "CENTR",
+              "room_num": "119"
+            },
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "W",
+              "start_time": 1700,
+              "end_time": 1820,
+              "building": "CENTR",
+              "room_num": "119"
+            },
+            {
+              "number": "A01",
+              "type": "DI",
+              "day": "Tu",
+              "start_time": 1900,
+              "end_time": 1950,
+              "building": "PCYNH",
+              "room_num": "109"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Components and Design Techniques for Digital Systems (4)",
+      "department": "CSE",
+      "number": "140",
+      "description": "Design of Boolean logic and finite state machines; two-level, multilevel combinational logic design, combinational modules and modular networks, Mealy and Moore machines, analysis and synthesis of canonical forms, sequential modules.",
+      "prereqs": "CSE 20 or MATH 15A or MATH 109 and CSE 30; CSE 140L must be taken concurrently; restricted to students with junior or senior standing. All other students will be allowed as space permits.",
+      "units": 4,
+      "class_rating": 88,
+      "gpa": 2.00,
+      "workload": 10.5,
+      "sections": [
+        {
+          "id": 995124,
+          "professor": "Eldon, John",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961496",
+          "prof_rating": "75",
+          "workload": 10.5,
+          "gpa": 3.09,
+          "final": {
+            "date": "03/18/2020W",
+            "start_time": 1130,
+            "end_time": 1429,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "M",
+              "start_time": 1200,
+              "end_time": 1250,
+              "building": "CENTR",
+              "room_num": "216"
+            },
+            {
+              "number": "A01",
+              "type": "DI",
+              "day": "W",
+              "start_time": 1500,
+              "end_time": 1550,
+              "building": "CENTR",
+              "room_num": "109"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Digital Systems Laboratory (2)",
+      "department": "CSE",
+      "number": "140L",
+      "description": "Implementation with computer-aided design tools for combinational logic minimization and state machine synthesis. Hardware construction of a small digital system.",
+      "prereqs": "CSE 20 or MATH 15A or MATH 109 and CSE 30; CSE 140 must be taken concurrently; restricted to students with junior or senior standing. All other students will be allowed as space permits.",
+      "units": 2,
+      "class_rating": 80,
+      "gpa": 1.50,
+      "workload": 10.5,
+      "sections": [
+        {
+          "id": 995128,
+          "professor": "Staff",
+          "link": "http://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=961496",
+          "prof_rating": "N/A",
+          "workload": 10,
+          "gpa": 3,
+          "final": {
+            "date": "03/20/2020F",
+            "start_time": 1500,
+            "end_time": 1729,
+            "building": "TBA",
+            "room_num": "TBA"
+          },
+          "meetings": [
+            {
+              "number": "A00",
+              "type": "LE",
+              "day": "M",
+              "start_time": 1600,
+              "end_time": 1650,
+              "building": "PCYNCH",
+              "room_num": "106"
+            },
+            {
+              "number": "A01",
+              "type": "DI",
+              "day": "M",
+              "start_time": 1700,
+              "end_time": 1750,
+              "building": "PCYNCH",
+              "room_num": "109"
+            },
+            {
+              "number": "A50",
+              "type": "LA",
+              "day": "TBA",
+              "start_time": 0,
+              "end_time": 0,
+              "building": "TBA",
+              "room_num": "TBA"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+]

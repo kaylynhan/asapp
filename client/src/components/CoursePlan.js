@@ -16,14 +16,14 @@ class CoursePlan extends React.Component {
 
   requiredCallBack = item => {
     this.setState(state => {
-      let obj = this.state.requiredClasses.find(o => o.name === item);
-      const requiredClasses = this.state.requiredClasses.filter(function(
+      let obj = this.props.requiredClasses.find(o => o.name === item);
+      const requiredClasses = this.props.requiredClasses.filter(function(
         value
       ) {
         return value.name !== item;
       });
 
-      const optionalClasses = this.state.optionalClasses.concat(obj);
+      const optionalClasses = this.props.optionalClasses.concat(obj);
       this.props.callBack(requiredClasses, optionalClasses);
       return {
         optionalClasses,
@@ -34,14 +34,14 @@ class CoursePlan extends React.Component {
 
   optionalCallBack = item => {
     this.setState(state => {
-      let obj = this.state.optionalClasses.find(o => o.name === item);
-      const optionalClasses = this.state.optionalClasses.filter(function(
+      let obj = this.props.optionalClasses.find(o => o.name === item);
+      const optionalClasses = this.props.optionalClasses.filter(function(
         value
       ) {
         return value.name !== item;
       });
 
-      const requiredClasses = this.state.requiredClasses.concat(obj);
+      const requiredClasses = this.props.requiredClasses.concat(obj);
       this.props.callBack(requiredClasses, optionalClasses);
       return {
         optionalClasses,
@@ -52,12 +52,12 @@ class CoursePlan extends React.Component {
 
   removeCallBack = item => {
     this.setState(state => {
-      const optionalClasses = this.state.optionalClasses.filter(function(
+      const optionalClasses = this.props.optionalClasses.filter(function(
         value
       ) {
         return value.name !== item;
       });
-      const requiredClasses = this.state.requiredClasses.filter(function(
+      const requiredClasses = this.props.requiredClasses.filter(function(
         value
       ) {
         return value.name !== item;
@@ -75,7 +75,7 @@ class CoursePlan extends React.Component {
       <div id="courseTagContainer">
         <div id="optionalArea">
           <h6>Optional</h6>
-          {this.state.optionalClasses.map(item => (
+          {this.props.optionalClasses.map(item => (
             <div key={item.name}>
               <OptionalTag
                 name={item.name}
@@ -87,7 +87,7 @@ class CoursePlan extends React.Component {
         </div>
         <div id="requiredArea">
           <h6>Required</h6>
-          {this.state.requiredClasses.map(item => (
+          {this.props.requiredClasses.map(item => (
             <div key={item.name}>
               <RequiredTag
                 name={item.name}

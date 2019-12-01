@@ -3,12 +3,20 @@ import axios from 'axios';
 import CourseInput from "./CourseInput.js";
 import CourseList from "./CourseList.js";
 import CoursePlan from "./CoursePlan.js"
+import CourseListTag from "./CourseListTag"
+import {generateSchedules} from "./scheduleGenerator.js"
 
 class CourseManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             catalogue: [],
+            tagCourse:
+                {
+                    name: 'CSE 110',
+                    id: '5dcf3980ba95db6aa9429fe3'
+                },
+			/*
             requiredClasses: [
                 {
                     name: 'CSE 101',
@@ -29,6 +37,23 @@ class CourseManager extends React.Component {
                     id: '5dcf3e650636c96b37bfc810'
                 }
             ],
+			*/
+			///////////////////////////////////////////////////////////////
+			optionalClasses: [
+				{'name' : 'CSE 140', 'id': '5ddddabf18eee9cc93245fc4'},
+				{'name' : 'CSE 140L', 'id': '5ddddabf18eee9cc93245fc5'},
+				{'name' : 'CSE 141', 'id': '5ddddabf18eee9cc93245fc6'},
+				{'name' : 'CSE 170', 'id': '5ddddabf18eee9cc93245fcc'},
+				{'name' : 'CSE 150A', 'id': '5ddddabf18eee9cc93245fc9'},
+				{'name' : 'MATH 10A', 'id': '5ddddabf18eee9cc932460f8'}
+            ],
+            requiredClasses: [
+				{'name' : 'ANTH 196B', 'id': '5ddddabf18eee9cc93245e9d'},
+                {'name' : 'ANAR 154', 'id': '5ddddabf18eee9cc93245e9e'},
+				{'name' : 'ANSC 101', 'id': '5ddddabf18eee9cc93245ea4'},
+				{'name' : 'CSE 110', 'id': '5ddddabf18eee9cc93245fc3'}
+            ],
+			/////////////////////////////////////////////////////////////////
             optCourseInfo: null,
             reqCourseInfo: null,
             schedules: null,
@@ -76,7 +101,9 @@ class CourseManager extends React.Component {
                 courseMenu.push(courseJSON);
             }
             courseMenu.sort(function(a, b){
-                return (a.title > b.title ? 1 : a.title < b.title ? -1 : 0);
+                let valA = a.title.toLowerCase();
+                let valB = b.title.toLowerCase();
+                return (valA > valB ? 1 : valA < valB ? -1 : 0);
             });
             this.setState({
                 catalogue: courseMenu
@@ -87,6 +114,58 @@ class CourseManager extends React.Component {
         });
     }
 
+	
+	////////////////////////////////////////////////////////////
+	onGenerateSchedules= () => {
+		let optionalIDs = []
+        let requiredIDs = []
+		
+		for(var i=0; i<this.state.optionalClasses.length; i++)
+		{
+			optionalIDs.push(this.state.optionalClasses[i].id)
+		}
+		
+		for(var i=0; i<this.state.requiredClasses.length; i++)
+		{
+			requiredIDs.push(this.state.requiredClasses[i].id)
+		}
+	
+        axios.get("http://localhost:4000/courses/getMany", 
+        {params: {ids: requiredIDs}})
+        .then(res => {
+            this.setState({
+                reqCourseInfo: res.data
+            })
+        })
+        .catch(err => console.log(err.message));
+        axios.get("http://localhost:4000/courses/getMany", 
+        {params: {ids: optionalIDs}})
+        .then(res => {
+            this.setState({
+                optCourseInfo: res.data
+            }, this.getGeneratedSchedules)
+        })
+
+    }
+
+    getGeneratedSchedules  = () => {
+
+		this.setState({
+        schedules: generateSchedules(this.state.optCourseInfo, this.state.reqCourseInfo)
+         }, this.nextgen)
+    }
+	
+	nextgen = () => {
+		console.log(this.state.optCourseInfo);
+        console.log(this.state.reqCourseInfo);
+		console.log(this.state.schedules);
+	}
+	////////////////////////////////////////////////////////////
+	
+	
+	
+	
+/*
     onGenerateSchedules = () => {
         let optIDs = []
         let reqIDs = []
@@ -123,13 +202,14 @@ class CourseManager extends React.Component {
         //         this.state.reqCourseInfo)
         // })
 
-        /*  This is the callBack function which will update HomePage's
-            schedule state. Be sure to call it after setting
-            this.state.schedules to the newly generated schedules.
-        */
+        //  This is the callBack function which will update HomePage's
+        //    schedule state. Be sure to call it after setting
+        //    this.state.schedules to the newly generated schedules.
+        
         this.props.callBack(this.state.schedules)
     }
-
+*/
+	
     handleSearch(search_query, search_query_dept, search_query_num) {
         this.setState({
             search_query: search_query,
@@ -143,6 +223,39 @@ class CourseManager extends React.Component {
 
     }
 
+    addCourse = item => {
+        this.setState(state => {
+            let req = this.state.requiredClasses.find(o => o.name === item.name);
+            let opt = this.state.optionalClasses.find(o => o.name === item.name);
+            var newArr = this.state.requiredClasses
+            function containsObject(obj, list) {
+                var i;
+                for (i = 0; i < list.length; i++) {
+                    if (list[i] === obj) {
+                        return true;
+                    }
+                }
+            
+                return false;
+            }
+            console.log(this.state.optionalClasses)
+            if(opt == undefined){
+                console.log("NOT IN REQ")
+            }
+            if(req == undefined
+             && opt == undefined) {
+                    newArr = newArr.concat(item)
+                }
+            
+            
+            const requiredClasses = newArr
+            return {
+                requiredClasses
+            }
+            
+        })
+    }
+
     render() {
         return (
             <div>
@@ -152,6 +265,9 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
+                    <div id="tag">
+                    <CourseListTag courseObj={this.state.tagCourse} addCourse={this.addCourse}/>
+                    </div>
                     <CourseList menus = {this.state.catalogue} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
