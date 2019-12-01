@@ -128,7 +128,7 @@ class CourseManager extends React.Component {
 			requiredIDs.push(this.state.requiredClasses[i].id)
 		}
 	
-        axios.get("http://localhost:4000/courses/getMany", 
+        axios.get("/courses/getMany", 
         {params: {ids: requiredIDs}})
         .then(res => {
             this.setState({
@@ -136,7 +136,7 @@ class CourseManager extends React.Component {
             })
         })
         .catch(err => console.log(err.message));
-        axios.get("http://localhost:4000/courses/getMany", 
+        axios.get("/courses/getMany", 
         {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
