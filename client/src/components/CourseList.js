@@ -6,36 +6,35 @@ import axios from 'axios';
 class CourseList extends React.Component {
     constructor(props) {
         super(props)
-        this.matches = this.matches.bind(this)
+        this.matches = this.includeInFilteredList.bind(this)
         this.myDivToFocus = React.createRef()
         /*this.state = {
             filteredList: this.props.menu.options.filter(course => (this.matches(course.department, course.number)))
         }*/
-    } /* end constructor */
-
-
-    filterList() {
-        var full_menu = this.props.menu
-        full_menu.map(menu => menu.filter(course => course.department != this.props.search_query_dept || course.number === this.props.search_query_num))
     }
 
-    matches(department, number) {
-        var regpattern = new RegExp('^' + this.props.search_query_num, 'i')
-        var noNum = (this.props.search_query_num === "")
-        var noDeptMatch = this.props.search_query_dept.toUpperCase() != department.toUpperCase()
-        var numMatch = regpattern.test(number)
-        //console.log("department: " + department + " number: " + number + " regpattern: " + regpattern + " noNum: " + noNum + " noDeptMatch: " + noDeptMatch + " numMatch: " + numMatch)
-        return noNum || (noDeptMatch || numMatch)
+
+    /*filterList() {
+        var full_menu = this.props.menu
+        full_menu.map(menu => menu.filter(course => course.department != this.props.search_query_dept || course.number === this.props.search_query_num))
+    }*/
+
+    includeInFilteredList(department, number) {
+        var searchQueryNumRegPattern = new RegExp('^' + this.props.search_query_num, 'i')
+        var searchQueryIsOnlyForDept = (this.props.search_query_num === "")
+        var courseIsFromDifferentDept = this.props.search_query_dept.toUpperCase() != department.toUpperCase()
+        var courseMatchesSearchQueryPattern = searchQueryNumRegPattern.test(number)
+        
+        // keep courses from other departments and department courses that match number query
+        return searchQueryIsOnlyForDept || (courseIsFromDifferentDept || courseMatchesSearchQueryPattern)
     }
 
     componentDidUpdate() {
+        // For a department match
         if (this.myDivToFocus.current) {
-            /*this.myDivToFocus.current.scrollIntoView(false, {
-                behavior: "smooth",
-                block: "end"
-            })*/
+            // Open the department
             this.myDivToFocus.current.children[0].open = true
-            //this.myDivToFocus.current.parentElement.parentElement.scrollTop = this.myDivToFocus.current.offsetTop - this.myDivToFocus.current.parentElement.parentElement.offsetTop
+            // Scroll department to top of view
             this.myDivToFocus.current.parentElement.parentElement.scroll({
                 top: this.myDivToFocus.current.offsetTop - this.myDivToFocus.current.parentElement.parentElement.offsetTop,
                 behavior: 'smooth',
@@ -43,43 +42,17 @@ class CourseList extends React.Component {
         }
     }
     render(){
-        //toDelete
-        /*
-        //popup for section : Math140
-        var ex = <div>
-            <p>Section : A01</p>
-            <p>Professor : Tarek M Elgindi</p>
-            <p>Lecture : Tuesday/Thursday 2:00pm - 3:20pm</p>
-            <p>Building : APM</p>
-            <p>Room Number : B402A</p>
-            <br />
-            <p>Discussion : Monday 6:00pm - 6:50pm</p>
-            <p>Lecture : Tuesday/Thursday 2:00pm - 3:20pm</p>
-            <p>Building : APM</p>
-            <p>Room Number : B402A</p>
-        </div>
-        */
-        //end
-
-        /*function matches(department, number, dept_pattern, num_pattern) {
-            console.log("hi")
-            var regpattern = new RegExp('^' + num_pattern, 'i')
-            var noNum = (num_pattern === "")
-            var noDeptMatch = dept_pattern != department
-            var numMatch = regpattern.test(number)
-            return noNum || (noDeptMatch || numMatch)
-        }*/
         var full_menu =  
                 <div id="courseListWindow">
                     {this.props.menus.map(menu => (
-
+                        // Give search query department a ref in order to scroll towards it
                         menu.title.toUpperCase() === this.props.search_query_dept.toUpperCase()
                         ? 
                         <div key={menu.title} ref={this.myDivToFocus}>
                             <details>
                                 <summary>{menu.title}</summary>
                                 {
-                                    menu.options.filter(course => (this.matches(course.department, course.number))).map(course => (
+                                    menu.options.filter(course => (this.includeInFilteredList(course.department, course.number))).map(course => (
                                         <div>
                                             <details style={{marginLeft:'10%'}}>
                                                 <summary>{course.id + " " + course.name}</summary>
@@ -99,11 +72,8 @@ class CourseList extends React.Component {
                             <details>
                                 <summary>{menu.title}</summary>
                                 {
-                                    menu.options.filter(course => (this.matches(course.department, course.number))).map(course => (
-                                    //menu.options.map(course => (
-                                        //code by rel
+                                    menu.options.filter(course => (this.includeInFilteredList(course.department, course.number))).map(course => (
                                         <div>
-                                            {/* Everything in here is to be replaced with a CourseListTag*/}
                                             <details style={{marginLeft:'10%'}}>
                                                 <summary>{course.id + " " + course.name}</summary>
                                                 <div style={{marginLeft:'10%'}}>
@@ -113,7 +83,6 @@ class CourseList extends React.Component {
                                                 </div>
                                             </details>
                                         </div>
-                                        //end rel
                                     ))
                                 }
                             </details>
@@ -123,34 +92,6 @@ class CourseList extends React.Component {
       return(
         <div id="courseListContainer">
             {full_menu}
-            {/*
-            <div id="courseListWindow">
-                {this.props.menus.map(menu => (
-                    <div key={menu.title}>
-                        <details>
-                            <summary>{menu.title}</summary>
-                            {
-                                menu.options.filter(course => (this.matches(course.department, course.number))).map(course => (
-                                //menu.options.map(course => (
-                                    //code by rel
-                                    <div>
-                                        <details style={{marginLeft:'10%'}}>
-                                            <summary>{course.id + " " + course.name}</summary>
-                                            <div style={{marginLeft:'10%'}}>
-                                                Units : {course.units}<br />
-                                                Prerequisites : {course.prereqs}<br />
-                                                Description : {course.description}
-                                            </div>
-                                        </details>
-                                    </div>
-                                    //end rel
-                                ))
-                            }
-                        </details>
-                    </div>
-                ))}
-            </div>
-            */}
         </div>
         )
 
@@ -158,25 +99,3 @@ class CourseList extends React.Component {
 }
 
 export default CourseList
-
-/*
-{this.props.menus.map(menu => (
-    <div key={menu.title}>
-        <details>
-            <summary>{menu.title}</summary>
-            {menu.options.map(course => (
-                //code by rel
-                <div>
-                    <details style={{marginLeft:'10%'}}>
-                        <summary>{course.id + " " + course.name}</summary>
-                        <div style={{marginLeft:'10%'}}>
-                            Units : {course.units}<br />
-                            Prerequisites : {course.prereqs}<br />
-                            Description : {course.description}
-                        </div>
-                    </details>
-                </div>
-            ))}
-        </details>
-    </div>
-))}*/
