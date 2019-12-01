@@ -268,7 +268,7 @@ class CourseManager extends React.Component {
                     <div id="tag">
                     <CourseListTag courseObj={this.state.tagCourse} addCourse={this.addCourse}/>
                     </div>
-                    <CourseList menus = {this.state.catalogue} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
+                    <CourseList menus = {this.state.catalogue} addCourse={this.addCourse} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
                     <button class="NavBtn">

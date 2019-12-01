@@ -2,6 +2,7 @@ import React from 'react'
 import './CourseList.css'
 import Tooltip from "./Tooltip";
 import axios from 'axios';
+import CourseListTag from "./CourseListTag";
 
 class CourseList extends React.Component {
     constructor(props) {
@@ -53,7 +54,9 @@ class CourseList extends React.Component {
                                 <summary>{menu.title}</summary>
                                 {
                                     menu.options.filter(course => (this.includeInFilteredList(course.department, course.number))).map(course => (
-                                        <div>
+                                        <div style={{marginLeft:'10%'}}>
+                                            <CourseListTag courseObj={course} addCourse={this.props.addCourse}/>
+                                            {/* Replaced with CourseListTag 
                                             <details style={{marginLeft:'10%'}}>
                                                 <summary>{course.id + " " + course.name}</summary>
                                                 <div style={{marginLeft:'10%'}}>
@@ -61,7 +64,7 @@ class CourseList extends React.Component {
                                                     Prerequisites : {course.prereqs}<br />
                                                     Description : {course.description}
                                                 </div>
-                                            </details>
+                                            </details>*/}
                                         </div>
                                     ))
                                 }
@@ -73,7 +76,9 @@ class CourseList extends React.Component {
                                 <summary>{menu.title}</summary>
                                 {
                                     menu.options.filter(course => (this.includeInFilteredList(course.department, course.number))).map(course => (
-                                        <div>
+                                        <div style={{marginLeft:'10%'}}>
+                                            <CourseListTag courseObj={course} addCourse={this.props.addCourse}/>
+                                            {/* Replaced with CourseListTag 
                                             <details style={{marginLeft:'10%'}}>
                                                 <summary>{course.id + " " + course.name}</summary>
                                                 <div style={{marginLeft:'10%'}}>
@@ -81,7 +86,7 @@ class CourseList extends React.Component {
                                                     Prerequisites : {course.prereqs}<br />
                                                     Description : {course.description}
                                                 </div>
-                                            </details>
+                                            </details>*/}
                                         </div>
                                     ))
                                 }
