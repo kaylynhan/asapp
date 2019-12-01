@@ -115,41 +115,52 @@ class CourseManager extends React.Component {
 	
 	////////////////////////////////////////////////////////////
 	onGenerateSchedules= () => {
+		
+		this.getOptionalInformation()
+
+    }
+	
+	getOptionalInformation = () => {
+	
 		let optionalIDs = []
-        let requiredIDs = []
 		
 		for(var i=0; i<this.state.optionalClasses.length; i++)
 		{
 			optionalIDs.push(this.state.optionalClasses[i]._id)
 		}
 		
-		for(var i=0; i<this.state.requiredClasses.length; i++)
-		{
-			requiredIDs.push(this.state.requiredClasses[i]._id)
-		}
-        console.log("optional IDs are",optionalIDs);
-        console.log("required IDs are", requiredIDs);
+		console.log("optional IDs are",optionalIDs);
 		
 		axios.get("/courses/getMany", {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
                 optCourseInfo: res.data
-            }/*, this.getGeneratedSchedules*/)
+            }, this.getRequiredInformation)
         })
         .catch(err => {
             console.log(err.message)
         })
+	}
+	
+	getRequiredInformation = () => {
+	
+		let requiredIDs = []
 		
+		for(var i=0; i<this.state.requiredClasses.length; i++)
+		{
+			requiredIDs.push(this.state.requiredClasses[i]._id)
+		}
 		
-        axios.get("/courses/getMany", {params: {ids: requiredIDs}})
+		console.log("required IDs are", requiredIDs);
+		
+		axios.get("/courses/getMany", {params: {ids: requiredIDs}})
         .then(res => {
             this.setState({
                 reqCourseInfo: res.data
             }, this.getGeneratedSchedules)
         })
         .catch(err => console.log(err.message));
-
-    }
+	}
 
     getGeneratedSchedules  = () => {
 
