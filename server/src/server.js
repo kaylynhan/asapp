@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import userRoutes from "./routes/user.route.js";
 import courseRoutes from "./routes/course.route.js";
 
 const port = process.env.PORT || 4000;
@@ -27,7 +26,6 @@ connection.on('error', (err) => {
     console.log("MongoDB connection encountered an error:", err);
 });
 
-app.use('/users', userRoutes);
 app.use('/courses', courseRoutes);
 
 app.listen(port, function() {

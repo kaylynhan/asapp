@@ -5,7 +5,6 @@ import "./ScheduleManager.css";
 import ProfDropdown from "./ProfDropdown";
 import ScheduleList from "./ScheduleList";
 import ScheduleGrid from "./ScheduleGrid";
-import ScheduleGridReact from "./ScheduleGridReact";
 import schedules from '../test/sampleSchedules.json';           // Get schedules from generation (download json from github and place import accordingly)
 import SectionDetail from './SectionDetail';
 
@@ -224,11 +223,6 @@ class ScheduleManager extends React.Component {
                             onChange={this.handleAvoidProfChange}
                         />
                     </div>
-                    <button onClick={this.filterOutSchedules}>Filter</button>
-                    <label>
-                        Enable Commute Restriction
-                        <input type="checkbox"></input>
-                    </label>
                 </div>
                 <div id="sort">
                     <ScheduleList
