@@ -20,7 +20,7 @@ class CourseListTag extends React.Component {
 
         return(
             <div>
-                {this.state.obj.name} 
+                {this.props.courseObj.id} 
                 <button onClick={() => this.props.addCourse(this.props.courseObj)}>+</button>
             </div>
         )
