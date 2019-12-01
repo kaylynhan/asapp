@@ -3,6 +3,7 @@ import axios from 'axios';
 import CourseInput from "./CourseInput.js";
 import CourseList from "./CourseList.js";
 import CoursePlan from "./CoursePlan.js"
+import CourseListTag from "./CourseListTag"
 import {generateSchedules} from "./scheduleGenerator.js"
 
 class CourseManager extends React.Component {
@@ -10,6 +11,8 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
+            optionalClasses: [],
+            requiredClasses: [],
 			/*
             requiredClasses: [
                 {
@@ -33,7 +36,8 @@ class CourseManager extends React.Component {
             ],
 			*/
 			///////////////////////////////////////////////////////////////
-			optionalClasses: [
+            /*
+            optionalClasses: [
 				{'name' : 'CSE 140', 'id': '5ddddabf18eee9cc93245fc4'},
 				{'name' : 'CSE 140L', 'id': '5ddddabf18eee9cc93245fc5'},
 				{'name' : 'CSE 141', 'id': '5ddddabf18eee9cc93245fc6'},
@@ -46,7 +50,7 @@ class CourseManager extends React.Component {
                 {'name' : 'ANAR 154', 'id': '5ddddabf18eee9cc93245e9e'},
 				{'name' : 'ANSC 101', 'id': '5ddddabf18eee9cc93245ea4'},
 				{'name' : 'CSE 110', 'id': '5ddddabf18eee9cc93245fc3'}
-            ],
+            ],*/
 			/////////////////////////////////////////////////////////////////
             optCourseInfo: null,
             reqCourseInfo: null,
@@ -88,12 +92,16 @@ class CourseManager extends React.Component {
             for (var i = 0; i < deptArray.length; i++){
                 let courseJSON = {
                     title: deptArray[i],
-                    options: courseArray[i]
+                    options: courseArray[i].sort(function(a, b){
+                        return (parseInt(a.number) > parseInt(b.number) ? 1 : parseInt(a.number) < parseInt(b.number) ? -1 : a.number > b.number ? 1 : a.number < b.number ? -1 : 0);
+                    })
                 }
                 courseMenu.push(courseJSON);
             }
             courseMenu.sort(function(a, b){
-                return (a > b.title ? 1 : a.title < b.title ? -1 : 0);
+                let valA = a.title.toLowerCase();
+                let valB = b.title.toLowerCase();
+                return (valA > valB ? 1 : valA < valB ? -1 : 0);
             });
             this.setState({
                 catalogue: courseMenu
@@ -112,28 +120,30 @@ class CourseManager extends React.Component {
 		
 		for(var i=0; i<this.state.optionalClasses.length; i++)
 		{
-			optionalIDs.push(this.state.optionalClasses[i].id)
+			optionalIDs.push(this.state.optionalClasses[i]._id)
 		}
 		
 		for(var i=0; i<this.state.requiredClasses.length; i++)
 		{
-			requiredIDs.push(this.state.requiredClasses[i].id)
+			requiredIDs.push(this.state.requiredClasses[i]._id)
 		}
-	
-        axios.get("http://localhost:4000/courses/getMany", 
-        {params: {ids: requiredIDs}})
+        console.log("optional IDs are",optionalIDs);
+        console.log("required IDs are", requiredIDs);
+        axios.get("/courses/getMany", {params: {ids: requiredIDs}})
         .then(res => {
             this.setState({
                 reqCourseInfo: res.data
             })
         })
         .catch(err => console.log(err.message));
-        axios.get("http://localhost:4000/courses/getMany", 
-        {params: {ids: optionalIDs}})
+        axios.get("/courses/getMany", {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
                 optCourseInfo: res.data
             }, this.getGeneratedSchedules)
+        })
+        .catch(err => {
+            console.log(err.message)
         })
 
     }
@@ -146,9 +156,9 @@ class CourseManager extends React.Component {
     }
 	
 	nextgen = () => {
-		console.log(this.state.optCourseInfo);
-        console.log(this.state.reqCourseInfo);
-		console.log(this.state.schedules);
+		console.log("this.state.optCourseInfo is",this.state.optCourseInfo);
+        console.log("this.state.reqCourseInfo is", this.state.reqCourseInfo);
+		console.log("this.state.schedules is", this.state.schedules);
 	}
 	////////////////////////////////////////////////////////////
 	
@@ -213,6 +223,39 @@ class CourseManager extends React.Component {
 
     }
 
+    addCourse = item => {
+        this.setState(state => {
+            let req = this.state.requiredClasses.find(o => o.name === item.name);
+            let opt = this.state.optionalClasses.find(o => o.name === item.name);
+            var newArr = this.state.requiredClasses
+            function containsObject(obj, list) {
+                var i;
+                for (i = 0; i < list.length; i++) {
+                    if (list[i] === obj) {
+                        return true;
+                    }
+                }
+            
+                return false;
+            }
+            console.log(this.state.optionalClasses)
+            if(opt == undefined){
+                console.log("NOT IN REQ")
+            }
+            if(req == undefined
+             && opt == undefined) {
+                    newArr = newArr.concat(item)
+                }
+            
+            
+            const requiredClasses = newArr
+            return {
+                requiredClasses
+            }
+            
+        })
+    }
+
     render() {
         return (
             <div>
@@ -222,7 +265,7 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
-                    <CourseList menus = {this.state.catalogue} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
+                    <CourseList menus = {this.state.catalogue} addCourse={this.addCourse} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
                     <button class="NavBtn">

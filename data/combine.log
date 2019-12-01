@@ -1,121 +1,189 @@
-WARNING - root:combine.py:280 - Workload: N/A cannot be converted to a number
-WARNING - root:combine.py:340 - Workload: N/A cannot be converted to a number
-WARNING - root:combine.py:80 - ANBI 100 was not found in catalog
-WARNING - root:combine.py:80 - ANBI 116 was not found in catalog
-WARNING - root:combine.py:80 - BENG 181 was not found in catalog
-WARNING - root:combine.py:80 - BIPN 154 was not found in catalog
-WARNING - root:combine.py:80 - BIPN 162 was not found in catalog
-WARNING - root:combine.py:80 - CHIN 185A was not found in catalog
-WARNING - root:combine.py:80 - COGS 111 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Directed Group Study (2 or 4)
-WARNING - root:combine.py:80 - COMM 109I was not found in catalog
-WARNING - root:combine.py:80 - COMM 182 was not found in catalog
-WARNING - root:combine.py:80 - CSE 95 was not found in catalog
-WARNING - root:combine.py:80 - CSE 151A was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Seminar in CSE (1�4)
-WARNING - root:combine.py:108 - Cannot parse number of units from Seminar in CSE (1�4)
-WARNING - root:combine.py:80 - CSS 1 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Seminar in CSE (1�4)
-WARNING - root:combine.py:80 - EDS 30 was not found in catalog
-WARNING - root:combine.py:80 - EDS 119 was not found in catalog
-WARNING - root:combine.py:80 - EDS 121A was not found in catalog
-WARNING - root:combine.py:80 - EDS 122 was not found in catalog
-WARNING - root:combine.py:80 - EDS 128A was not found in catalog
-WARNING - root:combine.py:80 - EDS 129B was not found in catalog
-WARNING - root:combine.py:80 - HDS 60 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Directed Group Study (1�2)
-WARNING - root:combine.py:80 - HIEU 163 was not found in catalog
-WARNING - root:combine.py:80 - HIEU 183 was not found in catalog
-WARNING - root:combine.py:80 - HILD 2B was not found in catalog
-WARNING - root:combine.py:80 - HINE 171 was not found in catalog
-WARNING - root:combine.py:80 - HINE 186 was not found in catalog
-WARNING - root:combine.py:80 - HITO 119 was not found in catalog
-WARNING - root:combine.py:80 - HMNR 100 was not found in catalog
-WARNING - root:combine.py:80 - JAPN 140B was not found in catalog
-WARNING - root:combine.py:80 - JAPN 150A was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Selected Topics in Contemporary Japanese Studies
-WARNING - root:combine.py:80 - LIAB 1B was not found in catalog
-WARNING - root:combine.py:80 - LIAB 1BX was not found in catalog
-WARNING - root:combine.py:80 - LIAB 1E was not found in catalog
-WARNING - root:combine.py:80 - LIAB 1EX was not found in catalog
-WARNING - root:combine.py:80 - LIFR 1B was not found in catalog
-WARNING - root:combine.py:80 - LIFR 1BX was not found in catalog
-WARNING - root:combine.py:80 - LIFR 1C was not found in catalog
-WARNING - root:combine.py:80 - LIFR 1CX was not found in catalog
-WARNING - root:combine.py:80 - LIGM 1B was not found in catalog
-WARNING - root:combine.py:80 - LIGM 1BX was not found in catalog
-WARNING - root:combine.py:80 - LIHL 112W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 114W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 115W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 117W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 119W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 124W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 132W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 134W was not found in catalog
-WARNING - root:combine.py:80 - LIHL 137W was not found in catalog
-WARNING - root:combine.py:80 - LIIT 1B was not found in catalog
-WARNING - root:combine.py:80 - LIIT 1BX was not found in catalog
-WARNING - root:combine.py:80 - LIPO 1B was not found in catalog
-WARNING - root:combine.py:80 - LIPO 1BX was not found in catalog
-WARNING - root:combine.py:80 - LIPO 17 was not found in catalog
-WARNING - root:combine.py:80 - LISL 1B was not found in catalog
-WARNING - root:combine.py:80 - LISL 1BX was not found in catalog
-WARNING - root:combine.py:80 - LISL 1C was not found in catalog
-WARNING - root:combine.py:80 - LISL 1CX was not found in catalog
-WARNING - root:combine.py:80 - LISL 1E was not found in catalog
-WARNING - root:combine.py:80 - LISP 1B was not found in catalog
-WARNING - root:combine.py:80 - LISP 1BX was not found in catalog
-WARNING - root:combine.py:80 - LISP 1C was not found in catalog
-WARNING - root:combine.py:80 - LISP 1CX was not found in catalog
-WARNING - root:combine.py:80 - LISP 16 was not found in catalog
-WARNING - root:combine.py:80 - LISP 18 was not found in catalog
-WARNING - root:combine.py:80 - LTKO 2B was not found in catalog
-WARNING - root:combine.py:80 - MAE 40 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Directed Group Study (1�4)
-WARNING - root:combine.py:80 - MUIR 90H was not found in catalog
-WARNING - root:combine.py:80 - MUS 2B was not found in catalog
-WARNING - root:combine.py:80 - MUS 2BK was not found in catalog
-WARNING - root:combine.py:80 - MUS 95D was not found in catalog
-WARNING - root:combine.py:80 - MUS 95E was not found in catalog
-WARNING - root:combine.py:80 - MUS 95G was not found in catalog
-WARNING - root:combine.py:80 - MUS 95JC was not found in catalog
-WARNING - root:combine.py:80 - MUS 95K was not found in catalog
-WARNING - root:combine.py:80 - MUS 95L was not found in catalog
-WARNING - root:combine.py:80 - MUS 95W was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Chamber Music Performance (2�4/0)
-WARNING - root:combine.py:108 - Cannot parse number of units from Advanced Improvisation Performance (4/0)
-WARNING - root:combine.py:80 - CENG 15 was not found in catalog
-WARNING - root:combine.py:80 - CENG 176A was not found in catalog
-WARNING - root:combine.py:80 - POLI 5D was not found in catalog
-WARNING - root:combine.py:80 - POLI 11D was not found in catalog
-WARNING - root:combine.py:80 - POLI 13D was not found in catalog
-WARNING - root:combine.py:80 - POLI 30D was not found in catalog
-WARNING - root:combine.py:80 - POLI 100X was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Game Theory in Political Science
-WARNING - root:combine.py:80 - POLI 125D was not found in catalog
-WARNING - root:combine.py:80 - POLI 134 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from The U
-WARNING - root:combine.py:80 - POLI 174 was not found in catalog
-WARNING - root:combine.py:80 - POLI 191B was not found in catalog
-WARNING - root:combine.py:80 - PSYC 116B was not found in catalog
-WARNING - root:combine.py:80 - SE 130A was not found in catalog
-WARNING - root:combine.py:80 - SE 131A was not found in catalog
-WARNING - root:combine.py:80 - SIO 104 was not found in catalog
-WARNING - root:combine.py:80 - SIO 144 was not found in catalog
-WARNING - root:combine.py:80 - SOCI 188 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Assistant Designer (2�6)
-WARNING - root:combine.py:108 - Cannot parse number of units from 
-WARNING - root:combine.py:108 - Cannot parse number of units from 
-WARNING - root:combine.py:108 - Cannot parse number of units from 
-WARNING - root:combine.py:108 - Cannot parse number of units from 
-WARNING - root:combine.py:108 - Cannot parse number of units from Theatre Practicum (4�6)
-WARNING - root:combine.py:108 - Cannot parse number of units from Theatre Practicum (4�6)
-WARNING - root:combine.py:108 - Cannot parse number of units from Advanced Theatre Practicum (4�6)
-WARNING - root:combine.py:80 - TMC 120 was not found in catalog
-WARNING - root:combine.py:80 - TWS 22 was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Culture, Tourism, and the Urban Economy: Case Studies of Craft Breweries
-WARNING - root:combine.py:108 - Cannot parse number of units from Life Course Scholars Research and Core Fundamentals
-WARNING - root:combine.py:80 - USP 159A was not found in catalog
-WARNING - root:combine.py:108 - Cannot parse number of units from Field Research in Migrant Communities�Practicum
-WARNING - root:combine.py:80 - WARR 87 was not found in catalog
-WARNING - root:combine.py:80 - WCWP 160 was not found in catalog
+WARNING - root:combine.py:290 - Workload: N/A cannot be converted to a number
+WARNING - root:combine.py:350 - Workload: N/A cannot be converted to a number
+WARNING - root:combine.py:99 - ANBI 100 was not found in catalog
+WARNING - root:combine.py:99 - ANBI 116 was not found in catalog
+WARNING - root:combine.py:99 - BENG 181 was not found in catalog
+WARNING - root:combine.py:99 - BIPN 154 was not found in catalog
+WARNING - root:combine.py:99 - BIPN 162 was not found in catalog
+WARNING - root:combine.py:99 - CHIN 185A was not found in catalog
+WARNING - root:combine.py:99 - COGS 111 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Directed Group Study (2 or 4)
+WARNING - root:combine.py:99 - COMM 109I was not found in catalog
+WARNING - root:combine.py:99 - COMM 182 was not found in catalog
+WARNING - root:combine.py:99 - CSE 95 was not found in catalog
+WARNING - root:combine.py:99 - CSE 151A was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Seminar in CSE (1�4)
+WARNING - root:combine.py:127 - Cannot parse number of units from Seminar in CSE (1�4)
+WARNING - root:combine.py:99 - CSS 1 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Seminar in CSE (1�4)
+WARNING - root:combine.py:99 - EDS 30 was not found in catalog
+WARNING - root:combine.py:99 - EDS 119 was not found in catalog
+WARNING - root:combine.py:99 - EDS 121A was not found in catalog
+WARNING - root:combine.py:99 - EDS 122 was not found in catalog
+WARNING - root:combine.py:99 - EDS 128A was not found in catalog
+WARNING - root:combine.py:99 - EDS 129B was not found in catalog
+WARNING - root:combine.py:99 - HDS 60 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Directed Group Study (1�2)
+WARNING - root:combine.py:99 - HIEU 163 was not found in catalog
+WARNING - root:combine.py:99 - HIEU 183 was not found in catalog
+WARNING - root:combine.py:99 - HILD 2B was not found in catalog
+WARNING - root:combine.py:99 - HINE 171 was not found in catalog
+WARNING - root:combine.py:99 - HINE 186 was not found in catalog
+WARNING - root:combine.py:99 - HITO 119 was not found in catalog
+WARNING - root:combine.py:99 - HMNR 100 was not found in catalog
+WARNING - root:combine.py:99 - JAPN 140B was not found in catalog
+WARNING - root:combine.py:99 - JAPN 150A was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Selected Topics in Contemporary Japanese Studies
+WARNING - root:combine.py:99 - LIAB 1B was not found in catalog
+WARNING - root:combine.py:99 - LIAB 1BX was not found in catalog
+WARNING - root:combine.py:99 - LIAB 1E was not found in catalog
+WARNING - root:combine.py:99 - LIAB 1EX was not found in catalog
+WARNING - root:combine.py:99 - LIFR 1B was not found in catalog
+WARNING - root:combine.py:99 - LIFR 1BX was not found in catalog
+WARNING - root:combine.py:99 - LIFR 1C was not found in catalog
+WARNING - root:combine.py:99 - LIFR 1CX was not found in catalog
+WARNING - root:combine.py:99 - LIGM 1B was not found in catalog
+WARNING - root:combine.py:99 - LIGM 1BX was not found in catalog
+WARNING - root:combine.py:99 - LIHL 112W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 114W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 115W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 117W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 119W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 124W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 132W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 134W was not found in catalog
+WARNING - root:combine.py:99 - LIHL 137W was not found in catalog
+WARNING - root:combine.py:99 - LIIT 1B was not found in catalog
+WARNING - root:combine.py:99 - LIIT 1BX was not found in catalog
+WARNING - root:combine.py:99 - LIPO 1B was not found in catalog
+WARNING - root:combine.py:99 - LIPO 1BX was not found in catalog
+WARNING - root:combine.py:99 - LIPO 17 was not found in catalog
+WARNING - root:combine.py:99 - LISL 1B was not found in catalog
+WARNING - root:combine.py:99 - LISL 1BX was not found in catalog
+WARNING - root:combine.py:99 - LISL 1C was not found in catalog
+WARNING - root:combine.py:99 - LISL 1CX was not found in catalog
+WARNING - root:combine.py:99 - LISL 1E was not found in catalog
+WARNING - root:combine.py:99 - LISP 1B was not found in catalog
+WARNING - root:combine.py:99 - LISP 1BX was not found in catalog
+WARNING - root:combine.py:99 - LISP 1C was not found in catalog
+WARNING - root:combine.py:99 - LISP 1CX was not found in catalog
+WARNING - root:combine.py:99 - LISP 16 was not found in catalog
+WARNING - root:combine.py:99 - LISP 18 was not found in catalog
+WARNING - root:combine.py:99 - LTKO 2B was not found in catalog
+WARNING - root:combine.py:99 - MAE 40 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Directed Group Study (1�4)
+WARNING - root:combine.py:99 - MUIR 90H was not found in catalog
+WARNING - root:combine.py:99 - MUS 2B was not found in catalog
+WARNING - root:combine.py:99 - MUS 2BK was not found in catalog
+WARNING - root:combine.py:99 - MUS 95D was not found in catalog
+WARNING - root:combine.py:99 - MUS 95E was not found in catalog
+WARNING - root:combine.py:99 - MUS 95G was not found in catalog
+WARNING - root:combine.py:99 - MUS 95JC was not found in catalog
+WARNING - root:combine.py:99 - MUS 95K was not found in catalog
+WARNING - root:combine.py:99 - MUS 95L was not found in catalog
+WARNING - root:combine.py:99 - MUS 95W was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Chamber Music Performance (2�4/0)
+WARNING - root:combine.py:127 - Cannot parse number of units from Advanced Improvisation Performance (4/0)
+WARNING - root:combine.py:99 - CENG 15 was not found in catalog
+WARNING - root:combine.py:99 - CENG 176A was not found in catalog
+WARNING - root:combine.py:99 - POLI 5D was not found in catalog
+WARNING - root:combine.py:99 - POLI 11D was not found in catalog
+WARNING - root:combine.py:99 - POLI 13D was not found in catalog
+WARNING - root:combine.py:99 - POLI 30D was not found in catalog
+WARNING - root:combine.py:99 - POLI 100X was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Game Theory in Political Science
+WARNING - root:combine.py:99 - POLI 125D was not found in catalog
+WARNING - root:combine.py:99 - POLI 134 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from The U
+WARNING - root:combine.py:99 - POLI 174 was not found in catalog
+WARNING - root:combine.py:99 - POLI 191B was not found in catalog
+WARNING - root:combine.py:99 - PSYC 116B was not found in catalog
+WARNING - root:combine.py:99 - SE 130A was not found in catalog
+WARNING - root:combine.py:99 - SE 131A was not found in catalog
+WARNING - root:combine.py:99 - SIO 104 was not found in catalog
+WARNING - root:combine.py:99 - SIO 144 was not found in catalog
+WARNING - root:combine.py:99 - SOCI 188 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Assistant Designer (2�6)
+WARNING - root:combine.py:127 - Cannot parse number of units from 
+WARNING - root:combine.py:127 - Cannot parse number of units from 
+WARNING - root:combine.py:127 - Cannot parse number of units from 
+WARNING - root:combine.py:127 - Cannot parse number of units from 
+WARNING - root:combine.py:127 - Cannot parse number of units from Theatre Practicum (4�6)
+WARNING - root:combine.py:127 - Cannot parse number of units from Theatre Practicum (4�6)
+WARNING - root:combine.py:127 - Cannot parse number of units from Advanced Theatre Practicum (4�6)
+WARNING - root:combine.py:99 - TMC 120 was not found in catalog
+WARNING - root:combine.py:99 - TWS 22 was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Culture, Tourism, and the Urban Economy: Case Studies of Craft Breweries
+WARNING - root:combine.py:127 - Cannot parse number of units from Life Course Scholars Research and Core Fundamentals
+WARNING - root:combine.py:99 - USP 159A was not found in catalog
+WARNING - root:combine.py:127 - Cannot parse number of units from Field Research in Migrant Communities�Practicum
+WARNING - root:combine.py:99 - WARR 87 was not found in catalog
+WARNING - root:combine.py:99 - WCWP 160 was not found in catalog
+ERROR - root:combine.py:435 - ANTH 5 is not a valid course
+ERROR - root:combine.py:435 - BENG 181 is not a valid course
+ERROR - root:combine.py:435 - BENG 191 is not a valid course
+ERROR - root:combine.py:435 - BIPN 154 is not a valid course
+ERROR - root:combine.py:435 - BIPN 162 is not a valid course
+ERROR - root:combine.py:435 - COGS 11 is not a valid course
+ERROR - root:combine.py:435 - COGS 111 is not a valid course
+ERROR - root:combine.py:435 - CSE 151A is not a valid course
+ERROR - root:combine.py:435 - ECE 181 is not a valid course
+ERROR - root:combine.py:435 - ECE 183 is not a valid course
+ERROR - root:combine.py:435 - EDS 25 is not a valid course
+ERROR - root:combine.py:435 - EDS 121A is not a valid course
+ERROR - root:combine.py:435 - EDS 122 is not a valid course
+ERROR - root:combine.py:435 - HDS 60 is not a valid course
+ERROR - root:combine.py:435 - HILD 2B is not a valid course
+ERROR - root:combine.py:435 - LIAB 1BX is not a valid course
+ERROR - root:combine.py:435 - LIAB 1BX is not a valid course
+ERROR - root:combine.py:435 - LIAB 1EX is not a valid course
+ERROR - root:combine.py:435 - LIFR 1BX is not a valid course
+ERROR - root:combine.py:435 - LIFR 1BX is not a valid course
+ERROR - root:combine.py:435 - LIFR 1CX is not a valid course
+ERROR - root:combine.py:435 - LIFR 1CX is not a valid course
+ERROR - root:combine.py:435 - LIGM 1BX is not a valid course
+ERROR - root:combine.py:435 - LIGM 1BX is not a valid course
+ERROR - root:combine.py:435 - LIIT 1BX is not a valid course
+ERROR - root:combine.py:435 - LIPO 1BX is not a valid course
+ERROR - root:combine.py:435 - LIPO 17 is not a valid course
+ERROR - root:combine.py:435 - LISL 1BX is not a valid course
+ERROR - root:combine.py:435 - LISL 1BX is not a valid course
+ERROR - root:combine.py:435 - LISL 1BX is not a valid course
+ERROR - root:combine.py:435 - LISL 1BX is not a valid course
+ERROR - root:combine.py:435 - LISL 1CX is not a valid course
+ERROR - root:combine.py:435 - LISL 1CX is not a valid course
+ERROR - root:combine.py:435 - LISL 1E is not a valid course
+ERROR - root:combine.py:435 - LISP 1BX is not a valid course
+ERROR - root:combine.py:435 - LISP 1BX is not a valid course
+ERROR - root:combine.py:435 - LISP 1BX is not a valid course
+ERROR - root:combine.py:435 - LISP 1BX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 1CX is not a valid course
+ERROR - root:combine.py:435 - LISP 16 is not a valid course
+ERROR - root:combine.py:435 - LISP 16 is not a valid course
+ERROR - root:combine.py:435 - LTEA 120B is not a valid course
+ERROR - root:combine.py:435 - LTKO 2B is not a valid course
+ERROR - root:combine.py:435 - LTKO 2B is not a valid course
+ERROR - root:combine.py:435 - LTKO 2B is not a valid course
+ERROR - root:combine.py:435 - MAE 155A is not a valid course
+ERROR - root:combine.py:435 - MAE 155A is not a valid course
+ERROR - root:combine.py:435 - MAE 156B is not a valid course
+ERROR - root:combine.py:435 - MAE 156B is not a valid course
+ERROR - root:combine.py:435 - MUS 2B is not a valid course
+ERROR - root:combine.py:435 - CENG 15 is not a valid course
+ERROR - root:combine.py:435 - POLI 5D is not a valid course
+ERROR - root:combine.py:435 - POLI 11D is not a valid course
+ERROR - root:combine.py:435 - POLI 13D is not a valid course
+ERROR - root:combine.py:435 - POLI 30D is not a valid course
+ERROR - root:combine.py:435 - PSYC 114 is not a valid course
+ERROR - root:combine.py:435 - PSYC 115A is not a valid course
+ERROR - root:combine.py:435 - SIO 104 is not a valid course
+ERROR - root:combine.py:435 - SIO 180 is not a valid course
+ERROR - root:combine.py:435 - TDMV 20 is not a valid course
+ERROR - root:combine.py:435 - TWS 22 is not a valid course
