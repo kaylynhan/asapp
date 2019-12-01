@@ -18,7 +18,7 @@ class CourseInput extends React.Component {
     }
 
     validateInput() {
-        const regexpValid = /^(([A-Z]+)( [0-9]+[A-Z]?)?)?$/i
+        const regexpValid = /^(([A-Z]+)( ([0-9]+[A-Z]?)?)?)?$/i
         const regexpComplete = /^([A-Z]+) [0-9]+[A-Z]?$/i
         const regexpDept = /^([A-Z]+ ?)$/i
         
@@ -40,14 +40,19 @@ class CourseInput extends React.Component {
         var search_query_dept;
         var search_query_num;
         
-        if (this.state.input_is_valid) {            
+        if (this.state.input_is_valid) {  
             if (this.state.input_is_complete) {
                 var split = this.state.search_query.indexOf(' ')
                 search_query_dept = this.state.search_query.substring(0,split)
-                search_query_num = this.state.search_query.substring(split)
+                search_query_num = this.state.search_query.substring(split+1)
             }
             else if (this.state.input_is_dept) {
-                search_query_dept = this.state.search_query
+                if (this.state.search_query.slice(-1)[0] === " ") {
+                    search_query_dept = this.state.search_query.slice(0,-1)
+                }
+                else {
+                    search_query_dept = this.state.search_query
+                }
                 search_query_num = ""
 
             }

@@ -1,27 +1,11 @@
-import {Queue} from "./Queue.js"
-
 export function generateSchedules(optionalCourseList, requiredCourseList) {
 
 var listOfSchedules = []
-
 var doubleSchedule = []
+var scheduleQueue = []
+var scheduleQueue2 = []
 
-var scheduleStack1 = []
-
-var scheduleStack2 = []
-
-//////////////////////
-var scheduleStack = []
-var morePossibleSchedules = true;
-var removeIndex = 0
-var populateIndex = 1
-
-var queue = new Queue()
-
-scheduleStack[removeIndex] = new Queue
-scheduleStack[populateIndex] = new Queue
-
-//add Course information to optional course sections.
+//Add course information to optional course sections.
 if(optionalCourseList != null){
 	for(var i = 0; i < optionalCourseList.length; i++)
 		for(var j = 0;j < optionalCourseList[i].sections.length; j++)
@@ -30,7 +14,7 @@ if(optionalCourseList != null){
 		}
 }
 
-//Add Course information to required course sections.
+//Add course information to required course sections.
 if(requiredCourseList != null)
 {
 	for(var i = 0; i < requiredCourseList.length; i++)
@@ -40,150 +24,170 @@ if(requiredCourseList != null)
 		}
 }
 
-//Add All optional course sections to the list of schedules.
+//Add all optional course sections to the list of schedules.
 if(optionalCourseList != null){
 	for(var i = 0; i < optionalCourseList.length; i++)
 		for(var j = 0;j < optionalCourseList[i].sections.length; j++)
 		{
-			scheduleStack1.push(optionalCourseList[i].sections[j])
 			listOfSchedules.push([optionalCourseList[i].sections[j]])
+			scheduleQueue.push([optionalCourseList[i].sections[j]])
 		}
 }
 
-//Add All required course sections to the list of schedules.
+//Add all required course sections to the list of schedules.
 if(requiredCourseList != null)
 {
 	for(var i = 0; i < requiredCourseList.length; i++)
 		for(var j = 0;j < requiredCourseList[i].sections.length; j++)
 		{
-			scheduleStack1.push(requiredCourseList[i].sections[j])
 			listOfSchedules.push([requiredCourseList[i].sections[j]])
+			scheduleQueue.push([requiredCourseList[i].sections[j]])
 		}
 }
 
-//Calculate all schedules with 2 sections that don't have time conflicts.
-while(scheduleStack1.length != 0)
+//Find all schedules with 2 courses and no conflicts.
+var conflict = false
+for(var i=0; i< scheduleQueue.length; i++)
 {
-  var current = scheduleStack1.pop()
-
-  var conflict = false
-
-  for(var i = 0; i < scheduleStack1.length; i++)
-    if(current.course != scheduleStack1[i].course)
-    {
-   // Make sure there are no schedule conflicts between the current 
- // section and scheduleStack[i] section.
-for(var j = 0; j < current.meetings.length; j++)
-{
-  for(var k=0; k < scheduleStack1[i].meetings.length; k++)
-  {
-   //  Checks if a class starts during another class, or ends during
-   //    another class. checks for these conflicts: (start2 start1 end2), (start2 end1 end2), and (start 1 start2 end2 end1)
-    if(current.meetings[j].day == scheduleStack1[i].meetings[k].day)
+	for(var j=i+1; j< scheduleQueue.length; j++)
 	{
-		if((current.meetings[j].start_time >= scheduleStack1[i].meetings[k].start_time 
-		&& current.meetings[j].start_time <= scheduleStack1[i].meetings[k].end_time) || 
-		(current.meetings[j].end_time >= scheduleStack1[i].meetings[k].start_time && 
-		current.meetings[j].end_time <= scheduleStack1[i].meetings[k].end_time ) || 
-		(current.meetings[j].start_time <= scheduleStack1[i].meetings[k].start_time &&
-		current.meetings[j].end_time >= scheduleStack1[i].meetings[k].end_time))
-		{
-        conflict = true
-        break //End the k loop.
-		}
-	}
-  }
-
-  if(conflict == true)
-    break
-}
-
-  if(conflict == false)
-  {
-    doubleSchedule[[current.id,scheduleStack1[i].id]] = [current, scheduleStack1[i]]
-	
-    scheduleStack2.push([current, scheduleStack1[i]])
-	scheduleStack[removeIndex].enqueue([current, scheduleStack1[i]])
-	
-	listOfSchedules.push([current, scheduleStack1[i]])
-  }
-  else
-    conflict = false
-
-}
-}
-
-var TEST_NUMBER = 0;
-
-//Calculate all possible schedules with more than 2 courses.
-while(morePossibleSchedules)
-{
-	TEST_NUMBER++
-	
-	while(scheduleStack[removeIndex].getLength() != 0)
-	{
-		var currentSchedule = scheduleStack[removeIndex].dequeue()
-		var numSectionsMinusOne = currentSchedule.length - 1
 		
-		for(var i = 0; i < scheduleStack[removeIndex].getLength(); i++)
+		//Check for final conflicts.
+		if(scheduleQueue[i][0].final != undefined && scheduleQueue[j][0].final != undefined)
 		{
-			var newSchedule = []
-			var valid = true
-			
-			for(j=0; j < numSectionsMinusOne; j++)
-			{
-				if(currentSchedule[j].id != scheduleStack[removeIndex].getIndex(i)[j].id)
+			if(scheduleQueue[i][0].final.date == scheduleQueue[j][0].final.date)
+				if(!((scheduleQueue[i][0].final.start_time > scheduleQueue[j][0].final.end_time) ||
+				(scheduleQueue[i][0].final.end_time < scheduleQueue[j][0].final.start_time)))
 				{
-					valid = false;
-					break;
+					conflict = true
 				}
-				else
+		}
+		
+		
+		//Check for meeting conflicts.
+		if(conflict == false && scheduleQueue[i][0].course != scheduleQueue[j][0].course)
+		{
+			for(var k=0; k<scheduleQueue[i][0].meetings.length; k++)
+			{
+				for(var z=0; z<scheduleQueue[j][0].meetings.length; z++)
 				{
-					newSchedule.push(currentSchedule[j])
+					if(scheduleQueue[i][0].meetings[k].day == scheduleQueue[j][0].meetings[z].day)
+					{
+						if(!((scheduleQueue[i][0].meetings[k].start_time > scheduleQueue[j][0].meetings[z].end_time) ||
+						(scheduleQueue[i][0].meetings[k].end_time < scheduleQueue[j][0].meetings[z].start_time)))
+						{
+							conflict = true
+							break //End the k loop.
+						}
+					}
+				}
+				
+				if(conflict == true)
+					break
+			}
+		}
+		else
+		{
+			conflict = true
+		}
+		
+		if(conflict == false)
+		{
+			doubleSchedule[[scheduleQueue[i][0].id,scheduleQueue[j][0].id]] = 1
+			
+			scheduleQueue2.push([scheduleQueue[i][0], scheduleQueue[j][0]])
+			listOfSchedules.push([scheduleQueue[i][0], scheduleQueue[j][0]])
+		}
+		else
+			conflict = false
+		
+	}
+}
+
+scheduleQueue = []
+
+//Find all schedules with 3 courses.
+for(var i=0; i<scheduleQueue2.length; i++)
+{
+	for(var j=i+1; j<scheduleQueue2.length; j++)
+	{
+		if (scheduleQueue2[i][0].id == scheduleQueue2[j][0].id)
+			if(scheduleQueue2[i][1].course != scheduleQueue2[j][1].course)
+			{
+				if(doubleSchedule[[scheduleQueue2[i][1].id, scheduleQueue2[j][1].id]] != undefined)
+				{
+					listOfSchedules.push([scheduleQueue2[i][0], scheduleQueue2[i][1], scheduleQueue2[j][1]])
+					scheduleQueue.push([scheduleQueue2[i][0], scheduleQueue2[i][1], scheduleQueue2[j][1]])
 				}
 			}
-		
-			if(currentSchedule[numSectionsMinusOne].course == scheduleStack[removeIndex].getIndex(i)[numSectionsMinusOne].course ||
-			doubleSchedule[[currentSchedule[numSectionsMinusOne].id,scheduleStack[removeIndex].getIndex(i)[numSectionsMinusOne].id]] == undefined)
-			{
-				valid = false;
-			}
-			else
-			{
-				newSchedule.push(currentSchedule[numSectionsMinusOne])
-				newSchedule.push(scheduleStack[removeIndex].getIndex(i)[numSectionsMinusOne])
-			}
-			
-			if(valid)
-			{	
-				scheduleStack[populateIndex].enqueue(newSchedule)
-				listOfSchedules.push(newSchedule)
-			}
-			else
-			{
-				valid = true
-			}
-		}
 	}
-	
-	if(scheduleStack[populateIndex].getLength() == 0 || TEST_NUMBER == 3)
-	{	
-		morePossibleSchedules = false
-	}
-	
-	var placeHolder = removeIndex
-	removeIndex = populateIndex
-	populateIndex = placeHolder
 }
 
-//Filters out schedules without required courses.
+scheduleQueue2 = []
+
+//Find all schedules with 4 courses.
+for(var i=0; i<scheduleQueue.length; i++)
+{
+	for(var j=i+1; j<scheduleQueue.length; j++)
+	{
+		if (scheduleQueue[i][0].id == scheduleQueue[j][0].id)
+			if(scheduleQueue[i][1].id == scheduleQueue[j][1].id)
+				if(scheduleQueue[i][2].course != scheduleQueue[j][2].course)
+				{
+					if(doubleSchedule[[scheduleQueue[i][2].id, scheduleQueue[j][2].id]] != undefined)
+					{
+						scheduleQueue2.push([scheduleQueue[i][0], scheduleQueue[i][1], scheduleQueue[i][2], scheduleQueue[j][2]])
+						listOfSchedules.push([scheduleQueue[i][0], scheduleQueue[i][1], scheduleQueue[i][2], scheduleQueue[j][2]])
+					}
+				}
+	}
+}
+
+scheduleQueue = []
+
+//Find all schedules with 5 courses.
+for(var i=0; i<scheduleQueue2.length; i++)
+{
+	for(var j=i+1; j<scheduleQueue2.length; j++)
+	{
+		if (scheduleQueue2[i][0].id == scheduleQueue2[j][0].id)
+			if(scheduleQueue2[i][1].id == scheduleQueue2[j][1].id)
+				if(scheduleQueue2[i][2].id == scheduleQueue2[j][2].id)
+					if(scheduleQueue2[i][3].course != scheduleQueue2[j][3].course)
+					{
+						if(doubleSchedule[[scheduleQueue2[i][3].id, scheduleQueue2[j][3].id]] != undefined)
+						{
+							scheduleQueue.push([scheduleQueue2[i][0], scheduleQueue2[i][1], scheduleQueue2[i][2], scheduleQueue2[i][3], scheduleQueue2[j][3]])
+							listOfSchedules.push([scheduleQueue2[i][0], scheduleQueue2[i][1], scheduleQueue2[i][2], scheduleQueue2[i][3], scheduleQueue2[j][3]])
+						}
+					}
+	}
+}
+
+scheduleQueue2 = []
+
+//Find all schedules with 6 courses.
+for(var i=0; i<scheduleQueue.length; i++)
+{
+	for(var j=i+1; j<scheduleQueue.length; j++)
+	{
+		if (scheduleQueue[i][0].id == scheduleQueue[j][0].id)
+			if(scheduleQueue[i][1].id == scheduleQueue[j][1].id)
+				if(scheduleQueue[i][2].id == scheduleQueue[j][2].id)
+					if(scheduleQueue[i][3].id == scheduleQueue[j][3].id)
+						if(scheduleQueue[i][4].course != scheduleQueue[j][4].course)
+						{
+							if(doubleSchedule[[scheduleQueue[i][4].id, scheduleQueue[j][4].id]] != undefined)
+								listOfSchedules.push([scheduleQueue[i][0], scheduleQueue[i][1], scheduleQueue[i][2], scheduleQueue[i][3], scheduleQueue[i][4], scheduleQueue[j][4]])
+						}
+	}
+}
+
+//Filters out schedules that don't contain required courses.
 var filtered = listOfSchedules.filter(function(value, index, arr){
-
-    return value.length >= requiredCourseList.length;
-
-});
-
-var filtered2 = filtered.filter(function(value, index, arr){
+	
+	if(value.length < requiredCourseList.length)
+		return false
 	
 	for(var i=0; i < requiredCourseList.length; i++)
 	{
@@ -204,5 +208,5 @@ var filtered2 = filtered.filter(function(value, index, arr){
 	return true
 });
 
-	return filtered2
+	return filtered
 }

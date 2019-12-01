@@ -46,6 +46,7 @@ class Popup extends React.Component {
         popup.style.display = "none"
         btn.disabled = false
     }
+    
 
     render() {
         // New popup
@@ -59,15 +60,24 @@ class Popup extends React.Component {
             left: this.props.x ? this.props.x : "25%",
         }
 
+        var popupBtn = this.props.btn
+            ? <div
+                onClick={() => this.handleBtnClick(PopupCount)}
+                id={"myPopupBtn" + PopupCount}>
+                    {this.props.btn}
+                </div>
+            : <button className="popupBtn"
+                onClick={() => this.handleBtnClick(PopupCount)}
+                id={"myPopupBtn" + PopupCount}
+                >
+                    {this.props.display}
+                </button>
+
+
         return (
             <div>
                 {/* Popup Button */}
-                <button className="popupBtn"
-                    onClick={() => this.handleBtnClick(PopupCount)}
-                    id={"myPopupBtn" + PopupCount}
-                    >
-                    {this.props.display}
-                </button>
+                {popupBtn}
                 {/* Popup Window */}
                 <div className="popup"
                     style={popupStyle}
