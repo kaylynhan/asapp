@@ -23,7 +23,10 @@ class ScheduleManager extends React.Component {
             currentSchedule: null                               // Unneeded field? Not used
         };
     }
-
+    componentDidUpdate() {
+      console.log("ScheduleManager updated")
+      console.log("this.props.schedule_list is", this.props.schedule_list);
+    }
     // prints an array of schedules that match the given filters
     filterOutSchedules = () => {
         let totalSchedules = this.props.schedule_list;
