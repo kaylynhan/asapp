@@ -34,47 +34,140 @@ def format_time(time):
 		time[i] = f'{hour}{minute}'
 
 
-def parse_courses():
+def add_to_obj(course_obj, department, num, final_obj):
+	final_obj[f'{department} {num}'] = {
+		'number': num,
+		'department': department,
+		'name': course_obj['name'].strip(),
+		'description': course_obj['description'].strip(),
+		'prereqs': course_obj['prereqs'].strip()
+	}
+
+
+def fix_course_obj():
+
 	with open('course.json') as in_file:
 		course_list = json.load(in_file)
 
-	# Fix random whitespace errors
-	bad_keys = []
+	added_courses = {}
+
 	for key in course_list:
-		course = course_list[key]
-		course['id'] = key
-		try:
-			course['number'] = key.split()[1]
-			course['department'] = key.split()[0]
-		except IndexError:
-			course['number'] = 'N/A'
-			course['department'] = 'N/A'
-			pass
-		course['name'] = course['name'].strip()
-		course['description'] = course['description'].strip()
-		course['prereqs'] = course['prereqs'].strip()
-		# course['link'] = \
-		#     f'http://cape.ucsd.edu/responses/Results.aspx?courseNumber={course["department"]}+{course["number"]}'
+		course_obj = course_list[key]
+		course_info = key.split()
+
+		if '(' in key and ')' in key:
+			department = re.findall('\(\d*\w*\)', key)[0]
+			department = department[1:len(department) - 1]
+			num = key.split()[-1]
+
+			add_to_obj(course_obj, department, num, added_courses)
+
+		elif '/' in key:
+			course_ids = key.split('/')
+			all_department = None
+			all_num = None
+
+			if len(course_ids[0].split()) == 1:
+				all_num = course_ids[-1].split()[1]
+			elif len(course_ids[0].split()) == 2:
+				all_department = course_ids[0].split()[0]
+			else:
+				print("Error")
+				sys.exit()
+
+			for i, course_id in enumerate(course_ids):
+				department = num = None
+				if len(course_id.split()) == 2:
+					department = course_id.split()[0]
+					num = course_id.split()[1]
+					add_to_obj(course_obj, department, num, added_courses)
+
+				elif len(course_id.split()) == 1:
+
+					if all_num is not None:
+						num = all_num
+						department = course_id
+
+					if all_department is not None:
+						department = all_department
+						num = course_id
+
+					add_to_obj(course_obj, department, num, added_courses)
+
+				else:
+					logging.error(f'Could not find course id from "{course_id}"')
+					continue
+
+		elif ' or ' in key:
+			assert len(course_info) == 4
+
+			department = course_info[0]
+			course_ids = [course_info[1], course_info[3]]
+			for num in course_ids:
+				add_to_obj(course_obj, department, num, added_courses)
+
+		elif '-' in key and len(course_info) == 3:
+			letters = course_info[2]
+			department = course_info[0]
+			base_num = course_info[1]
+			for letter in letters.split('-'):
+				add_to_obj(course_obj, department, base_num + letter, added_courses)
+
+		elif '-' in key and len(course_info) == 2:
+			keys = key.split('-')
+
+			assert len(keys[0].split()) == 2
+			department = keys[0].split()[0]
+			course_nums = key.split()[1].split('-')
+			for num in course_nums:
+				add_to_obj(course_obj, department, num, added_courses)
+
+		else:
+			try:
+				num = key.split()[1]
+				department = key.split()[0]
+			except IndexError:
+				num = 'N/A'
+				department = 'N/A'
+
+			add_to_obj(course_obj, department, num, added_courses)
+			# course['link'] = \
+			#     f'http://cape.ucsd.edu/responses/Results.aspx?courseNumber={course["department"]}+{course["number"]}'
+
+	course_list = added_courses
+
+	# Fix random whitespace errors
+	bad_keys = set()
+	for key in course_list:
 
 		# Some course numbers start with 0*
 		if ' 0' in key:
-			bad_keys.append(key)
+			bad_keys.add(key)
+
+		if ':' in key:
+			bad_keys.add(key)
 
 	for key in bad_keys:
 		new_key = re.sub('\s+0', ' ', key).strip()
+		new_key = re.sub(':', '', new_key).strip()
 		course_list[new_key] = course_list[key]
 		del course_list[key]
 
-	for course_id in MISSING_COURSES:
-		course = {}
-		course['id'] = course_id
-		course['number'] = course_id.split()[1]
-		course['department'] = course_id.split()[0]
-		course['name'] = 'N/A'
-		course['description'] = 'N/A'
-		course['prereqs'] = ''
-		course['units'] = -1
-		course_list[course_id] = course
+	# for course_id in MISSING_COURSES:
+	# 	course_obj = {}
+	# 	course_obj['id'] = course_id
+	# 	course_obj['number'] = course_id.split()[1]
+	# 	course_obj['department'] = course_id.split()[0]
+	# 	course_obj['name'] = 'N/A'
+	# 	course_obj['description'] = 'N/A'
+	# 	course_obj['prereqs'] = ''
+	# 	course_obj['units'] = -1
+	# 	course_list[course_id] = course_obj
+
+	return course_list
+
+
+def parse_courses(course_list):
 
 	with open('dataWI2020.csv') as in_file:
 		csv_reader = csv.reader(in_file)
@@ -96,7 +189,7 @@ def parse_courses():
 			try:
 				course_obj = course_list[course_id]
 			except KeyError:
-				logging.warning(f'{course_id} was not found in catalog')
+				logging.warning(f'{course_id} was not found in course catalog')
 
 				course = {}
 				course['id'] = course_id
@@ -124,7 +217,7 @@ def parse_courses():
 
 				if course_obj['name'] == 'N/A':
 					continue
-				logging.warning(f'Cannot parse number of units from {course_obj["name"]}')
+				logging.warning(f'Cannot parse number of units from "{course_obj["name"]}"')
 
 			day_str = line[4]
 			day = []
@@ -470,13 +563,16 @@ def test_case(course_dict):
 	assert 'SIO 180' not in course_dict
 	assert len(course_dict['CSE 167']['sections']) == 1
 	assert len(course_dict['CSE 167']['sections'][0]['meetings']) == 3
+	assert 'CENG 15' in course_dict
+	assert len(course_dict['CENG 15']['sections'][0]['meetings']) == 4
 
 	print("Test cases passed")
 
 
-if __name__ == '__main__':
+def main():
 	instructor_cape_dict, course_cape_dict = parse_CAPEs()
-	course_dict = parse_courses()
+	course_list = fix_course_obj()
+	course_dict = parse_courses(course_list)
 
 	combine_data(instructor_cape_dict, course_cape_dict, course_dict)
 	fix_meeting_unique_id(course_dict)
@@ -491,3 +587,6 @@ if __name__ == '__main__':
 	with open('combined.json', 'w') as out_file:
 		json.dump(json_arr, out_file, indent=4)
 
+
+if __name__ == '__main__':
+	main()
