@@ -54,7 +54,7 @@ class HomePage extends React.Component {
           <CourseManager callback={this.homePageCallBack} />
         </div>
         <div>
-          <ScheduleManager schedule_list={sample_schedules}/>
+          <ScheduleManager schedule_list={this.state.schedules}/>
         </div>
       </div>
     );

@@ -7,18 +7,15 @@ import CourseListTag from "./CourseListTag";
 class CourseList extends React.Component {
     constructor(props) {
         super(props)
-        this.matches = this.includeInFilteredList.bind(this)
-        this.myDivToFocus = React.createRef()
-        /*this.state = {
-            filteredList: this.props.menu.options.filter(course => (this.matches(course.department, course.number)))
-        }*/
+        this.deptToScrollTo = React.createRef()
+        this.deptLastScrolledTo = React.createRef()
+        this.refGivenAlready = false
+        this.deptIsMatch = false
+
+        this.includeInFilteredList = this.includeInFilteredList.bind(this)
+        this.giveDeptARef = this.giveDeptARef.bind(this)
+        this.deptIsCompleteMatch = this.deptIsCompleteMatch.bind(this)
     }
-
-
-    /*filterList() {
-        var full_menu = this.props.menu
-        full_menu.map(menu => menu.filter(course => course.department != this.props.search_query_dept || course.number === this.props.search_query_num))
-    }*/
 
     includeInFilteredList(department, number) {
         var searchQueryNumRegPattern = new RegExp('^' + this.props.search_query_num, 'i')
@@ -30,63 +27,71 @@ class CourseList extends React.Component {
         return searchQueryIsOnlyForDept || (courseIsFromDifferentDept || courseMatchesSearchQueryPattern)
     }
 
+    componentDidMount() {
+        this.deptLastScrolledTo = this.deptToScrollTo
+    }
+    
     componentDidUpdate() {
-        // For a department match
-        if (this.myDivToFocus.current) {
-            // Open the department
-            this.myDivToFocus.current.children[0].open = true
+        // For a department match or partial match
+        if (this.deptToScrollTo.current) {
             // Scroll department to top of view
-            this.myDivToFocus.current.parentElement.parentElement.scroll({
-                top: this.myDivToFocus.current.offsetTop - this.myDivToFocus.current.parentElement.parentElement.offsetTop,
+            this.deptToScrollTo.current.parentElement.parentElement.scroll({
+                top: this.deptToScrollTo.current.offsetTop - this.deptToScrollTo.current.parentElement.parentElement.offsetTop,
                 behavior: 'smooth',
             })
+            // For a complete department match
+            if (this.deptIsCompleteMatch(this.deptToScrollTo.current)) {
+                // Open the department
+                this.deptToScrollTo.current.children[0].open = true
+                this.deptIsMatch = true
+            }
+            // For partial department match
+            else {
+                // If previous department was complete match and opened
+                if (this.deptIsMatch === true) {
+                    // Close all departments
+                    const details = this.deptToScrollTo.current.parentElement.querySelectorAll("details")
+                    details.forEach((detail) => {
+                        detail.removeAttribute("open")
+                    })
+                    this.deptIsMatch = false
+                }
+            }
         }
     }
+
+    deptIsCompleteMatch(department) {
+        var matches = department.children[0].children[0].textContent.toLowerCase() === this.props.search_query_dept.toLowerCase()
+        return matches
+    }
+
+    giveDeptARef(menu) {
+        if (this.refGivenAlready) {
+            return false
+        }
+        else {
+            var searchQueryDeptRegPattern = new RegExp('^' + this.props.search_query_dept, 'i')
+            var matches =  searchQueryDeptRegPattern.test(menu.title)
+            if (matches) {
+                this.refGivenAlready = true
+            }
+            return matches
+        }
+    }
+
     render(){
-        var full_menu =  
+        this.refGivenAlready = false
+        var filtered_menu =  
                 <div id="courseListWindow">
                     {this.props.menus.map(menu => (
                         // Give search query department a ref in order to scroll towards it
-                        menu.title.toUpperCase() === this.props.search_query_dept.toUpperCase()
-                        ? 
-                        <div key={menu.title} ref={this.myDivToFocus}>
+                        <div key={menu.title} ref={(this.giveDeptARef(menu)) ? this.deptToScrollTo : undefined}>
                             <details>
                                 <summary>{menu.title}</summary>
                                 {
                                     menu.options.filter(course => (this.includeInFilteredList(course.department, course.number))).map(course => (
-                                        <div style={{marginLeft:'10%'}}>
+                                        <div key={course.id} style={{marginLeft:'10%'}}>
                                             <CourseListTag courseObj={course} addCourse={this.props.addCourse}/>
-                                            {/* Replaced with CourseListTag 
-                                            <details style={{marginLeft:'10%'}}>
-                                                <summary>{course.id + " " + course.name}</summary>
-                                                <div style={{marginLeft:'10%'}}>
-                                                    Units : {course.units}<br />
-                                                    Prerequisites : {course.prereqs}<br />
-                                                    Description : {course.description}
-                                                </div>
-                                            </details>*/}
-                                        </div>
-                                    ))
-                                }
-                            </details>
-                        </div>
-                        :
-                        <div key={menu.title}>
-                            <details>
-                                <summary>{menu.title}</summary>
-                                {
-                                    menu.options.filter(course => (this.includeInFilteredList(course.department, course.number))).map(course => (
-                                        <div style={{marginLeft:'10%'}}>
-                                            <CourseListTag courseObj={course} addCourse={this.props.addCourse}/>
-                                            {/* Replaced with CourseListTag 
-                                            <details style={{marginLeft:'10%'}}>
-                                                <summary>{course.id + " " + course.name}</summary>
-                                                <div style={{marginLeft:'10%'}}>
-                                                    Units : {course.units}<br />
-                                                    Prerequisites : {course.prereqs}<br />
-                                                    Description : {course.description}
-                                                </div>
-                                            </details>*/}
                                         </div>
                                     ))
                                 }
@@ -94,9 +99,9 @@ class CourseList extends React.Component {
                         </div>
                     ))}
                 </div>
-      return(
+        return(
         <div id="courseListContainer">
-            {full_menu}
+            {filtered_menu}
         </div>
         )
 
