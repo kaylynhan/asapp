@@ -76,7 +76,7 @@ class CoursePlan extends React.Component {
         <div id="optionalArea">
           <h6>Optional</h6>
           {this.props.optionalClasses.map(item => (
-            <div key={item.name}>
+            <div key={item.id}>
               <OptionalTag
                 name={item.name}
                 parentCallback={this.optionalCallBack}
@@ -88,7 +88,7 @@ class CoursePlan extends React.Component {
         <div id="requiredArea">
           <h6>Required</h6>
           {this.props.requiredClasses.map(item => (
-            <div key={item.name}>
+            <div key={item.id}>
               <RequiredTag
                 name={item.name}
                 parentCallback={this.requiredCallBack}

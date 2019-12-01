@@ -11,11 +11,8 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
-            tagCourse:
-                {
-                    name: 'CSE 110',
-                    id: '5dcf3980ba95db6aa9429fe3'
-                },
+            optionalClasses: [],
+            requiredClasses: [],
 			/*
             requiredClasses: [
                 {
@@ -39,7 +36,8 @@ class CourseManager extends React.Component {
             ],
 			*/
 			///////////////////////////////////////////////////////////////
-			optionalClasses: [
+            /*
+            optionalClasses: [
 				{'name' : 'CSE 140', 'id': '5ddddabf18eee9cc93245fc4'},
 				{'name' : 'CSE 140L', 'id': '5ddddabf18eee9cc93245fc5'},
 				{'name' : 'CSE 141', 'id': '5ddddabf18eee9cc93245fc6'},
@@ -52,7 +50,7 @@ class CourseManager extends React.Component {
                 {'name' : 'ANAR 154', 'id': '5ddddabf18eee9cc93245e9e'},
 				{'name' : 'ANSC 101', 'id': '5ddddabf18eee9cc93245ea4'},
 				{'name' : 'CSE 110', 'id': '5ddddabf18eee9cc93245fc3'}
-            ],
+            ],*/
 			/////////////////////////////////////////////////////////////////
             optCourseInfo: null,
             reqCourseInfo: null,
@@ -265,9 +263,6 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
-                    <div id="tag">
-                    <CourseListTag courseObj={this.state.tagCourse} addCourse={this.addCourse}/>
-                    </div>
                     <CourseList menus = {this.state.catalogue} addCourse={this.addCourse} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
