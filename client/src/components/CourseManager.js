@@ -158,7 +158,7 @@ class CourseManager extends React.Component {
 	nextgen = () => {
 		console.log(this.state.optCourseInfo);
         console.log(this.state.reqCourseInfo);
-		console.log(this.state.schedules);
+        console.log(this.state.schedules);
 	}
 	////////////////////////////////////////////////////////////
 	
