@@ -129,22 +129,25 @@ class CourseManager extends React.Component {
 		}
         console.log("optional IDs are",optionalIDs);
         console.log("required IDs are", requiredIDs);
-        axios.get("/courses/getMany", {params: {ids: requiredIDs}})
-        .then(res => {
-            this.setState({
-                reqCourseInfo: res.data
-            })
-        })
-        .catch(err => console.log(err.message));
-        axios.get("/courses/getMany", {params: {ids: optionalIDs}})
+		
+		axios.get("/courses/getMany", {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
                 optCourseInfo: res.data
-            }, this.getGeneratedSchedules)
+            }/*, this.getGeneratedSchedules*/)
         })
         .catch(err => {
             console.log(err.message)
         })
+		
+		
+        axios.get("/courses/getMany", {params: {ids: requiredIDs}})
+        .then(res => {
+            this.setState({
+                reqCourseInfo: res.data
+            }, this.getGeneratedSchedules)
+        })
+        .catch(err => console.log(err.message));
 
     }
 
