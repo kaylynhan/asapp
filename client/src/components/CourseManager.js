@@ -11,11 +11,8 @@ class CourseManager extends React.Component {
         super(props);
         this.state = {
             catalogue: [],
-            tagCourse:
-                {
-                    name: 'CSE 110',
-                    id: '5dcf3980ba95db6aa9429fe3'
-                },
+            optionalClasses: [],
+            requiredClasses: [],
 			/*
             requiredClasses: [
                 {
@@ -39,7 +36,8 @@ class CourseManager extends React.Component {
             ],
 			*/
 			///////////////////////////////////////////////////////////////
-			optionalClasses: [
+            /*
+            optionalClasses: [
 				{'name' : 'CSE 140', 'id': '5ddddabf18eee9cc93245fc4'},
 				{'name' : 'CSE 140L', 'id': '5ddddabf18eee9cc93245fc5'},
 				{'name' : 'CSE 141', 'id': '5ddddabf18eee9cc93245fc6'},
@@ -52,7 +50,7 @@ class CourseManager extends React.Component {
                 {'name' : 'ANAR 154', 'id': '5ddddabf18eee9cc93245e9e'},
 				{'name' : 'ANSC 101', 'id': '5ddddabf18eee9cc93245ea4'},
 				{'name' : 'CSE 110', 'id': '5ddddabf18eee9cc93245fc3'}
-            ],
+            ],*/
 			/////////////////////////////////////////////////////////////////
             optCourseInfo: null,
             reqCourseInfo: null,
@@ -122,28 +120,30 @@ class CourseManager extends React.Component {
 		
 		for(var i=0; i<this.state.optionalClasses.length; i++)
 		{
-			optionalIDs.push(this.state.optionalClasses[i].id)
+			optionalIDs.push(this.state.optionalClasses[i]._id)
 		}
 		
 		for(var i=0; i<this.state.requiredClasses.length; i++)
 		{
-			requiredIDs.push(this.state.requiredClasses[i].id)
+			requiredIDs.push(this.state.requiredClasses[i]._id)
 		}
-	
-        axios.get("http://localhost:4000/courses/getMany", 
-        {params: {ids: requiredIDs}})
+        console.log("optional IDs are",optionalIDs);
+        console.log("required IDs are", requiredIDs);
+        axios.get("/courses/getMany", {params: {ids: requiredIDs}})
         .then(res => {
             this.setState({
                 reqCourseInfo: res.data
             })
         })
         .catch(err => console.log(err.message));
-        axios.get("http://localhost:4000/courses/getMany", 
-        {params: {ids: optionalIDs}})
+        axios.get("/courses/getMany", {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
                 optCourseInfo: res.data
             }, this.getGeneratedSchedules)
+        })
+        .catch(err => {
+            console.log(err.message)
         })
 
     }
@@ -156,9 +156,15 @@ class CourseManager extends React.Component {
     }
 	
 	nextgen = () => {
+<<<<<<< HEAD
 		console.log(this.state.optCourseInfo);
         console.log(this.state.reqCourseInfo);
         console.log(this.state.schedules);
+=======
+		console.log("this.state.optCourseInfo is",this.state.optCourseInfo);
+        console.log("this.state.reqCourseInfo is", this.state.reqCourseInfo);
+		console.log("this.state.schedules is", this.state.schedules);
+>>>>>>> 84c6c0924517742a317fcef6378a16cb5fe109ff
 	}
 	////////////////////////////////////////////////////////////
 	
@@ -265,9 +271,6 @@ class CourseManager extends React.Component {
                 </div>
                 <div id="search_result">
                     <p> Search_result</p>
-                    <div id="tag">
-                    <CourseListTag courseObj={this.state.tagCourse} addCourse={this.addCourse}/>
-                    </div>
                     <CourseList menus = {this.state.catalogue} addCourse={this.addCourse} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="generate">
