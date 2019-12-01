@@ -16,11 +16,11 @@ class CoursePlan extends React.Component {
 
   requiredCallBack = item => {
     this.setState(state => {
-      let obj = this.props.requiredClasses.find(o => o.name === item);
+      let obj = this.props.requiredClasses.find(o => o.id === item);
       const requiredClasses = this.props.requiredClasses.filter(function(
         value
       ) {
-        return value.name !== item;
+        return value.id !== item;
       });
 
       const optionalClasses = this.props.optionalClasses.concat(obj);
@@ -34,11 +34,11 @@ class CoursePlan extends React.Component {
 
   optionalCallBack = item => {
     this.setState(state => {
-      let obj = this.props.optionalClasses.find(o => o.name === item);
+      let obj = this.props.optionalClasses.find(o => o.id === item);
       const optionalClasses = this.props.optionalClasses.filter(function(
         value
       ) {
-        return value.name !== item;
+        return value.id !== item;
       });
 
       const requiredClasses = this.props.requiredClasses.concat(obj);
@@ -55,12 +55,12 @@ class CoursePlan extends React.Component {
       const optionalClasses = this.props.optionalClasses.filter(function(
         value
       ) {
-        return value.name !== item;
+        return value.id !== item;
       });
       const requiredClasses = this.props.requiredClasses.filter(function(
         value
       ) {
-        return value.name !== item;
+        return value.id !== item;
       });
       this.props.callBack(requiredClasses, optionalClasses);
       return {
@@ -78,7 +78,7 @@ class CoursePlan extends React.Component {
           {this.props.optionalClasses.map(item => (
             <div key={item.id}>
               <OptionalTag
-                name={item.name}
+                name={item.id}
                 parentCallback={this.optionalCallBack}
                 removeCallback={this.removeCallBack}
               />
@@ -90,7 +90,7 @@ class CoursePlan extends React.Component {
           {this.props.requiredClasses.map(item => (
             <div key={item.id}>
               <RequiredTag
-                name={item.name}
+                name={item.id}
                 parentCallback={this.requiredCallBack}
                 removeCallback={this.removeCallBack}
               />
