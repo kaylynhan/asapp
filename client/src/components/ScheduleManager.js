@@ -30,9 +30,10 @@ class ScheduleManager extends React.Component {
       console.log("this.props.schedule_list is", this.props.schedule_list);
     }
     // prints an array of schedules that match the given filters
+
     filterOutSchedules = () => {
         let totalSchedules = this.props.schedule_list;
-        //console.log(totalSchedules)
+        let avoidTimes = this.state.avoidHours;
 
         let filteredSchedules = this.filterOutUnits(totalSchedules);
 
@@ -44,6 +45,8 @@ class ScheduleManager extends React.Component {
         if (this.state.avoidProfs.length != 0 ){
             filteredSchedules = this.filterOutAvoidProfessors(filteredSchedules);
         }
+
+        filteredSchedules = this.filterOutAvoidTimes(avoidTimes, filteredSchedules);
 
         this.setState({filteredSchedules: filteredSchedules});
     };
@@ -73,7 +76,6 @@ class ScheduleManager extends React.Component {
 
         return filteredSchedules;
     };
-
 
     filterOutAvoidProfessors = totalSchedules => {
         let filteredSchedules = [];
@@ -105,6 +107,97 @@ class ScheduleManager extends React.Component {
 
         return filteredSchedules;
     };
+
+    filterOutUnits = totalSchedules => {
+        let self = this;
+
+        let filteredSchedules = [];
+
+        totalSchedules.forEach(function(schedule, schedule_index) {
+            let total_units = 0;
+            schedule.forEach(function(course, course_index) {
+                // let a = axios.get("http://localhost:4000/course/overviews")
+                //     .then(res => console.log(res.data))
+                //     .catch(err => console.log(err));
+                total_units += course["units"];
+            });
+
+            if (
+                total_units >= self.state.minUnits &&
+                total_units <= self.state.maxUnits
+            ) {
+                filteredSchedules.push(schedule);
+            }
+        });
+
+        return filteredSchedules
+    };
+
+    // Ugly quad nested loop. Pretty sure it works tho
+    filterOutAvoidTimes = (avoidTimes, totalSchedules) => {
+       let filteredSchedules = [];
+
+       // Loop through each schedule
+       totalSchedules.forEach(function(schedule, schedule_index) {
+           let noConflicts = true;
+
+           // Loop through each course in schedule
+           schedule.forEach(function(course, course_index) {
+               let meetings = [];
+               meetings = course["sections"][0].meetings;
+
+               // Loop through each meeting in course
+               meetings.forEach(function(meeting, meeting_index) {
+
+                   // For each meeting, test against all avoidTimes
+                   avoidTimes.forEach(function(avoidTime, avoidTime_index) {
+
+                       // Get Day (mon, tu, etc.)
+                       let avoidDay =  avoidTime.match(/[a-zA-Z]+/g);
+
+                       // Convert to json convention
+                       switch (avoidDay[0]){
+                           case "Mon":
+                               avoidDay = "M";
+                               break;
+                           case "Tu":
+                               break;
+                           case "Wed":
+                               avoidDay = "W";
+                               break;
+                           case "Thur":
+                               avoidDay = "Th";
+                               break;
+                           case "Fri":
+                               avoidDay = "F";
+                               break;
+                       }
+
+                       // Get time (830, 1150, etc.)
+                       let avoidChunk = avoidTime.match(/\d+/g);
+                       avoidChunk = avoidChunk[0];
+
+                       if (meeting.day.includes(avoidDay)){
+
+                           let start = meeting.start_time;
+                           let end = meeting.end_time;
+
+                           if( start <= avoidChunk && avoidChunk <= end){
+                               noConflicts = false;
+                           }
+                       }
+                   });
+               });
+           });
+
+           if( noConflicts ){
+               filteredSchedules.push(schedule);
+           }
+
+       });
+
+       return filteredSchedules;
+   };
 
     handleUnitSliderChange = value => {
         this.setState({ minUnits: value[0] });
