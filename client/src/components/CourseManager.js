@@ -94,7 +94,9 @@ class CourseManager extends React.Component {
             for (var i = 0; i < deptArray.length; i++){
                 let courseJSON = {
                     title: deptArray[i],
-                    options: courseArray[i]
+                    options: courseArray[i].sort(function(a, b){
+                        return (parseInt(a.number) > parseInt(b.number) ? 1 : parseInt(a.number) < parseInt(b.number) ? -1 : a.number > b.number ? 1 : a.number < b.number ? -1 : 0);
+                    })
                 }
                 courseMenu.push(courseJSON);
             }
