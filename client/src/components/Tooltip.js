@@ -82,6 +82,8 @@ class Tooltip extends React.Component {
                         id={"Tooltip#" + Tooltip.tooltipCount}
                         className="tooltip"
                         effect="solid"
+                        delayHide={200}
+                        clickable={true}
                     >
                         {/* Tooltip Info */}
                         {tooltipInfo}

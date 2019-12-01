@@ -7,6 +7,7 @@ import ScheduleList from "./ScheduleList";
 import ScheduleGrid from "./ScheduleGrid";
 import ScheduleGridReact from "./ScheduleGridReact";
 import schedules from '../test/sampleSchedules.json';           // Get schedules from generation (download json from github and place import accordingly)
+import SectionDetail from './SectionDetail';
 
 class ScheduleManager extends React.Component {
     // props is a object containing several schedules
@@ -20,7 +21,8 @@ class ScheduleManager extends React.Component {
             avoidHours: [],
             filteredSchedules: [],
             schedule_list: schedules,                           // Get schedules from generation
-            currentSchedule: null                               // Unneeded field? Not used
+            currentSchedule: null,                               // Unneeded field? Not used
+            grid_draggable:true,
         };
     }
     componentDidUpdate() {
@@ -102,46 +104,6 @@ class ScheduleManager extends React.Component {
         });
 
         return filteredSchedules;
-
-    };
-
-    // For some reason itellij doesnt recognize the below function? maybe i missed some closing bracket?
-
-    // getProfessors = (schedule) => {
-    //     let scheduleProfs = [];
-    //
-    //     schedule.forEach(function(course, course_index) {
-    //         scheduleProfs.push(course["sections"][0].professor);
-    //     });
-    //
-    //     return scheduleProfs;
-    // };
-
-
-    // Henrys a cs god
-    filterOutUnits = totalSchedules => {
-        let self = this;
-
-        let filteredSchedules = [];
-
-        totalSchedules.forEach(function(schedule, schedule_index) {
-            let total_units = 0;
-            schedule.forEach(function(course, course_index) {
-                // let a = axios.get("/course/overviews")
-                //     .then(res => console.log(res.data))
-                //     .catch(err => console.log(err));
-                total_units += course["units"];
-            });
-
-            if (
-                total_units >= self.state.minUnits &&
-                total_units <= self.state.maxUnits
-            ) {
-                filteredSchedules.push(schedule);
-            }
-        });
-
-        return filteredSchedules
     };
 
     handleUnitSliderChange = value => {
@@ -152,21 +114,18 @@ class ScheduleManager extends React.Component {
 
     handlePrefProfChange = event => {
         // console.log(this.state) // Use this to check change in state
-        console.log(this.state.prefProfs);
         console.log(event.target);
         let prof = event.target.value;
         console.log(prof);
-
         this.setState(prevState => ({
             prefProfs: [...prevState.prefProfs, prof]
         }));
-        console.log(this.state.prefProfs); // Does not update state right away for some reason. Can check with above
+        console.log(this.state); // Does not update state right away for some reason. Can check with above
     };
 
     handleAvoidProfChange = event => {
         let prof = event.target.value;
         console.log(prof);
-
         this.setState(prevState => ({
             avoidProfs: [...prevState.avoidProfs, prof]
         }));
@@ -178,21 +137,76 @@ class ScheduleManager extends React.Component {
         setTimeout(() => console.log(this.state.avoidHours), 1);
     };
 
-    renderSection = (startTime, sectionLen) => {
-        let x = document.getElementById(startTime);
-        console.log(x);
-        // return ReactDOM.createPortal(
-        //   <div>Hello World</div>,
-        //   this.tableNode.current.getElementById("Mon800")
-        //);
+    populateMeetings = schedule => {
+        if (this.state.currentSchedule !== null) {
+            let outputArr = Array(0);
+            schedule.map(course => {
+                course.sections.map(section => {
+                    section.meetings.map(meeting => {
+                        let courseID = course["department"] + " " + course["number"];
+                        outputArr.push({
+                            meeting: meeting,
+                            section: section,
+                            course: course
+                        });
+                    });
+                });
+            });
+            console.log(outputArr);
+            return outputArr;
+        }
+    };
+
+    renderMeeting = meeting_course_section => {
+        let class_days = {
+            M: "Mon",
+            Tu: "Tu",
+            W: "Wed",
+            Th: "Thur",
+            F: "Fri"
+        };
+        let meeting = meeting_course_section["meeting"];
+        let course = meeting_course_section["course"];
+        let section = meeting_course_section["section"];
+
+        if (this.state.currentSchedule !== null) {
+            //let meeting = this.state.currentSchedule[0]["sections"][0]["meetings"][0];
+            if (meeting.start_time === 0 || meeting.day === "TBA") {
+                return;
+            }
+            let grid_id = class_days[meeting["day"]] + meeting["start_time"];
+            let course_elem = document.getElementById(grid_id);
+            var bodyRect = document.body.getBoundingClientRect(),
+                courseRect = course_elem.getBoundingClientRect();
+            var width = courseRect.right - courseRect.left;
+            let section_detail = (
+                <SectionDetail
+                    left={courseRect.left - bodyRect.left}
+                    top={courseRect.top - bodyRect.top}
+                    course={course}
+                    meeting={meeting}
+                    section={section}
+                    width = {width}
+                ></SectionDetail>
+            );
+            return section_detail;
+        }
     };
 
     clickedSchedule = schedule => {
-        this.setState({currentSchedule: schedule});
-        console.log(schedule)
+        if (schedule === this.state.currentSchedule) {
+            this.setState({currentSchedule: null});
+            this.state.grid_draggable = true;
+            return
+        }
+        this.setState({ currentSchedule: schedule });
+        this.setState({grid_draggable:false});
+        console.log(this.state.currentSchedule);
     };
 
     render() {
+        let meetings = this.populateMeetings(this.state.currentSchedule);
+        console.log(meetings);
         return (
             <div id="schedule_area">
                 <div id="preferences">
@@ -217,12 +231,17 @@ class ScheduleManager extends React.Component {
                     </label>
                 </div>
                 <div id="sort">
-                    <ScheduleList schedule_list={this.state.filteredSchedules} onClick={this.clickedSchedule} />
+                    <ScheduleList
+                        schedule_list={this.state.filteredSchedules}
+                        onClick={this.clickedSchedule}
+                    />
                 </div>
                 <div id="grid_area">
-                    <ScheduleGrid onMouseUp={this.handleOnMouseUp} />
+                    <ScheduleGrid onMouseUp={this.handleOnMouseUp} draggable={this.state.grid_draggable}/>
                 </div>
-                {this.renderSection("Mon800", "blah")}
+                {meetings
+                    ? meetings.map(meeting => this.renderMeeting(meeting))
+                    : false}
             </div>
         );
     }

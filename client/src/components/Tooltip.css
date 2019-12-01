@@ -31,7 +31,10 @@
   overflow-wrap: break-word;
   display: block;
   max-width: 40vw;
+}
 
+.tooltip > *{
+  list-style-type:none;
 }
 
 .tooltip.place-right:after {
@@ -54,6 +57,11 @@ circle {
 text {
   fill: white;
   pointer-events: none;
+}
+
+svg{
+  width:25px;
+  height:25px;
 }
 
 
