@@ -120,28 +120,30 @@ class CourseManager extends React.Component {
 		
 		for(var i=0; i<this.state.optionalClasses.length; i++)
 		{
-			optionalIDs.push(this.state.optionalClasses[i].id)
+			optionalIDs.push(this.state.optionalClasses[i]._id)
 		}
 		
 		for(var i=0; i<this.state.requiredClasses.length; i++)
 		{
-			requiredIDs.push(this.state.requiredClasses[i].id)
+			requiredIDs.push(this.state.requiredClasses[i]._id)
 		}
-	
-        axios.get("/courses/getMany", 
-        {params: {ids: requiredIDs}})
+        console.log("optional IDs are",optionalIDs);
+        console.log("required IDs are", requiredIDs);
+        axios.get("/courses/getMany", {params: {ids: requiredIDs}})
         .then(res => {
             this.setState({
                 reqCourseInfo: res.data
             })
         })
         .catch(err => console.log(err.message));
-        axios.get("/courses/getMany", 
-        {params: {ids: optionalIDs}})
+        axios.get("/courses/getMany", {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
                 optCourseInfo: res.data
             }, this.getGeneratedSchedules)
+        })
+        .catch(err => {
+            console.log(err.message)
         })
 
     }
@@ -154,9 +156,9 @@ class CourseManager extends React.Component {
     }
 	
 	nextgen = () => {
-		console.log(this.state.optCourseInfo);
-        console.log(this.state.reqCourseInfo);
-		console.log(this.state.schedules);
+		console.log("this.state.optCourseInfo is",this.state.optCourseInfo);
+        console.log("this.state.reqCourseInfo is", this.state.reqCourseInfo);
+		console.log("this.state.schedules is", this.state.schedules);
 	}
 	////////////////////////////////////////////////////////////
 	
