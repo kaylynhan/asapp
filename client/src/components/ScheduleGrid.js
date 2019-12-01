@@ -33,20 +33,26 @@ class ScheduleGrid extends React.Component {
   };
 
   handleMouseDown = e => {
-    this.setState({ isMouseDown: true });
-    this.trackExcludedTime(e);
-  };
-
-  handleMouseOver = e => {
-    const outputArr = this.state.avoidHour;
-    if (this.state.isMouseDown) {
+    if (this.props.draggable) {
+      this.setState({ isMouseDown: true });
       this.trackExcludedTime(e);
     }
   };
 
+  handleMouseOver = e => {
+    if (this.props.draggable) {
+      const outputArr = this.state.avoidHour;
+      if (this.state.isMouseDown) {
+        this.trackExcludedTime(e);
+      }
+    }
+  };
+
   handleMouseUp = e => {
-    this.state.isMouseDown = false;
-    this.props.onMouseUp(this.state.avoidHour);
+    if (this.props.draggable) {
+      this.state.isMouseDown = false;
+      this.props.onMouseUp(this.state.avoidHour);
+    }
   };
   render() {
     let hour = [

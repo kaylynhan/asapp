@@ -20,7 +20,8 @@ class ScheduleManager extends React.Component {
             avoidProfs: [],
             avoidHours: [],
             filteredSchedules: this.props.schedule_list,
-            currentSchedule: null
+            currentSchedule: null,
+            grid_draggable:true,
         };
 
         this.state.filteredSchedules.forEach(function(schedule) {
@@ -155,14 +156,6 @@ class ScheduleManager extends React.Component {
         setTimeout(() => console.log(this.state.avoidHours), 1);
     };
 
-    getOffset = el => {
-        const rect = el.getBoundingClientRect();
-        return {
-            left: rect.left + window.scrollX,
-            top: rect.top + window.scrollY
-        };
-    };
-
     populateMeetings = schedule => {
         if (this.state.currentSchedule !== null) {
             let outputArr = Array(0);
@@ -222,9 +215,11 @@ class ScheduleManager extends React.Component {
     clickedSchedule = schedule => {
         if (schedule === this.state.currentSchedule) {
             this.setState({currentSchedule: null});
+            this.state.grid_draggable = true;
             return
         }
         this.setState({ currentSchedule: schedule });
+        this.setState({grid_draggable:false});
         console.log(this.state.currentSchedule);
     };
 
@@ -261,7 +256,7 @@ class ScheduleManager extends React.Component {
                     />
                 </div>
                 <div id="grid_area">
-                    <ScheduleGrid onMouseUp={this.handleOnMouseUp} />
+                    <ScheduleGrid onMouseUp={this.handleOnMouseUp} draggable={this.state.grid_draggable}/>
                 </div>
                 {meetings
                     ? meetings.map(meeting => this.renderMeeting(meeting))
