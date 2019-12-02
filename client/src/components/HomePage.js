@@ -15,19 +15,14 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
-      schedules: null
+      schedules: null,
+      profs: null
     };
   }
 
-  homePageCallBack = item => {
-    this.setState({ schedules: item });
+  homePageCallBack = obj => {
+    this.setState({ schedules: obj.schedules, profs: obj.profs });
   };
-
-  toggleLogin() {
-    this.setState({
-      showLogin: !this.state.showLogin
-    });
-  }
 
   render() {
     return (
@@ -39,7 +34,7 @@ class HomePage extends React.Component {
           <CourseManager callback={this.homePageCallBack} />
         </div>
         <div>
-          <ScheduleManager schedule_list={this.state.schedules}/>
+          <ScheduleManager schedule_list={this.state.schedules} profs={this.state.profs}/>
         </div>
       </div>
     );

@@ -23,6 +23,7 @@ class CourseManager extends React.Component {
         }
         this.handleSearch = this.handleSearch.bind(this)
         this.filterCatalogue = this.filterCatalogue.bind(this)
+        this.getProfessors = this.getProfessors.bind(this)
     }
 
     courseManagerCallBack = (item1FromChild, item2FromChild) => {
@@ -127,12 +128,29 @@ class CourseManager extends React.Component {
         schedules: generateSchedules(this.state.optCourseInfo, this.state.reqCourseInfo)
          }, this.nextgen)
     }
+
+    getProfessors = schedules => {
+        let profArr = Array(0);
+        schedules.forEach(function(schedule) {
+            if (this.state.schedule_list) {
+            schedule.map(course => {
+                if (!profArr.includes(course.professor))
+                profArr.push(course.professor)
+            });
+            console.log(profArr);
+            }
+        });        
+        this.setState({ prefProfs: profArr, avoidProfs: profArr})
+      };
 	
 	nextgen = () => {
 		console.log("this.state.optCourseInfo is",this.state.optCourseInfo);
         console.log("this.state.reqCourseInfo is", this.state.reqCourseInfo);
         console.log("this.state.schedules is", this.state.schedules);
-		this.calculateScheduleStats(this.props.callback(this.state.schedules))
+        // bundling generated schedules and it's professors together in the callback
+        let newProfs = this.getProfessors(this.state.schedules);
+        let callbackObj = {schedules: this.state.schedules, profs: newProfs}
+        this.calculateScheduleStats(this.props.callback(callbackObj))
 	}
 	
 	calculateScheduleStats = () => {
@@ -178,7 +196,7 @@ class CourseManager extends React.Component {
         schedule["workload"] = workload;
 
         //calculate class_days
-		/*
+		
         let class_days = {
           M: false,
           Tu: false,
@@ -186,8 +204,8 @@ class CourseManager extends React.Component {
           Th: false,
           F: false
         };
-		*/
 		
+		/*
 		//Calculates total number of days for a schedule.
 		var discoveredDays = []
 		var addDay = true
@@ -209,27 +227,24 @@ class CourseManager extends React.Component {
 			}
 		}
 		
-		schedule['num_days'] = discoveredDays.length;
+        schedule['num_days'] = discoveredDays.length;
+        */
 
-        // TODO class_days
-        // schedule.forEach(function(course) {
-        //   course["meetings"].forEach(function(meeting) {
-        //     if (meeting["day"] in class_days) {
-        //       class_days[meeting["day"]] = true;
-        //     }
-        //   });
-        // });
-        
-		/*
         // calculate number of days
+        schedule.forEach(function(course) {
+          course["meetings"].forEach(function(meeting) {
+            if (meeting["day"] in class_days) {
+              class_days[meeting["day"]] = true;
+            }
+          });
+        });      
         let num_days = 0;
         Object.values(class_days).forEach(function(value){
             if(value === true){
                 num_days += 1;
             }
-        })
-		*/
-        //schedule['num_days'] = num_days;
+        })		
+        schedule['num_days'] = num_days;
 		
 		
       });

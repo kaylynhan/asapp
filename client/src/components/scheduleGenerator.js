@@ -11,6 +11,7 @@ if(optionalCourseList != null){
 		for(var j = 0;j < optionalCourseList[i].sections.length; j++)
 		{
 			optionalCourseList[i].sections[j]["course"] = optionalCourseList[i].department + " " + optionalCourseList[i].number
+			optionalCourseList[i].sections[j]["units"] = optionalCourseList[i].units;
 		}
 }
 
@@ -21,6 +22,7 @@ if(requiredCourseList != null)
 		for(var j = 0;j < requiredCourseList[i].sections.length; j++)
 		{
 			requiredCourseList[i].sections[j]["course"] = requiredCourseList[i].department + " " + requiredCourseList[i].number
+			requiredCourseList[i].sections[j]["units"] = requiredCourseList[i].units;
 		}
 }
 
