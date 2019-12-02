@@ -19,7 +19,7 @@ class SectionDetail extends React.Component {
 
     var meetingDetail = (
       <ul>
-        <li>Professor: {meetings.professor} </li>
+        <li>Professor: {course.professor} </li>
         <li>Location: {meeting.building + " " + meeting.room_num}</li>
         <li>Prof Rating: {meetings.prof_rating}</li>
         <li>Average GPA: {course.gpa}</li>
@@ -45,7 +45,7 @@ class SectionDetail extends React.Component {
           borderRadius: "10px"
         }}
       >
-        <b>{course["department"] + " " + course["number"]}</b>
+        <b>{course.course}</b>
         <br></br>
         <i>{meeting.type}</i>
         <Tooltip info={meetingDetail} style={{ margin: "0 auto" }}></Tooltip>
