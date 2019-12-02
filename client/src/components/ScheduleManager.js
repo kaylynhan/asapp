@@ -22,15 +22,19 @@ class ScheduleManager extends React.Component {
       schedule_list: [],//schedules, // Get schedules from generation
       currentSchedule: null, // Unneeded field? Not used
       grid_draggable: true,
-      schedulesWereFiltered: false
+      schedulesWereFiltered: false,
+      scheduleProfs: this.getProfessors(this.props.schedule_list),
     };
     // update the stats
     //this.calculateScheduleStats();
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ schedule_list: nextProps.schedule_list });
+    let nextProfs = this.getProfessors(nextProps.schedule_list)
+    this.setState({ 
+      schedule_list: nextProps.schedule_list, 
+      scheduleProfs: nextProfs});
   }
-/*  
+/*
   calculateScheduleStats = () => {
     if (this.state.schedule_list !== null) {
       this.state.schedule_list.forEach(function(schedule) {
@@ -73,7 +77,7 @@ class ScheduleManager extends React.Component {
           });
         schedule["workload"] = workload;
 
-		
+
         //calculate class_days
         let class_days = {
           M: false,
@@ -82,13 +86,13 @@ class ScheduleManager extends React.Component {
           Th: false,
           F: false
         };
-		
 
-		
+
+
 		//Calculates total number of days for a schedule.
 		var discoveredDays = []
 		discoveredDays.push(schedule[0])
-		
+
 		for(var k=0; k < schedule.length; k++)
 		{
 			for(var i=0;i<schedule[k].meetings.length;i++)
@@ -98,7 +102,7 @@ class ScheduleManager extends React.Component {
 						discoveredDays.push(schedule[k].meetings[i].day)
 			}
 		}
-		
+
 		schedule['num_days'] = discoveredDays.length;
 
 
@@ -110,8 +114,8 @@ class ScheduleManager extends React.Component {
         //     }
         //   });
         // });
-        
-		
+
+
         // calculate number of days
         let num_days = 0;
         Object.values(class_days).forEach(function(value){
@@ -120,7 +124,7 @@ class ScheduleManager extends React.Component {
             }
         })
         schedule['num_days'] = num_days;
-		
+
       });
     }
   };
@@ -136,9 +140,10 @@ class ScheduleManager extends React.Component {
   filterOutSchedules = () => {
     let totalSchedules = this.props.schedule_list;
     let avoidTimes = this.state.avoidHours;
-
+    console.log("IN FILTER SCHEDULES")
+    console.log("total:",totalSchedules)
     let filteredSchedules = this.filterOutUnits(totalSchedules);
-
+    console.log(filteredSchedules)
     // Somebody tell me how to make intellij happy here pls
     if (this.state.prefProfs.length != 0) {
       filteredSchedules = this.filterOutPrefProfessors(filteredSchedules);
@@ -152,6 +157,23 @@ class ScheduleManager extends React.Component {
 
     this.setState({ filteredSchedules: filteredSchedules });
     this.setState({ schedulesWereFiltered: true });
+    console.log(filteredSchedules)
+  };
+
+  getProfessors = (totalSchedules) => {
+      if(!totalSchedules)
+        return Array(0)
+
+      let scheduleProfs = [];
+
+      totalSchedules.forEach(function(schedule, schedule_index) {
+        schedule.forEach(function(course, course_index) {
+          scheduleProfs.push(course.professor);
+        });
+      });
+
+      let unique = [...new Set(scheduleProfs)];
+      return unique;
   };
 
   filterOutPrefProfessors = totalSchedules => {
@@ -166,7 +188,7 @@ class ScheduleManager extends React.Component {
 
       // Extract all profs from schedule
       schedule.forEach(function(course, course_index) {
-        scheduleProfs.push(course["sections"][0].professor);
+        scheduleProfs.push(course.professor);
       });
 
       // Checks if schedProfs is subset of prefProfs
@@ -194,7 +216,7 @@ class ScheduleManager extends React.Component {
 
       // Extract all profs from schedule
       schedule.forEach(function(course, course_index) {
-        scheduleProfs.push(course["sections"][0].professor);
+        scheduleProfs.push(course.professor);
       });
 
       // Sets flag if schedule contains any of the avoid profs
@@ -214,6 +236,8 @@ class ScheduleManager extends React.Component {
   };
 
   filterOutUnits = totalSchedules => {
+    console.log("IN TOTAL")
+    console.log(totalSchedules)
     let self = this;
 
     let filteredSchedules = [];
@@ -221,9 +245,7 @@ class ScheduleManager extends React.Component {
     totalSchedules.forEach(function(schedule, schedule_index) {
       let total_units = 0;
       schedule.forEach(function(course, course_index) {
-        // let a = axios.get("http://localhost:4000/course/overviews")
-        //     .then(res => console.log(res.data))
-        //     .catch(err => console.log(err));
+        console.log("course:", course)
         total_units += course["units"];
       });
 
@@ -231,6 +253,7 @@ class ScheduleManager extends React.Component {
         total_units >= self.state.minUnits &&
         total_units <= self.state.maxUnits
       ) {
+        console.log("pushing: ", schedule)
         filteredSchedules.push(schedule);
       }
     });
@@ -249,7 +272,7 @@ class ScheduleManager extends React.Component {
       // Loop through each course in schedule
       schedule.forEach(function(course, course_index) {
         let meetings = [];
-        meetings = course["sections"][0].meetings;
+        meetings = course.meetings;
 
         // Loop through each meeting in course
         meetings.forEach(function(meeting, meeting_index) {
@@ -311,18 +334,33 @@ class ScheduleManager extends React.Component {
     console.log(event.target);
     let prof = event.target.value;
     console.log(prof);
-    this.setState(prevState => ({
-      prefProfs: [...prevState.prefProfs, prof]
-    }));
+
+    if (prof != ""){
+      this.setState(prevState => ({
+        prefProfs: [prof] // [...prevState.prefProfs, prof]
+      }));
+    }else{
+      this.setState(prevState => ({
+        prefProfs: [] // [...prevState.prefProfs, prof]
+      }));
+    }
+
     console.log(this.state); // Does not update state right away for some reason. Can check with above
   };
 
   handleAvoidProfChange = event => {
     let prof = event.target.value;
     console.log(prof);
-    this.setState(prevState => ({
-      avoidProfs: [...prevState.avoidProfs, prof]
-    }));
+
+    if(prof != ""){
+      this.setState(prevState => ({
+        avoidProfs: [prof] //[...prevState.avoidProfs, prof]
+      }));
+    }else{
+      this.setState(prevState => ({
+        avoidProfs: [] //[...prevState.avoidProfs, prof]
+      }));
+    }
     console.log(this.state);
   };
 
@@ -411,12 +449,14 @@ class ScheduleManager extends React.Component {
             <ProfDropdown
               title="Pref Prof"
               onChange={this.handlePrefProfChange}
+              profs={this.state.scheduleProfs}
             />
           </div>
           <div id="profAvoid">
             <ProfDropdown
               title="Avoid Prof"
               onChange={this.handleAvoidProfChange}
+              profs={this.state.scheduleProfs}
             />
           </div>
           <button onClick={this.filterOutSchedules}>Filter</button>
