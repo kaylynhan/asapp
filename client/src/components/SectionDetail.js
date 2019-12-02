@@ -32,6 +32,13 @@ class SectionDetail extends React.Component {
       </ul>
     );
 
+    let timeConv = {
+      50:50,
+      90:50,
+      120: 90,
+      250:170
+    }
+
     return (
       <div
         className={"Course"}
@@ -40,7 +47,7 @@ class SectionDetail extends React.Component {
           left: this.props.left,
           top: this.props.top,
           backgroundColor: "#f7edc1",
-          height: (meeting.end_time - meeting.start_time) * MIN_TO_PIX,
+          height: (timeConv[meeting.end_time - meeting.start_time]) * MIN_TO_PIX,
           width: this.props.width,
           borderRadius: "10px"
         }}
