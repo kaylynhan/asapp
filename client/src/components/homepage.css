@@ -69,6 +69,9 @@ h1, p{
 
 #sort{
     grid-area:sort;
+    overflow-y:scroll;
+    height:1250px;
+    
 }
 
 #grid_area{
