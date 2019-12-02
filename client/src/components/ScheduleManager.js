@@ -22,19 +22,22 @@ class ScheduleManager extends React.Component {
             schedule_list: schedules,                           // Get schedules from generation
             currentSchedule: null,                               // Unneeded field? Not used
             grid_draggable:true,
+            schedulesWereFiltered: false,
         };
     }
     componentDidUpdate() {
-      console.log("ScheduleManager updated")
-      console.log("this.props.schedule_list is", this.props.schedule_list);
+        console.log("ScheduleManager updated")
+        console.log("this.props.schedule_list is", this.props.schedule_list);
     }
     // prints an array of schedules that match the given filters
+
+
 
     filterOutSchedules = () => {
         let totalSchedules = this.props.schedule_list;
         let avoidTimes = this.state.avoidHours;
 
-        let filteredSchedules = this.filterOutUnits(totalSchedules);
+        let filteredSchedules  = this.filterOutUnits(totalSchedules);
 
         // Somebody tell me how to make intellij happy here pls
         if( this.state.prefProfs.length != 0 ){
@@ -48,6 +51,7 @@ class ScheduleManager extends React.Component {
         filteredSchedules = this.filterOutAvoidTimes(avoidTimes, filteredSchedules);
 
         this.setState({filteredSchedules: filteredSchedules});
+        this.setState({schedulesWereFiltered: true});
     };
 
     filterOutPrefProfessors = totalSchedules => {
@@ -69,7 +73,7 @@ class ScheduleManager extends React.Component {
             let includesAllPrefProfs = prefProfs.every(function(val) { return scheduleProfs.indexOf(val) >= 0; });
 
             if ( includesAllPrefProfs ){
-                 filteredSchedules.push(schedule);
+                filteredSchedules.push(schedule);
             }
         });
 
@@ -134,69 +138,69 @@ class ScheduleManager extends React.Component {
 
     // Ugly quad nested loop. Pretty sure it works tho
     filterOutAvoidTimes = (avoidTimes, totalSchedules) => {
-       let filteredSchedules = [];
+        let filteredSchedules = [];
 
-       // Loop through each schedule
-       totalSchedules.forEach(function(schedule, schedule_index) {
-           let noConflicts = true;
+        // Loop through each schedule
+        totalSchedules.forEach(function(schedule, schedule_index) {
+            let noConflicts = true;
 
-           // Loop through each course in schedule
-           schedule.forEach(function(course, course_index) {
-               let meetings = [];
-               meetings = course["sections"][0].meetings;
+            // Loop through each course in schedule
+            schedule.forEach(function(course, course_index) {
+                let meetings = [];
+                meetings = course["sections"][0].meetings;
 
-               // Loop through each meeting in course
-               meetings.forEach(function(meeting, meeting_index) {
+                // Loop through each meeting in course
+                meetings.forEach(function(meeting, meeting_index) {
 
-                   // For each meeting, test against all avoidTimes
-                   avoidTimes.forEach(function(avoidTime, avoidTime_index) {
+                    // For each meeting, test against all avoidTimes
+                    avoidTimes.forEach(function(avoidTime, avoidTime_index) {
 
-                       // Get Day (mon, tu, etc.)
-                       let avoidDay =  avoidTime.match(/[a-zA-Z]+/g);
+                        // Get Day (mon, tu, etc.)
+                        let avoidDay =  avoidTime.match(/[a-zA-Z]+/g);
 
-                       // Convert to json convention
-                       switch (avoidDay[0]){
-                           case "Mon":
-                               avoidDay = "M";
-                               break;
-                           case "Tu":
-                               break;
-                           case "Wed":
-                               avoidDay = "W";
-                               break;
-                           case "Thur":
-                               avoidDay = "Th";
-                               break;
-                           case "Fri":
-                               avoidDay = "F";
-                               break;
-                       }
+                        // Convert to json convention
+                        switch (avoidDay[0]){
+                            case "Mon":
+                                avoidDay = "M";
+                                break;
+                            case "Tu":
+                                break;
+                            case "Wed":
+                                avoidDay = "W";
+                                break;
+                            case "Thur":
+                                avoidDay = "Th";
+                                break;
+                            case "Fri":
+                                avoidDay = "F";
+                                break;
+                        }
 
-                       // Get time (830, 1150, etc.)
-                       let avoidChunk = avoidTime.match(/\d+/g);
-                       avoidChunk = avoidChunk[0];
+                        // Get time (830, 1150, etc.)
+                        let avoidChunk = avoidTime.match(/\d+/g);
+                        avoidChunk = avoidChunk[0];
 
-                       if (meeting.day.includes(avoidDay)){
+                        if (meeting.day.includes(avoidDay)){
 
-                           let start = meeting.start_time;
-                           let end = meeting.end_time;
+                            let start = meeting.start_time;
+                            let end = meeting.end_time;
 
-                           if( start <= avoidChunk && avoidChunk <= end){
-                               noConflicts = false;
-                           }
-                       }
-                   });
-               });
-           });
+                            if( start <= avoidChunk && avoidChunk <= end){
+                                noConflicts = false;
+                            }
+                        }
+                    });
+                });
+            });
 
-           if( noConflicts ){
-               filteredSchedules.push(schedule);
-           }
+            if( noConflicts ){
+                filteredSchedules.push(schedule);
+            }
 
-       });
+        });
 
-       return filteredSchedules;
-   };
+        return filteredSchedules;
+    };
 
     handleUnitSliderChange = value => {
         this.setState({ minUnits: value[0] });
@@ -298,6 +302,7 @@ class ScheduleManager extends React.Component {
 
     render() {
         let meetings = this.populateMeetings(this.state.currentSchedule);
+        let schedulesWereFiltered = this.state.schedulesWereFiltered;
         console.log(meetings);
         return (
             <div id="schedule_area">
@@ -316,10 +321,11 @@ class ScheduleManager extends React.Component {
                             onChange={this.handleAvoidProfChange}
                         />
                     </div>
+                    <button onClick={this.filterOutSchedules}>Filter</button>
                 </div>
                 <div id="sort">
                     <ScheduleList
-                        schedule_list={this.state.filteredSchedules}
+                        schedule_list={schedulesWereFiltered ? this.state.filteredSchedules : this.state.schedule_list}
                         onClick={this.clickedSchedule}
                     />
                 </div>
