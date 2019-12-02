@@ -24,17 +24,65 @@ class ScheduleManager extends React.Component {
       grid_draggable: true,
       schedulesWereFiltered: false
     };
+    // update the stats
+    this.calculateScheduleStats();
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ schedule_list: nextProps.schedule_list });
   }
+  calculateScheduleStats = () => {
+    if (this.state.schedule_list !== null) {
+      this.state.schedule_list.forEach(function(schedule) {
+        // calculate GPA
+        let gpa = 0;
+        let numb = 0;
+        schedule
+          .filter(course => course["gpa"] !== -1)
+          .forEach(function(course) {
+            gpa += course["gpa"];
+            numb += 1;
+          });
+        if (numb !== 0) {
+          schedule["gpa"] = gpa / numb;
+        } else {
+          schedule["gpa"] = -1;
+        }
+
+        // calculate class rating
+        let class_rating = 0;
+        numb = 0;
+        schedule
+          .filter(course => course["class_rating"] !== -1)
+          .forEach(function(course) {
+            class_rating += course["class_rating"];
+            numb += 1;
+          });
+        if (numb !== 0) {
+          schedule["class_rating"] = class_rating / numb;
+        } else {
+          schedule["class_rating"] = -1;
+        }
+
+        // calculate workload
+        let workload = 0;
+        schedule
+          .filter(course => course["workload"] !== -1)
+          .forEach(function(course) {
+            workload += course["workload"];
+          });
+        schedule["workload"] = workload;
+      });
+    }
+  };
 
   componentDidUpdate() {
     console.log("ScheduleManager updated");
     console.log("this.props.schedule_list is", this.props.schedule_list);
+    this.calculateScheduleStats();
   }
   // prints an array of schedules that match the given filters
 
+  // calculate the stats displayed in scheduleList
   filterOutSchedules = () => {
     let totalSchedules = this.props.schedule_list;
     let avoidTimes = this.state.avoidHours;
@@ -239,16 +287,20 @@ class ScheduleManager extends React.Component {
       schedule.map(course => {
         let meetings = course.meetings;
         meetings.map(meeting => {
-            // for each meeting, find its corresponding meetings and course
-            outputArr.push({course:course, meeting:meeting, meetings:meetings});
-        })
+          // for each meeting, find its corresponding meetings and course
+          outputArr.push({
+            course: course,
+            meeting: meeting,
+            meetings: meetings
+          });
+        });
       });
       console.log(outputArr);
       return outputArr;
     }
   };
 
-  renderMeeting = meeting_meetings_course=> {
+  renderMeeting = meeting_meetings_course => {
     let class_days = {
       M: "Mon",
       Tu: "Tu",
@@ -260,7 +312,7 @@ class ScheduleManager extends React.Component {
     let course = meeting_meetings_course.course;
     let meeting = meeting_meetings_course.meeting;
     let meetings = meeting_meetings_course.meetings;
-    
+
     if (this.state.currentSchedule !== null) {
       //let meeting = this.state.currentSchedule[0]["sections"][0]["meetings"][0];
       if (meeting.start_time === 0 || meeting.day === "TBA") {
