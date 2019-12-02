@@ -7,7 +7,7 @@ class CourseListTag extends React.Component {
         this.state = {
             obj: this.props.courseObj
         }
-
+        this.state.obj.id = this.state.obj.department + " " + this.state.obj.number;
         this.toggle = this.toggle.bind(this)
     }
 
@@ -20,7 +20,7 @@ class CourseListTag extends React.Component {
 
         return(
             <div>
-                {this.props.courseObj.id} 
+                {this.state.obj.id} 
                 <button onClick={() => this.props.addCourse(this.props.courseObj)}>+</button>
                 <Popup display="Details" info={
                 <div id="popupDisplay">
