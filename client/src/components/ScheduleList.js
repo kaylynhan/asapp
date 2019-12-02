@@ -20,6 +20,10 @@ class ScheduleList extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({ schedule_list: nextProps.schedule_list })
+    }
+
     sortFunction = (event) => {
         let sort_func_name = event.target.value;
 
@@ -92,4 +96,4 @@ class ScheduleList extends React.Component {
     }
 }
 
-export default ScheduleList
+export default ScheduleList;
