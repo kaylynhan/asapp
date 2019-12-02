@@ -15,7 +15,7 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
-      schedules: null
+      schedules: []
     };
   }
 

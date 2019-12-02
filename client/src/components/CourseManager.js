@@ -13,45 +13,6 @@ class CourseManager extends React.Component {
             catalogue: [],
             optionalClasses: [],
             requiredClasses: [],
-			/*
-            requiredClasses: [
-                {
-                    name: 'CSE 101',
-                    id: '5dcf3e650636c96b37bfc819',
-                },
-                {
-                    name: 'CSE 123',
-                    id: '5dd9ecd7f151a092016468fa'
-                }
-            ],
-            optionalClasses : [ 
-                {
-                    name: 'CSE 110',
-                    id: '5dcf3980ba95db6aa9429fe3'
-                },
-                {
-                    name: 'CSE 100',
-                    id: '5dcf3e650636c96b37bfc810'
-                }
-            ],
-			*/
-			///////////////////////////////////////////////////////////////
-            /*
-            optionalClasses: [
-				{'name' : 'CSE 140', 'id': '5ddddabf18eee9cc93245fc4'},
-				{'name' : 'CSE 140L', 'id': '5ddddabf18eee9cc93245fc5'},
-				{'name' : 'CSE 141', 'id': '5ddddabf18eee9cc93245fc6'},
-				{'name' : 'CSE 170', 'id': '5ddddabf18eee9cc93245fcc'},
-				{'name' : 'CSE 150A', 'id': '5ddddabf18eee9cc93245fc9'},
-				{'name' : 'MATH 10A', 'id': '5ddddabf18eee9cc932460f8'}
-            ],
-            requiredClasses: [
-				{'name' : 'ANTH 196B', 'id': '5ddddabf18eee9cc93245e9d'},
-                {'name' : 'ANAR 154', 'id': '5ddddabf18eee9cc93245e9e'},
-				{'name' : 'ANSC 101', 'id': '5ddddabf18eee9cc93245ea4'},
-				{'name' : 'CSE 110', 'id': '5ddddabf18eee9cc93245fc3'}
-            ],*/
-			/////////////////////////////////////////////////////////////////
             optCourseInfo: null,
             reqCourseInfo: null,
             schedules: null,

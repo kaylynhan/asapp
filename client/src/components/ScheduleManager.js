@@ -18,20 +18,68 @@ class ScheduleManager extends React.Component {
             prefProfs: [],
             avoidProfs: [],
             avoidHours: [],
-            filteredSchedules: [],
-            schedule_list: schedules,                           // Get schedules from generation
-            currentSchedule: null,                               // Unneeded field? Not used
-            grid_draggable:true,
-            schedulesWereFiltered: false,
+            schedules: this.props.schedule_list,
+            filteredSchedules: this.props.schedule_list,                         // Get schedules from generation
+            currentSchedule: null,                               
+            grid_draggable:true
         };
     }
     componentDidUpdate() {
-        console.log("ScheduleManager updated")
-        console.log("this.props.schedule_list is", this.props.schedule_list);
+        if (this.state.schedules != this.props.schedule_list){
+            this.setState({
+                schedules:this.props.schedule_list,
+                filteredSchedules: this.props.schedule_list
+            });
+        }
     }
     // prints an array of schedules that match the given filters
 
+    sortFunction = (event) => {
+        let sort_func_name = event.target.value;
 
+        let schedule_list = this.state.filteredSchedules;
+
+        switch(sort_func_name) {
+            case "Sort by GPA":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule2['gpa'] - schedule1['gpa']; // Best to worst
+                    }
+                );
+                console.log("Sorting by GPA");
+                break;
+            case "Sort by CAPE Ratings":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule2['class_rating'] - schedule1['class_rating'];
+                    }
+                );
+                console.log("Sorting by CAPE Ratings");
+                break;
+            case "Sort by Workload":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule1['workload'] - schedule2['workload'];
+                    }
+                );
+                console.log("Sorting by Workload");
+                break;
+            case "Sort by Minimum Days":
+                schedule_list.sort(
+                    function(schedule1, schedule2) {
+                        return schedule1['num_days'] - schedule2['num_days'];
+                    }
+                );
+                console.log("Sorting by Minimum Days");
+                break;
+            case "Sort by Maximum Average Gap":
+                break;
+            default:
+                console.error(sort_func_name + " is not a valid sort");
+        }
+
+        this.setState({filteredSchedules: schedule_list})
+    };
 
     filterOutSchedules = () => {
         let totalSchedules = this.props.schedule_list;
@@ -51,7 +99,6 @@ class ScheduleManager extends React.Component {
         filteredSchedules = this.filterOutAvoidTimes(avoidTimes, filteredSchedules);
 
         this.setState({filteredSchedules: filteredSchedules});
-        this.setState({schedulesWereFiltered: true});
     };
 
     filterOutPrefProfessors = totalSchedules => {
@@ -302,7 +349,6 @@ class ScheduleManager extends React.Component {
 
     render() {
         let meetings = this.populateMeetings(this.state.currentSchedule);
-        let schedulesWereFiltered = this.state.schedulesWereFiltered;
         console.log(meetings);
         return (
             <div id="schedule_area">
@@ -325,8 +371,10 @@ class ScheduleManager extends React.Component {
                 </div>
                 <div id="sort">
                     <ScheduleList
-                        schedule_list={schedulesWereFiltered ? this.state.filteredSchedules : this.state.schedule_list}
+                        schedule_list={this.state.filteredSchedules}
                         onClick={this.clickedSchedule}
+                        sortFunction = {this.sortFunction}
+                        sort_options = {this.sort_options}
                     />
                 </div>
                 <div id="grid_area">
