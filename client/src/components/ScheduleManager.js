@@ -71,6 +71,36 @@ class ScheduleManager extends React.Component {
             workload += course["workload"];
           });
         schedule["workload"] = workload;
+
+        //calculate class_days
+        let class_days = {
+          M: false,
+          Tu: false,
+          W: false,
+          Th: false,
+          F: false
+        };
+
+
+
+        // TODO class_days
+        // schedule.forEach(function(course) {
+        //   course["meetings"].forEach(function(meeting) {
+        //     if (meeting["day"] in class_days) {
+        //       class_days[meeting["day"]] = true;
+        //     }
+        //   });
+        // });
+        
+
+        // calculate number of days
+        let num_days = 0;
+        Object.values(class_days).forEach(function(value){
+            if(value === true){
+                num_days += 1;
+            }
+        })
+        schedule['num_days'] = num_days;
       });
     }
   };
