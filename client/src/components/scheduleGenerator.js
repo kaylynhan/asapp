@@ -11,6 +11,7 @@ if(optionalCourseList != null){
 		for(var j = 0;j < optionalCourseList[i].sections.length; j++)
 		{
 			optionalCourseList[i].sections[j]["course"] = optionalCourseList[i].department + " " + optionalCourseList[i].number
+			optionalCourseList[i].sections[j]["units"] = optionalCourseList[i].units
 		}
 }
 
@@ -21,6 +22,7 @@ if(requiredCourseList != null)
 		for(var j = 0;j < requiredCourseList[i].sections.length; j++)
 		{
 			requiredCourseList[i].sections[j]["course"] = requiredCourseList[i].department + " " + requiredCourseList[i].number
+			requiredCourseList[i].sections[j]["units"] = requiredCourseList[i].units
 		}
 }
 
@@ -51,7 +53,7 @@ for(var i=0; i< scheduleQueue.length; i++)
 {
 	for(var j=i+1; j< scheduleQueue.length; j++)
 	{
-		
+
 		//Check for final conflicts.
 		if(scheduleQueue[i][0].final != undefined && scheduleQueue[j][0].final != undefined)
 		{
@@ -62,8 +64,8 @@ for(var i=0; i< scheduleQueue.length; i++)
 					conflict = true
 				}
 		}
-		
-		
+
+
 		//Check for meeting conflicts.
 		if(conflict == false && scheduleQueue[i][0].course != scheduleQueue[j][0].course)
 		{
@@ -81,7 +83,7 @@ for(var i=0; i< scheduleQueue.length; i++)
 						}
 					}
 				}
-				
+
 				if(conflict == true)
 					break
 			}
@@ -90,17 +92,17 @@ for(var i=0; i< scheduleQueue.length; i++)
 		{
 			conflict = true
 		}
-		
+
 		if(conflict == false)
 		{
 			doubleSchedule[[scheduleQueue[i][0].id,scheduleQueue[j][0].id]] = 1
-			
+
 			scheduleQueue2.push([scheduleQueue[i][0], scheduleQueue[j][0]])
 			listOfSchedules.push([scheduleQueue[i][0], scheduleQueue[j][0]])
 		}
 		else
 			conflict = false
-		
+
 	}
 }
 
@@ -185,26 +187,26 @@ for(var i=0; i<scheduleQueue.length; i++)
 
 //Filters out schedules that don't contain required courses.
 var filtered = listOfSchedules.filter(function(value, index, arr){
-	
+
 	if(value.length < requiredCourseList.length)
 		return false
-	
+
 	for(var i=0; i < requiredCourseList.length; i++)
 	{
 		var requiredCourseFound = false
-		
+
 		for(var j=0; j < value.length; j++)
 		{
 			if(requiredCourseList[i].department + " " + requiredCourseList[i].number == value[j].course)
 				requiredCourseFound = true
 		}
-		
+
 		if(requiredCourseFound == false)
 		{
 			return false
 		}
 	}
-	
+
 	return true
 });
 
