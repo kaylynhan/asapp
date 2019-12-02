@@ -15,18 +15,17 @@ class SectionDetail extends React.Component {
     const MIN_TO_PIX = 80 / 60;
     const course = this.props.course;
     const meeting = this.props.meeting;
-    const section = this.props.section;
+    const meetings = this.props.meetings;
 
     var meetingDetail = (
       <ul>
-        <li>Professor: {section.professor} </li>
+        <li>Professor: {meetings.professor} </li>
         <li>Location: {meeting.building + " " + meeting.room_num}</li>
-    <li>Class Rating: {course.class_rating}</li>
-  <li>Average GPA: {course.gpa}</li>
-    <li>Units: {course.units}</li>
+        <li>Prof Rating: {meetings.prof_rating}</li>
+        <li>Average GPA: {course.gpa}</li>
         <li>
           CAPE:{" "}
-          <a href={section.link} target="_blank">
+          <a href={course.link} target="_blank">
             Link to CAPE
           </a>
         </li>
