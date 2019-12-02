@@ -86,8 +86,8 @@ class ScheduleList extends React.Component {
                 {
                     this.state.schedule_list.map((item, index) => (
                         <ListItem onClick={() => this.props.onClick(item)} button>
-                            <ListItemText primary={`GPA: ${item['gpa']}\nCape: ${item['class_rating']}\n
-                            Workload: ${item['workload']}\nDays: ${item['num_days']}`}  />
+                            <ListItemText primary={`GPA: ${item['gpa'] == -1 ? "N/A" : item['gpa'].toFixed(2)}\nCape: ${item['class_rating'] == -1 ? "N/A" : item['class_rating'].toFixed(2)}\n
+                            Workload: ${item['workload'] == 0 ? "N/A": item['workload'].toFixed(2)}\nDays: ${item['num_days']}`}  />
                         </ListItem>
                     ))
                 }
