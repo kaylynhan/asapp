@@ -5,7 +5,7 @@ import "./ScheduleManager.css";
 import ProfDropdown from "./ProfDropdown";
 import ScheduleList from "./ScheduleList";
 import ScheduleGrid from "./ScheduleGrid";
-import schedules from "../test/sampleSchedules.json"; // Get schedules from generation (download json from github and place import accordingly)
+import schedules from "../test/sampleSchedules.json"; // For testing only
 import SectionDetail from "./SectionDetail";
 
 class ScheduleManager extends React.Component {
@@ -20,7 +20,7 @@ class ScheduleManager extends React.Component {
       avoidHours: [],
       filteredSchedules: [],
       schedule_list: [],//schedules, // Get schedules from generation
-      currentSchedule: null, // Unneeded field? Not used
+      currentSchedule: null,
       grid_draggable: true,
       schedulesWereFiltered: false,
       scheduleProfs: this.getProfessors(this.props.schedule_list),
@@ -30,9 +30,11 @@ class ScheduleManager extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     let nextProfs = this.getProfessors(nextProps.schedule_list)
-    this.setState({ 
-      schedule_list: nextProps.schedule_list, 
-      scheduleProfs: nextProfs});
+    this.setState({
+      schedule_list: nextProps.schedule_list,
+      scheduleProfs: nextProfs
+    });
+    this.setState({ schedulesWereFiltered : false })
   }
 /*
   calculateScheduleStats = () => {
