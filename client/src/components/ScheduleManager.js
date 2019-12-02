@@ -19,17 +19,18 @@ class ScheduleManager extends React.Component {
       avoidProfs: [],
       avoidHours: [],
       filteredSchedules: [],
-      schedule_list: schedules, // Get schedules from generation
+      schedule_list: [],//schedules, // Get schedules from generation
       currentSchedule: null, // Unneeded field? Not used
       grid_draggable: true,
       schedulesWereFiltered: false
     };
     // update the stats
-    this.calculateScheduleStats();
+    //this.calculateScheduleStats();
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ schedule_list: nextProps.schedule_list });
   }
+/*  
   calculateScheduleStats = () => {
     if (this.state.schedule_list !== null) {
       this.state.schedule_list.forEach(function(schedule) {
@@ -52,9 +53,9 @@ class ScheduleManager extends React.Component {
         let class_rating = 0;
         numb = 0;
         schedule
-          .filter(course => course["class_rating"] !== -1)
+          .filter(course => course["prof_rating"] !== -1)
           .forEach(function(course) {
-            class_rating += course["class_rating"];
+            class_rating += course["prof_rating"];
             numb += 1;
           });
         if (numb !== 0) {
@@ -72,6 +73,7 @@ class ScheduleManager extends React.Component {
           });
         schedule["workload"] = workload;
 
+		
         //calculate class_days
         let class_days = {
           M: false,
@@ -80,7 +82,24 @@ class ScheduleManager extends React.Component {
           Th: false,
           F: false
         };
+		
 
+		
+		//Calculates total number of days for a schedule.
+		var discoveredDays = []
+		discoveredDays.push(schedule[0])
+		
+		for(var k=0; k < schedule.length; k++)
+		{
+			for(var i=0;i<schedule[k].meetings.length;i++)
+			{
+				for(var j=0; j<discoveredDays.length; j++)
+					if(schedule[k].meetings[i].day != discoveredDays[j])
+						discoveredDays.push(schedule[k].meetings[i].day)
+			}
+		}
+		
+		schedule['num_days'] = discoveredDays.length;
 
 
         // TODO class_days
@@ -92,7 +111,7 @@ class ScheduleManager extends React.Component {
         //   });
         // });
         
-
+		
         // calculate number of days
         let num_days = 0;
         Object.values(class_days).forEach(function(value){
@@ -101,14 +120,15 @@ class ScheduleManager extends React.Component {
             }
         })
         schedule['num_days'] = num_days;
+		
       });
     }
   };
-
+*/
   componentDidUpdate() {
     console.log("ScheduleManager updated");
     console.log("this.props.schedule_list is", this.props.schedule_list);
-    this.calculateScheduleStats();
+    //this.calculateScheduleStats();
   }
   // prints an array of schedules that match the given filters
 

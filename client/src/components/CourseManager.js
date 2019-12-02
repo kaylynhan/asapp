@@ -13,45 +13,6 @@ class CourseManager extends React.Component {
             catalogue: [],
             optionalClasses: [],
             requiredClasses: [],
-			/*
-            requiredClasses: [
-                {
-                    name: 'CSE 101',
-                    id: '5dcf3e650636c96b37bfc819',
-                },
-                {
-                    name: 'CSE 123',
-                    id: '5dd9ecd7f151a092016468fa'
-                }
-            ],
-            optionalClasses : [ 
-                {
-                    name: 'CSE 110',
-                    id: '5dcf3980ba95db6aa9429fe3'
-                },
-                {
-                    name: 'CSE 100',
-                    id: '5dcf3e650636c96b37bfc810'
-                }
-            ],
-			*/
-			///////////////////////////////////////////////////////////////
-            /*
-            optionalClasses: [
-				{'name' : 'CSE 140', 'id': '5ddddabf18eee9cc93245fc4'},
-				{'name' : 'CSE 140L', 'id': '5ddddabf18eee9cc93245fc5'},
-				{'name' : 'CSE 141', 'id': '5ddddabf18eee9cc93245fc6'},
-				{'name' : 'CSE 170', 'id': '5ddddabf18eee9cc93245fcc'},
-				{'name' : 'CSE 150A', 'id': '5ddddabf18eee9cc93245fc9'},
-				{'name' : 'MATH 10A', 'id': '5ddddabf18eee9cc932460f8'}
-            ],
-            requiredClasses: [
-				{'name' : 'ANTH 196B', 'id': '5ddddabf18eee9cc93245e9d'},
-                {'name' : 'ANAR 154', 'id': '5ddddabf18eee9cc93245e9e'},
-				{'name' : 'ANSC 101', 'id': '5ddddabf18eee9cc93245ea4'},
-				{'name' : 'CSE 110', 'id': '5ddddabf18eee9cc93245fc3'}
-            ],*/
-			/////////////////////////////////////////////////////////////////
             optCourseInfo: null,
             reqCourseInfo: null,
             schedules: null,
@@ -112,8 +73,6 @@ class CourseManager extends React.Component {
         });
     }
 
-	
-	////////////////////////////////////////////////////////////
 	onGenerateSchedules= () => {
 		
 		this.getOptionalInformation()
@@ -173,58 +132,110 @@ class CourseManager extends React.Component {
 		console.log("this.state.optCourseInfo is",this.state.optCourseInfo);
         console.log("this.state.reqCourseInfo is", this.state.reqCourseInfo);
         console.log("this.state.schedules is", this.state.schedules);
-        this.props.callback(this.state.schedules)
+		this.calculateScheduleStats(this.props.callback(this.state.schedules))
 	}
-	////////////////////////////////////////////////////////////
 	
-	
-	
-	
-/*
-    onGenerateSchedules = () => {
-        let optIDs = []
-        let reqIDs = []
-        for (var course in this.state.optionalCourses){
-            optIDs.append(course.id)
+	calculateScheduleStats = () => {
+    if (this.state.schedules !== null) {
+      this.state.schedules.forEach(function(schedule) {
+        // calculate GPA
+        let gpa = 0;
+        let numb = 0;
+        schedule
+          .filter(course => course["gpa"] !== -1)
+          .forEach(function(course) {
+            gpa += course["gpa"];
+            numb += 1;
+          });
+        if (numb !== 0) {
+          schedule["gpa"] = gpa / numb;
+        } else {
+          schedule["gpa"] = -1;
         }
-        for (var course in this.state.requiredCourses){
-            reqIDs.append(course.id)
+
+        // calculate class rating
+        let class_rating = 0;
+        numb = 0;
+        schedule
+          .filter(course => course["prof_rating"] !== -1)
+          .forEach(function(course) {
+            class_rating += course["prof_rating"];
+            numb += 1;
+          });
+        if (numb !== 0) {
+          schedule["class_rating"] = class_rating / numb;
+        } else {
+          schedule["class_rating"] = -1;
         }
 
-        axios.get("/courses/getMany", 
-        {params: {ids: this.state.optionalIDs}})
-        .then(res => {
-            this.setState({
-                optCourseInfo: res.data
-            })
-        })
-        .catch(err => console.log(err.message));
+        // calculate workload
+        let workload = 0;
+        schedule
+          .filter(course => course["workload"] !== -1)
+          .forEach(function(course) {
+            workload += course["workload"];
+          });
+        schedule["workload"] = workload;
 
-        axios.get("/courses/getMany", 
-        {params: {ids: this.state.requiredIDs}})
-        .then(res => {
-            this.setState({
-                reqCourseInfo: res.data
-            })
-        })
-        .catch(err => console.log(err.message));
+        //calculate class_days
+		/*
+        let class_days = {
+          M: false,
+          Tu: false,
+          W: false,
+          Th: false,
+          F: false
+        };
+		*/
+		
+		//Calculates total number of days for a schedule.
+		var discoveredDays = []
+		var addDay = true
+		
+		for(var k=0; k < schedule.length; k++)
+		{
+			for(var i=0;i<schedule[k].meetings.length;i++)
+			{
+				addDay = true
+				
+				for(var j=0; j<discoveredDays.length; j++)
+				{
+					if(schedule[k].meetings[i].day == discoveredDays[j])
+						addDay = false
+				}
+				
+				if(addDay == true)
+					discoveredDays.push(schedule[k].meetings[i].day)
+			}
+		}
+		
+		schedule['num_days'] = discoveredDays.length;
 
-        console.log(this.state.optCourseInfo);
-        console.log(this.state.reqCourseInfo);
-
-        // this.setState({
-        //     schedules: generateSchedules(this.state.optCourseInfo,
-        //         this.state.reqCourseInfo)
-        // })
-
-        //  This is the callBack function which will update HomePage's
-        //    schedule state. Be sure to call it after setting
-        //    this.state.schedules to the newly generated schedules.
+        // TODO class_days
+        // schedule.forEach(function(course) {
+        //   course["meetings"].forEach(function(meeting) {
+        //     if (meeting["day"] in class_days) {
+        //       class_days[meeting["day"]] = true;
+        //     }
+        //   });
+        // });
         
-        this.props.callBack(this.state.schedules)
+		/*
+        // calculate number of days
+        let num_days = 0;
+        Object.values(class_days).forEach(function(value){
+            if(value === true){
+                num_days += 1;
+            }
+        })
+		*/
+        //schedule['num_days'] = num_days;
+		
+		
+      });
     }
-*/
-	
+  };	
+		
     handleSearch(search_query, search_query_dept, search_query_num) {
         this.setState({
             search_query: search_query,
@@ -282,16 +293,15 @@ class CourseManager extends React.Component {
                     <p> Search_result</p>
                     <CourseList menus = {this.state.catalogue} addCourse={this.addCourse} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
-                <div id="generate">
-                    <button class="NavBtn">
-                        Generate Schedules
-                            </button>
-                </div>
                 <div id="need_want">
-                    <p> Need vs want</p>
+                    <p>Chosen Courses</p>
                     <CoursePlan requiredClasses={this.state.requiredClasses} optionalClasses={this.state.optionalClasses} callBack={this.courseManagerCallBack}/>
+					<div id="generate">
+                    <button class="NavBtn" onClick = {this.onGenerateSchedules}>
+                        Generate Schedules
+                    </button>
+					</div>
                 </div>
-                <button onClick = {this.onGenerateSchedules}>testGenerateSchedules</button>
             </div>
         )
     }
