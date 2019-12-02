@@ -9,15 +9,19 @@ class ProfDropdown extends React.Component {
 
         this.state = {
             // pass in your list of profs here
-            ProfList: ["Bowers, Adam", "Ord, Rick", "Zhang, Danna", "Gillespie, Gary"]
+            ProfList: this.props.profs,
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ ProfList: nextProps.profs });
     }
 
     render() {
         return (
             <div>
                 <p style={{textAlign:"center"}}>{this.props.title}</p>
-                {this.state.ProfList.map(item => (
+
                     <select onChange={this.props.onChange}>
                         <option value="">--Select your Professor--</option>
                         {
@@ -26,7 +30,9 @@ class ProfDropdown extends React.Component {
                             ))
                         }
                     </select>
-                ))}
+
+
+
             </div>
         )
     }
