@@ -10,7 +10,7 @@ if(optionalCourseList != null){
 	for(var i = 0; i < optionalCourseList.length; i++)
 		for(var j = 0;j < optionalCourseList[i].sections.length; j++)
 		{
-			optionalCourseList[i].sections[j]["course"] = optionalCourseList[i].id
+			optionalCourseList[i].sections[j]["course"] = optionalCourseList[i].department + " " + optionalCourseList[i].number
 		}
 }
 
@@ -20,7 +20,7 @@ if(requiredCourseList != null)
 	for(var i = 0; i < requiredCourseList.length; i++)
 		for(var j = 0;j < requiredCourseList[i].sections.length; j++)
 		{
-			requiredCourseList[i].sections[j]["course"] = requiredCourseList[i].id
+			requiredCourseList[i].sections[j]["course"] = requiredCourseList[i].department + " " + requiredCourseList[i].number
 		}
 }
 
@@ -195,7 +195,7 @@ var filtered = listOfSchedules.filter(function(value, index, arr){
 		
 		for(var j=0; j < value.length; j++)
 		{
-			if(requiredCourseList[i].id == value[j].course)
+			if(requiredCourseList[i].department + " " + requiredCourseList[i].number == value[j].course)
 				requiredCourseFound = true
 		}
 		
