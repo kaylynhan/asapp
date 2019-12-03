@@ -20,10 +20,11 @@ class CourseListTag extends React.Component {
 
         return(
             <div>
-                {this.state.obj.id} 
-                <button onClick={() => this.props.addCourse(this.props.courseObj)}>+</button>
-                <Popup display="Details" info={
-                <div id="popupDisplay">
+                {this.state.obj.id}
+ 
+				<div style={{float: "right"}}>
+				<Popup display="Details" info={
+				<div id="popupDisplay">
                     <h1>{this.props.courseObj.name}</h1>
                     <ul>
                         <div>
@@ -50,6 +51,8 @@ class CourseListTag extends React.Component {
                     </ul>
                 </div>
                 }/>
+				</div>
+				<button className="popupBtn" onClick={() => this.props.addCourse(this.props.courseObj)}>+</button>
             </div>
         )
     }
