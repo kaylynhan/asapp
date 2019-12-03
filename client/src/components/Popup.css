@@ -12,7 +12,12 @@
   background-color: #ccc;
   border: 1px solid #aaa;
   margin: 1px;
-}*/
+}
+*/
+.popupBtn{
+	font-size: 10px;
+	float: right;
+}
 
 .popupBtn:hover {
   background-color: white;
