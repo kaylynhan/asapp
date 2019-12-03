@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 
 // Also modify switch statement in sortFunction if modifying below sorts
-let SORT_OPTIONS = ["Sort by GPA", "Sort by CAPE Ratings", "Sort by Workload", "Sort by Minimum Days", "Sort by Maximum Average Gap"];
+let SORT_OPTIONS = ["Sort by GPA", "Sort by CAPE Ratings", "Sort by Workload", "Sort by Minimum Days"];
 
 class ScheduleList extends React.Component {
 

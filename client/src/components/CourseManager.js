@@ -27,7 +27,7 @@ class CourseManager extends React.Component {
 
     courseManagerCallBack = (item1FromChild, item2FromChild) => {
         this.setState(
-            { 
+            {
                 requiredClasses: item1FromChild,
                 optionalClasses: item2FromChild
             }
@@ -121,7 +121,7 @@ class CourseManager extends React.Component {
         .catch(err => console.log(err.message));
 	}
 
-    getGeneratedSchedules  = () => {
+    getGeneratedSchedules = () => {
 
 		this.setState({
         schedules: generateSchedules(this.state.optCourseInfo, this.state.reqCourseInfo)
@@ -136,105 +136,108 @@ class CourseManager extends React.Component {
 	}
 	
 	calculateScheduleStats = () => {
-    if (this.state.schedules !== null) {
-      this.state.schedules.forEach(function(schedule) {
-        // calculate GPA
-        let gpa = 0;
-        let numb = 0;
-        schedule
-          .filter(course => course["gpa"] !== -1)
-          .forEach(function(course) {
-            gpa += course["gpa"];
-            numb += 1;
-          });
-        if (numb !== 0) {
-          schedule["gpa"] = gpa / numb;
-        } else {
-          schedule["gpa"] = -1;
+        if (this.state.schedules !== null) {
+            this.state.schedules.forEach(function(schedule) {
+
+                let num_units = 0
+
+                // calculate GPA
+                let gpa = 0;
+                let numb = 0;
+                schedule
+                    .filter(course => course["gpa"] !== -1)
+                    .forEach(function(course) {
+                        gpa += course["gpa"];
+                        numb += 1
+                    });
+
+                if (numb !== 0) {
+                    schedule["gpa"] = gpa / numb;
+                } else {
+                    schedule["gpa"] = -1;
+                }
+
+                // calculate class rating
+                let class_rating = 0;
+                numb = 0;
+                schedule
+                    .filter(course => course["prof_rating"] !== -1)
+                    .forEach(function(course) {
+                        class_rating += course["prof_rating"];
+                        numb += 1;
+                    });
+                if (numb !== 0) {
+                    schedule["class_rating"] = class_rating / numb;
+                } else {
+                    schedule["class_rating"] = -1;
+                }
+
+                // calculate workload
+                let workload = 0;
+                schedule
+                    .filter(course => course["workload"] !== -1)
+                    .forEach(function(course) {
+                        workload += course["workload"];
+                    });
+                schedule["workload"] = workload;
+
+                //calculate class_days
+
+                //Calculates total number of days for a schedule.
+                // var discoveredDays = []
+                // var addDay = true
+                //
+                // for(var k=0; k < schedule.length; k++)
+                // {
+                // 	for(var i=0;i<schedule[k].meetings.length;i++)
+                // 	{
+                // 		addDay = true
+                //
+                // 		for(var j=0; j<discoveredDays.length; j++)
+                // 		{
+                // 			if(schedule[k].meetings[i].day == discoveredDays[j])
+                // 				addDay = false
+                // 		}
+                //
+                // 		if(addDay == true)
+                // 			discoveredDays.push(schedule[k].meetings[i].day)
+                // 	}
+                // }
+                //
+                // schedule['num_days'] = discoveredDays.length;
+
+                let class_days = {
+                    M: false,
+                    Tu: false,
+                    W: false,
+                    Th: false,
+                    F: false
+                };
+
+                // TODO class_days
+                schedule.forEach(function(course) {
+                    num_units += course['units'];
+
+                    course["meetings"].forEach(function(meeting) {
+                        if (meeting["day"] in class_days) {
+                            class_days[meeting["day"]] = true;
+                        }
+                    });
+                });
+
+                schedule['units'] = num_units
+
+                // calculate number of days
+                let num_days = 0;
+                Object.values(class_days).forEach(function(value){
+                    if(value === true){
+                        num_days += 1;
+                    }
+                });
+                schedule['num_days'] = num_days;
+            });
         }
-
-        // calculate class rating
-        let class_rating = 0;
-        numb = 0;
-        schedule
-          .filter(course => course["prof_rating"] !== -1)
-          .forEach(function(course) {
-            class_rating += course["prof_rating"];
-            numb += 1;
-          });
-        if (numb !== 0) {
-          schedule["class_rating"] = class_rating / numb;
-        } else {
-          schedule["class_rating"] = -1;
-        }
-
-        // calculate workload
-        let workload = 0;
-        schedule
-          .filter(course => course["workload"] !== -1)
-          .forEach(function(course) {
-            workload += course["workload"];
-          });
-        schedule["workload"] = workload;
-
-        //calculate class_days
-		/*
-        let class_days = {
-          M: false,
-          Tu: false,
-          W: false,
-          Th: false,
-          F: false
-        };
-		*/
-		
-		//Calculates total number of days for a schedule.
-		var discoveredDays = []
-		var addDay = true
-		
-		for(var k=0; k < schedule.length; k++)
-		{
-			for(var i=0;i<schedule[k].meetings.length;i++)
-			{
-				addDay = true
-				
-				for(var j=0; j<discoveredDays.length; j++)
-				{
-					if(schedule[k].meetings[i].day == discoveredDays[j])
-						addDay = false
-				}
-				
-				if(addDay == true)
-					discoveredDays.push(schedule[k].meetings[i].day)
-			}
-		}
-		
-		schedule['num_days'] = discoveredDays.length;
-
-        // TODO class_days
-        // schedule.forEach(function(course) {
-        //   course["meetings"].forEach(function(meeting) {
-        //     if (meeting["day"] in class_days) {
-        //       class_days[meeting["day"]] = true;
-        //     }
-        //   });
-        // });
-        
-		/*
-        // calculate number of days
-        let num_days = 0;
-        Object.values(class_days).forEach(function(value){
-            if(value === true){
-                num_days += 1;
-            }
-        })
-		*/
-        //schedule['num_days'] = num_days;
-		
-		
-      });
-    }
-  };	
+    };
 		
     handleSearch(search_query, search_query_dept, search_query_num) {
         this.setState({
@@ -261,7 +264,7 @@ class CourseManager extends React.Component {
                         return true;
                     }
                 }
-            
+
                 return false;
             }
             console.log(this.state.optionalClasses)
@@ -272,13 +275,13 @@ class CourseManager extends React.Component {
              && opt == undefined) {
                     newArr = newArr.concat(item)
                 }
-            
-            
+
+
             const requiredClasses = newArr
             return {
                 requiredClasses
             }
-            
+
         })
     }
 
