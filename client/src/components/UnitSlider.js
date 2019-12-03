@@ -10,7 +10,7 @@ const Range = createSliderWithTooltip(Slider.Range)
 const Handle = Slider.Handle
 
 export const DEFAULT_MIN_UNITS = 4;
-export const DEFAULT_MAX_UNITS = 16;
+export const DEFAULT_MAX_UNITS = 24;
 
 export class UnitSlider extends React.Component {
     constructor(props) {
