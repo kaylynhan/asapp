@@ -30,6 +30,13 @@ class CourseList extends React.Component {
     componentDidMount() {
         this.deptLastScrolledTo = this.deptToScrollTo
     }
+
+    shouldComponentUpdate(nextProps,nextState) {
+        var menuUpdated =  nextProps.menus !== this.props.menus
+        var deptUpdated = nextProps.search_query_dept !== this.props.search_query_dept
+        var numUpdated = nextProps.search_query_num !== this.props.search_query_num
+        return menuUpdated || deptUpdated || numUpdated
+    }
     
     componentDidUpdate() {
         // For a department match or partial match
