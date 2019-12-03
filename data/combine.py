@@ -198,7 +198,7 @@ def parse_courses(course_list):
 				course['name'] = 'N/A'
 				course['description'] = 'N/A'
 				course['prereqs'] = ''
-				course['units'] = -1
+				course['units'] = 0
 				course_list[course_id] = course
 
 			meeting_type = line[2]
@@ -213,7 +213,7 @@ def parse_courses(course_list):
 				potential_units = re.findall('\d+', potential_units[0])
 				numb_units = int(potential_units[0])
 			except IndexError:
-				numb_units = -1
+				numb_units = 0
 
 				if course_obj['name'] == 'N/A':
 					continue
@@ -485,7 +485,7 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
 				if course_id not in course_cape_dict:
 					missing_courses.add(course_id)
 					section['gpa'] = -1
-					section['workload'] = -1
+					section['workload'] = 0
 					section['prof_rating'] = -1
 					continue
 
@@ -496,7 +496,7 @@ def combine_data(instructor_cape_dict, course_cape_dict, course_dict):
 
 		if course_id not in course_cape_dict:
 			course_dict[course_id]['gpa'] = -1
-			course_dict[course_id]['workload'] = -1
+			course_dict[course_id]['workload'] = 0
 			course_dict[course_id]['prof_rating'] = -1
 			continue
 
