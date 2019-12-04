@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import Tooltip from "./Tooltip.js";
 import { red } from "@material-ui/core/colors";
+import "./Tooltip.css"
 
 class SectionDetail extends React.Component {
   constructor(props) {
@@ -18,18 +19,18 @@ class SectionDetail extends React.Component {
     const meetings = this.props.meetings;
 
     var meetingDetail = (
-      <ul>
-        <li>Professor: {course.professor} </li>
-        <li>Location: {meeting.building + " " + meeting.room_num}</li>
-        <li>Prof Rating: {meetings.prof_rating}</li>
-        <li>Average GPA: {course.gpa}</li>
-        <li>
+	<div>
+		Section ID: {course.id} <br />
+        Location: {meeting.building + " " + meeting.room_num}<br/>
+		Professor: {course.professor}<br/>
+        Prof Rating: {course.prof_rating == -1 ? "N/A" : course.prof_rating.toFixed(2)}<br/>
+        
           CAPE:{" "}
           <a href={course.link} target="_blank">
             Link to CAPE
           </a>
-        </li>
-      </ul>
+        <br/>
+	</div>
     );
 
     let timeConv = {

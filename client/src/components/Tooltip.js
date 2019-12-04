@@ -52,7 +52,7 @@ class Tooltip extends React.Component {
                 }
             :
                 {
-                "--background-color": this.props.backgroundColor ? this.props.backgroundColor : "#888888",
+                "--background-color": this.props.backgroundColor ? this.props.backgroundColor : "#f0f0f0",
                 }
 
         // Create new Tooltip
