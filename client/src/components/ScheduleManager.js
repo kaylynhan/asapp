@@ -21,6 +21,7 @@ class ScheduleManager extends React.Component {
         filteredSchedules: [],
         schedule_list: [],//schedules, // Get schedules from generation
         currentSchedule: null,
+        currentScheduleIndex: -1,
         grid_draggable: true,
         schedulesWereFiltered: false,
         scheduleProfs: this.getProfessors(this.props.schedule_list),
@@ -65,8 +66,19 @@ class ScheduleManager extends React.Component {
 
         filteredSchedules = this.filterOutAvoidTimes(avoidTimes, filteredSchedules);
 
-        this.setState({ filteredSchedules: filteredSchedules });
-        this.setState({ schedulesWereFiltered: true });
+        let currentScheduleIndex = -1
+        let currentSchedule = this.state.currentSchedule
+        filteredSchedules.forEach(function(schedule, schedule_index) {
+            if (schedule === currentSchedule) {
+                currentScheduleIndex = schedule_index
+            }
+        })
+        this.setState({
+            filteredSchedules: filteredSchedules,
+            schedulesWereFiltered: true,
+            currentScheduleIndex: currentScheduleIndex,
+            currentSchedule: currentScheduleIndex === -1 ? null : this.state.currentSchedule
+        });
         console.log(`Number of filtered Schedules ${filteredSchedules.length}`)
     };
 
@@ -328,14 +340,20 @@ class ScheduleManager extends React.Component {
         }
     };
 
-    clickedSchedule = schedule => {
+    clickedSchedule = (schedule, index) => {
         if (schedule === this.state.currentSchedule) {
-            this.setState({ currentSchedule: null });
-            this.state.grid_draggable = true;
+            this.setState({
+                currentSchedule: null,
+                grid_draggable: true,
+                currentScheduleIndex: -1
+            });
             return;
         }
-        this.setState({ currentSchedule: schedule });
-        this.setState({ grid_draggable: false });
+        this.setState({
+            currentSchedule: schedule,
+            grid_draggable: false,
+            currentScheduleIndex: index
+        });
         console.log(this.state.currentSchedule);
     };
 
@@ -371,6 +389,7 @@ class ScheduleManager extends React.Component {
                     ? this.state.filteredSchedules
                     : this.state.schedule_list
                 }
+                selectedIndex={this.state.currentScheduleIndex}
                 onClick={this.clickedSchedule}
                 />
             </div>
