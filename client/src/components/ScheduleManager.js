@@ -72,7 +72,7 @@ class ScheduleManager extends React.Component {
             if (schedule === currentSchedule) {
                 currentScheduleIndex = schedule_index
             }
-        })
+        })        
         this.setState({
             filteredSchedules: filteredSchedules,
             schedulesWereFiltered: true,
@@ -340,12 +340,12 @@ class ScheduleManager extends React.Component {
         }
     };
 
-    clickedSchedule = (schedule, index) => {
+    clickedSchedule = (schedule, index, forceClicked = false) => {
         if (schedule === this.state.currentSchedule) {
             this.setState({
                 currentSchedule: null,
                 grid_draggable: true,
-                currentScheduleIndex: -1
+                currentScheduleIndex: forceClicked ? index : -1
             });
             return;
         }

@@ -29,6 +29,13 @@ class ScheduleList extends React.Component {
 
         let schedule_list = this.props.schedule_list;
 
+        let currentScheduleIndex = this.props.selectedIndex
+        let currentSchedule = null
+
+        if (currentScheduleIndex >= 0) {
+            currentSchedule = this.props.schedule_list[currentScheduleIndex]
+        }
+
         switch(sort_func_name) {
             case "Sort by GPA":
                 schedule_list.sort(
@@ -68,7 +75,17 @@ class ScheduleList extends React.Component {
                 console.error(sort_func_name + " is not a valid sort");
         }
 
-        this.setState({schedule_list: schedule_list})
+        schedule_list.forEach(function(schedule, schedule_index) {
+            if (schedule === currentSchedule) {
+                currentScheduleIndex = schedule_index
+            }
+        })
+
+        this.setState({schedule_list: schedule_list,},  () => {
+            this.props.onClick(currentSchedule, currentScheduleIndex, true)
+            }
+        )
+
     };
 
     render() {
