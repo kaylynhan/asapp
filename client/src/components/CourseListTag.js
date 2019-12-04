@@ -40,13 +40,13 @@ class CourseListTag extends React.Component {
                             Description: {this.props.courseObj.description}
                         </div>
                         <div>
-                            GPA: {this.props.courseObj.gpa}
+                            GPA: {this.props.courseObj.gpa == -1 ? "N/A" : this.props.courseObj.gpa.toFixed(2)}
                         </div>
                         <div>
-                            Workload: {this.props.courseObj.workload}
+                            Workload: {this.props.courseObj.workload == -1 ? "N/A" : this.props.courseObj.workload.toFixed(2)}
                         </div>
                         <div>
-                            Professor Rating: {this.props.courseObj.prof_rating}
+                            Course Rating: {this.props.courseObj.class_rating == undefined ? "N/A" : this.props.courseObj.class_rating.toFixed(2)}
                         </div>
                     </ul>
                 </div>
