@@ -33,7 +33,9 @@ class ScheduleManager extends React.Component {
         let nextProfs = this.getProfessors(nextProps.schedule_list)
         this.setState({
             schedule_list: nextProps.schedule_list,
-            scheduleProfs: nextProfs
+            scheduleProfs: nextProfs,
+            currentSchedule: null,
+            currentScheduleIndex: -1
         });
         this.setState({ schedulesWereFiltered : false })
         }
@@ -341,11 +343,11 @@ class ScheduleManager extends React.Component {
     };
 
     clickedSchedule = (schedule, index, forceClicked = false) => {
-        if (schedule === this.state.currentSchedule) {
+        if (forceClicked === false && schedule === this.state.currentSchedule) {
             this.setState({
                 currentSchedule: null,
                 grid_draggable: true,
-                currentScheduleIndex: forceClicked ? index : -1
+                currentScheduleIndex: -1
             });
             return;
         }
