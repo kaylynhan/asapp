@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import Tooltip from "./Tooltip.js";
 import { red } from "@material-ui/core/colors";
-import "./Tooltip.css"
 
 class SectionDetail extends React.Component {
   constructor(props) {
@@ -21,9 +20,9 @@ class SectionDetail extends React.Component {
     var meetingDetail = (
 	<div>
 		Section ID: {course.id} <br />
-        Location: {meeting.building + " " + meeting.room_num}<br/>
 		Professor: {course.professor}<br/>
-        Prof Rating: {course.prof_rating == -1 ? "N/A" : course.prof_rating.toFixed(2)}<br/>
+		Prof Rating: {course.prof_rating == -1 ? "N/A" : course.prof_rating.toFixed(2)}<br/>
+        Location: {meeting.building + " " + meeting.room_num}<br/>
         
           CAPE:{" "}
           <a href={course.link} target="_blank">
