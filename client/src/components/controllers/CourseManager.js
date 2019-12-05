@@ -113,7 +113,7 @@ class CourseManager extends React.Component {
                 reqCourseInfo: res.data
             }, this.getGeneratedSchedules)
         })
-        .catch(err => console.log(err.message));
+        .catch(err => console.error(err.message));
 	}
 
     getGeneratedSchedules = () => {
