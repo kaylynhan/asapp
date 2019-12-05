@@ -14,20 +14,22 @@ class ScheduleGrid extends React.Component {
   }
 
   trackExcludedTime = e => {
-    const EXCLUSION_COLOR = "grey";
-    const DEFAULT_COLOR = "#c7ecfc";
+    const EXCLUSION_COLOR = "red";
+    const DEFAULT_COLOR = "#green";
+    //const EXCLUSION_COLOR = "grey";
+    //const DEFAULT_COLOR = "#c7ecfc";
     const outputArr = this.state.avoidHour;
 
     if (e.target.style.backgroundColor == EXCLUSION_COLOR) {
       // Active color vs deact color constant definition
 
-      e.target.style.backgroundColor = DEFAULT_COLOR;
+      //e.target.style.backgroundColor = DEFAULT_COLOR;
       let removeIndex = outputArr.findIndex(
         elem => elem == e.target.getAttribute("id")
       );
       outputArr.splice(removeIndex, 1);
     } else {
-      e.target.style.backgroundColor = EXCLUSION_COLOR;
+      //e.target.style.backgroundColor = EXCLUSION_COLOR;
       outputArr.push(e.target.getAttribute("id"));
     }
   };
@@ -111,6 +113,8 @@ class ScheduleGrid extends React.Component {
                     onMouseDown={this.handleMouseDown}
                     onMouseOver={this.handleMouseOver}
                     onMouseUp={this.handleMouseUp}
+                    draggable={this.props.draggable}
+                    isMouseDown={this.state.isMouseDown}
                   ></GridCell>
                 ))}
               </tr>
@@ -123,6 +127,8 @@ class ScheduleGrid extends React.Component {
                     onMouseDown={this.handleMouseDown}
                     onMouseOver={this.handleMouseOver}
                     onMouseUp={this.handleMouseUp}
+                    draggable={this.props.draggable}
+                    isMouseDown={this.state.isMouseDown}
                   ></GridCell>
                 ))}
               </tr>

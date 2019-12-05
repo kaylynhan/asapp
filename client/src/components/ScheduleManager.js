@@ -1,12 +1,13 @@
 import React from "react";
 import GapSlider from "./GapSlider";
 import { UnitSlider, DEFAULT_MIN_UNITS, DEFAULT_MAX_UNITS } from "./UnitSlider";
-import "./ScheduleManager.css";
 import ProfDropdown from "./ProfDropdown";
 import ScheduleList from "./ScheduleList";
 import ScheduleGrid from "./ScheduleGrid";
 import schedules from "../test/sampleSchedules.json"; // For testing only
 import SectionDetail from "./SectionDetail";
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import "./ScheduleManager.css";
 
 class ScheduleManager extends React.Component {
     // props is a object containing several schedules
@@ -22,13 +23,14 @@ class ScheduleManager extends React.Component {
         schedule_list: [],//schedules, // Get schedules from generation
         currentSchedule: null,
         currentScheduleIndex: -1,
-        grid_draggable: true,
+        grid_draggable: false,
         schedulesWereFiltered: false,
         scheduleProfs: this.getProfessors(this.props.schedule_list),
     };
     // update the stats
     //this.calculateScheduleStats();
     }
+
     componentWillReceiveProps(nextProps) {
         let nextProfs = this.getProfessors(nextProps.schedule_list)
         this.setState({
@@ -318,7 +320,7 @@ class ScheduleManager extends React.Component {
         let meeting = meeting_meetings_course.meeting;
         let meetings = meeting_meetings_course.meetings;
 
-        if (this.state.currentSchedule !== null) {
+        if (this.state.currentSchedule !== null && !this.state.grid_draggable) {
             //let meeting = this.state.currentSchedule[0]["sections"][0]["meetings"][0];
             if (meeting.start_time === 0 || meeting.day === "TBA") {
             return;
@@ -346,14 +348,14 @@ class ScheduleManager extends React.Component {
         if (forceClicked === false && schedule === this.state.currentSchedule) {
             this.setState({
                 currentSchedule: null,
-                grid_draggable: true,
+                //grid_draggable: true,
                 currentScheduleIndex: -1
             });
             return;
         }
         this.setState({
             currentSchedule: schedule,
-            grid_draggable: false,
+            //grid_draggable: false,
             currentScheduleIndex: index
         });
         console.log(this.state.currentSchedule);
@@ -382,6 +384,12 @@ class ScheduleManager extends React.Component {
                     profs={this.state.scheduleProfs}
                 />
                 </div>
+                <ToggleButton
+                    selected={this.state.grid_draggable}
+                    id="time_filter"
+                    onChange={() => this.setState({grid_draggable: !this.state.grid_draggable})}
+                    >{this.state.grid_draggable ? "Return" : "Set Time Preferences"}
+                </ToggleButton>
                 <button onClick={this.filterOutSchedules}>Filter</button>
             </div>
             <div id="sort">

@@ -58,3 +58,26 @@ header{
     text-align: center;
 }
 
+
+#time_filter {
+    font-size: 90%;
+    color: black;
+    text-transform: none;
+}
+
+#time_filter.MuiToggleButton-root {
+    background-color: lightgrey !important;
+}
+
+#time_filter.MuiToggleButton-root:hover {
+    background-color: grey !important
+}
+
+#time_filter.MuiToggleButton-root.Mui-selected {
+    background-color: red !important;
+    font-size: 120%;
+}
+
+#time_filter.MuiToggleButton-root.Mui-selected:hover {
+    background-color: darkred !important
+}
