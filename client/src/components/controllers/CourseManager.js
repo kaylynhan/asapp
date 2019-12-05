@@ -68,13 +68,13 @@ class CourseManager extends React.Component {
             })
         })
         .catch(err => {
-            console.log(err.message);
+            console.error(err.message);
         });
     }
 
 	onGenerateSchedules= () => {
 		
-		this.getOptionalInformation()
+		this.getOptionalInformation();
 
     }
 	
@@ -94,7 +94,7 @@ class CourseManager extends React.Component {
             }, this.getRequiredInformation)
         })
         .catch(err => {
-            console.log(err.message)
+            console.error(err.message);
         })
 	}
 	

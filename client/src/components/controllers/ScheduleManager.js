@@ -258,7 +258,6 @@ class ScheduleManager extends React.Component {
 
     handleOnMouseUp = arr => {
         this.setState({ avoidHours: arr });
-        setTimeout(() => console.log(this.state.avoidHours), 1);
     };
 
     populateMeetings = schedule => {
