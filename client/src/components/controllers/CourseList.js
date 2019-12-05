@@ -1,8 +1,6 @@
-import React from 'react'
-import './CourseList.css'
-import Tooltip from "./Tooltip";
-import axios from 'axios';
-import CourseListTag from "./CourseListTag";
+import React from 'react';
+import '../../css/CourseList.css';
+import CourseListTag from "../views/CourseListTag";
 
 class CourseList extends React.Component {
     constructor(props) {

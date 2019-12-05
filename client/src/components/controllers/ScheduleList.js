@@ -2,10 +2,7 @@ import React from 'react';
 import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
-import RequiredTag from "./RequiredTag";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
+
 
 // Also modify switch statement in sortFunction if modifying below sorts
 let SORT_OPTIONS = ["Sort by GPA", "Sort by CAPE Ratings", "Sort by Workload", "Sort by Minimum Days"];
@@ -43,7 +40,6 @@ class ScheduleList extends React.Component {
                         return schedule2['gpa'] - schedule1['gpa']; // Best to worst
                     }
                 );
-                console.log("Sorting by GPA");
                 break;
             case "Sort by CAPE Ratings":
                 schedule_list.sort(
@@ -51,7 +47,6 @@ class ScheduleList extends React.Component {
                         return schedule2['class_rating'] - schedule1['class_rating'];
                     }
                 );
-                console.log("Sorting by CAPE Ratings");
                 break;
             case "Sort by Workload":
                 schedule_list.sort(
@@ -59,7 +54,6 @@ class ScheduleList extends React.Component {
                         return schedule1['workload'] - schedule2['workload'];
                     }
                 );
-                console.log("Sorting by Workload");
                 break;
             case "Sort by Minimum Days":
                 schedule_list.sort(
@@ -67,7 +61,6 @@ class ScheduleList extends React.Component {
                         return schedule1['num_days'] - schedule2['num_days'];
                     }
                 );
-                console.log("Sorting by Minimum Days");
                 break;
             case "Sort by Maximum Average Gap":
                 break;

@@ -22,7 +22,7 @@
 
 import React from "react"
 import ReactTooltip from "react-tooltip"
-import "./Tooltip.css"
+import "../../css/Tooltip.css"
 
 class Tooltip extends React.Component {
 
@@ -62,7 +62,6 @@ class Tooltip extends React.Component {
             <div className="tooltipDiv">
                 {/* Tooltip Icon */}
                 <svg>
-                    {/* Circle Background */}
                     <circle
                         data-tip data-for={"Tooltip#" + Tooltip.tooltipCount}
                         cx = "14" cy="14" r="10"

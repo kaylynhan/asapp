@@ -1,8 +1,8 @@
 import React from 'react';
 //import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
-import HomePage from "./components/HomePage";
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import HomePage from "./components/controllers/HomePage";
 
 
 class App extends React.Component {

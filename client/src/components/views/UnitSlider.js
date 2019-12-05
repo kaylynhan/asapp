@@ -1,9 +1,8 @@
-import "rc-slider/assets/index.css"
-import "rc-tooltip/assets/bootstrap.css"
-import React from "react"
-import ReactDOM from "react-dom"
-import Tooltip from "rc-tooltip"
-import Slider from "rc-slider"
+import "rc-slider/assets/index.css";
+import "rc-tooltip/assets/bootstrap.css";
+import React from "react";
+import Tooltip from "rc-tooltip";
+import Slider from "rc-slider";
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip
 const Range = createSliderWithTooltip(Slider.Range)
@@ -16,16 +15,7 @@ export class UnitSlider extends React.Component {
     constructor(props) {
         super(props);
         this.handle = this.handle.bind(this);
-        this.log = this.log.bind(this);
         this.state = {};
-    }
-
-    log = (value) => {
-        console.log(value);
-    };
-
-    onChange() {
-        console.log("onChange");
     }
 
     handle = (props) => {
@@ -56,9 +46,6 @@ export class UnitSlider extends React.Component {
             24: 24
         }
 
-        function log(value) {
-            console.log(value);
-        }
         return (
             <div style={{ width: "100%" }}>
                 <p>Unit Range</p>

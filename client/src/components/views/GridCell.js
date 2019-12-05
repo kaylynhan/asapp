@@ -1,6 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import SectionDetail from "./SectionDetail";
 
 class GridCell extends React.Component {
   state = {
