@@ -61,7 +61,7 @@ export class UnitSlider extends React.Component {
         }
         return (
             <div style={{ width: "100%" }}>
-                <p>Unit Range</p>
+                <h6 style={{ textAlign: "center" }}>Unit Range</h6>
                 <Range marks={marks} onChange={this.props.onChange} min={4} max={24} defaultValue={[DEFAULT_MIN_UNITS, DEFAULT_MAX_UNITS]} tipFormatter={value => `${value}`} />
             </div>
         )

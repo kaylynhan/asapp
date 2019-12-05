@@ -80,7 +80,7 @@ class CourseInput extends React.Component {
 
     render() {
         return (
-            <div id="searchBar">
+            <div id="searchbar">
                 <input type="text" onChange = {this.handleOnChange} className="input" placeholder="Search" />
             </div>
         )

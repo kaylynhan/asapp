@@ -92,7 +92,10 @@ class CourseList extends React.Component {
                 <div id="courseListWindow">
                     {this.props.menus.map(menu => (
                         // Give search query department a ref in order to scroll towards it
-                        <div key={menu.title} ref={(this.giveDeptARef(menu)) ? this.deptToScrollTo : undefined}>
+                        <div key={menu.title} 
+                             ref={(this.giveDeptARef(menu)) ? this.deptToScrollTo : undefined}
+                             style={{padding: "5px"}}
+                             >
                             <details>
                                 <summary>{menu.title}</summary>
                                 {

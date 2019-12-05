@@ -1,43 +1,17 @@
-#schedule_area{
-    grid-area: schedule_area;
-    display:grid;
-    grid-template-areas:
-            "pref pref"
-            "sort display_area";
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 6fr;
-}
-
-
-#schedule_area > *{
-    border: 1px black dashed;
-}
-
-#minGap{
-    flex:1
-}
-
-#unitPref{
-    flex:1
-}
-
-#restrictCommute{
-    flex:1
-}
-
-#profPref{
-    flex:1
-}
-
 #preferences{
     grid-area:pref;
     display:flex;
     flex-direction: row;
     margin:20px;
+    padding-top: 20px;
+    border: 1px solid #f0f0f0;
 }
 
 #sort{
     grid-area:sort;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
 }
 
 #grid_area{
@@ -49,16 +23,8 @@ header{
 }
 
 #page_container > *{
-    border: 1px black solid;
+    /* border: 1px solid black; */
 }
-
-#generate {
-    height: 10vh;
-    padding: 0px;
-    text-align: center;
-}
-
-
 #time_filter {
     font-size: 90%;
     color: black;
@@ -66,18 +32,18 @@ header{
 }
 
 #time_filter.MuiToggleButton-root {
-    background-color: lightgrey !important;
+    background-color: #f0f0f0 !important;
 }
 
 #time_filter.MuiToggleButton-root:hover {
-    background-color: grey !important
+    background-color: #d0d0d0 !important
 }
 
 #time_filter.MuiToggleButton-root.Mui-selected {
-    background-color: red !important;
+    background-color: #ffaabb !important;
     font-size: 120%;
 }
 
 #time_filter.MuiToggleButton-root.Mui-selected:hover {
-    background-color: darkred !important
+    background-color: #c56 !important
 }

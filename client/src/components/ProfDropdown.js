@@ -20,7 +20,7 @@ class ProfDropdown extends React.Component {
     render() {
         return (
             <div>
-                <p style={{textAlign:"center"}}>{this.props.title}</p>
+                <h6 style={{ textAlign: "center" }}>{this.props.title}</h6>
 
                     <select onChange={this.props.onChange}>
                         <option value="">--Select your Professor--</option>

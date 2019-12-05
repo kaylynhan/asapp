@@ -17,6 +17,7 @@ import {Link, NavLink, Route} from "react-router-dom"
                 </div>
                 <img src={Logo} className="App-logo" />
                 <div className="NavbarRight">
+                   ACADEMIC SCHEDULING APPLICATION
                 </div>
              </div>
          )

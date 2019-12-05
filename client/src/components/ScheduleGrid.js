@@ -12,10 +12,10 @@ class ScheduleGrid extends React.Component {
       isMouseDown: false
     };
   }
-
+ 
   trackExcludedTime = e => {
-    const EXCLUSION_COLOR = "red";
-    const DEFAULT_COLOR = "#green";
+    const EXCLUSION_COLOR = "#c56";    
+    const DEFAULT_COLOR = "#c7ecfc";
     //const EXCLUSION_COLOR = "grey";
     //const DEFAULT_COLOR = "#c7ecfc";
     const outputArr = this.state.avoidHour;

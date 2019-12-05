@@ -35,6 +35,10 @@
 
 .NavbarRight {
   background-color: #0d5b93;
+  font-family: 'Montserrat';
+  color: #fffacd;
+  text-align: left;
+  padding: 25px;
   height: 50px;
   min-width: 50vh;
   width: 100%;

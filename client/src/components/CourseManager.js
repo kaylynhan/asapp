@@ -288,19 +288,24 @@ class CourseManager extends React.Component {
     render() {
         return (
             <div>
-                <div id="search_input">
-                    <p> Search_input</p>
-                    <CourseInput handleSearch={this.handleSearch}/>
+                <div id="search_input" style={{textAlign: "center"}}>
+                    <br />
+                    <CourseInput handleSearch={this.handleSearch} />
                 </div>
                 <div id="search_result">
-                    <p> Search_result</p>
+                    <br />
                     <CourseList menus = {this.state.catalogue} addCourse={this.addCourse} search_query_dept = {this.state.search_query_dept} search_query_num = {this.state.search_query_num}/>
                 </div>
                 <div id="need_want">
                     <p>Chosen Courses</p>
-                    <CoursePlan requiredClasses={this.state.requiredClasses} optionalClasses={this.state.optionalClasses} callBack={this.courseManagerCallBack}/>
+                    <CoursePlan requiredClasses={this.state.requiredClasses} 
+                                optionalClasses={this.state.optionalClasses} 
+                                callBack={this.courseManagerCallBack}
+                                style={{textAlign: "center"}}/>
 					<div id="generate">
-                    <button class="NavBtn" onClick = {this.onGenerateSchedules}>
+                    <button class="NavBtn" 
+                            onClick = {this.onGenerateSchedules}
+                            style={{height: "50px", width: "100%", fontSize: "16px"}}>
                         Generate Schedules
                     </button>
 					</div>

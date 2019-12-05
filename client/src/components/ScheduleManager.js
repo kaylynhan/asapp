@@ -373,14 +373,14 @@ class ScheduleManager extends React.Component {
                 {/*<GapSlider />*/}
                 <div id="profPref">
                 <ProfDropdown
-                    title="Pref Prof"
+                    title="Prefer Professor"
                     onChange={this.handlePrefProfChange}
                     profs={this.state.scheduleProfs}
                 />
                 </div>
                 <div id="profAvoid">
                 <ProfDropdown
-                    title="Avoid Prof"
+                    title="Avoid Professor"
                     onChange={this.handleAvoidProfChange}
                     profs={this.state.scheduleProfs}
                 />
@@ -389,9 +389,10 @@ class ScheduleManager extends React.Component {
                     selected={this.state.grid_draggable}
                     id="time_filter"
                     onChange={() => this.setState({grid_draggable: !this.state.grid_draggable})}
+                    style={{height: "50px"}}
                     >{this.state.grid_draggable ? "Return" : "Set Time Preferences"}
                 </ToggleButton>
-                <button onClick={this.filterOutSchedules}>Filter</button>
+                <button onClick={this.filterOutSchedules} style={{ height: "50px" }}>Filter</button>
             </div>
             <div id="sort">
                 <ScheduleList

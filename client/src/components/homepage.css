@@ -3,12 +3,10 @@
     grid-template-areas: 
         "LS header"
         "LS schedule_area";
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 1fr 3.7fr;
     grid-template-rows:1fr 7fr;
-    grid-gap:2vmin;
     height: 0px;
 }
-
 h1, p{
     text-align:center;
 }
@@ -18,6 +16,7 @@ h1, p{
     display:grid;
     grid-area:LS;
     grid-template-rows: 1fr 5fr 1fr 3fr;
+    background-color: #f0f0f0;
 }
 
 #preferences > *{
@@ -26,7 +25,7 @@ h1, p{
 }
 
 #left_sidebar > *{
-    border: black 1px dashed;
+    /* border: black 1px dashed; */
 }
 
 #schedule_area{
@@ -35,13 +34,16 @@ h1, p{
     grid-template-areas:
         "pref pref"
         "sort display_area";
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-columns: 1fr 3.5fr;
+    grid-template-rows: 1fr 9fr;
+    vertical-align: center;
+    justify-content: center;
+    align-content: center;
 }
 
 
 #schedule_area > *{
-    border: 1px black dashed;
+    /* border: 1px black dashed; */
 }
 
 #minGap{
@@ -83,7 +85,7 @@ header{
 }
 
 #page_container > *{
-    border: 1px black solid;
+    /* border: 1px black solid; */
 }
 
 #generate {

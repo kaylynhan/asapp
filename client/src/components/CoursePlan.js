@@ -72,8 +72,8 @@ class CoursePlan extends React.Component {
 
   render() {
     return (
-      <div id="courseTagContainer">
-        <div id="optionalArea">
+      <div id="courseTagContainer" style={{textAlign: "center"}}>
+        <div id="optionalArea" style={{textAlign: "center"}}>
           <h6>Optional</h6>
           {this.props.optionalClasses.map(item => (
             <div key={item.id}>
@@ -85,7 +85,7 @@ class CoursePlan extends React.Component {
             </div>
           ))}
         </div>
-        <div id="requiredArea">
+        <div id="requiredArea" style={{textAlign: "center"}}>
           <h6>Required</h6>
           {this.props.requiredClasses.map(item => (
             <div key={item.id}>

@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import SectionDetail from "./SectionDetail";
 
-const TIME_EXCLUSION_COLOR = "red"
-const TIME_COLOR = "green"
+const TIME_EXCLUSION_COLOR = "#c56"
+const TIME_COLOR = "#5eb"
 const DEFAULT_COLOR = "#c7ecfc"
 const EXCLUSION_COLOR = "grey"
 
