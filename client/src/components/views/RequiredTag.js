@@ -1,5 +1,5 @@
 import React from "react"
-import "./CoursePlan.css"
+import "../../css/CoursePlan.css"
 
 class RequiredTag extends React.Component {
     constructor(props) {

@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import CourseInput from "./CourseInput.js";
-import CourseList from "./CourseList.js";
 import CoursePlan from "./CoursePlan.js"
-import CourseListTag from "./CourseListTag"
 import {generateSchedules} from "./scheduleGenerator.js"
+import CourseInput from "../views/CourseInput.js";
+import CourseList from "./CourseList.js";
 
 class CourseManager extends React.Component {
     constructor(props) {
@@ -88,8 +87,6 @@ class CourseManager extends React.Component {
 			optionalIDs.push(this.state.optionalClasses[i]._id)
 		}
 		
-		console.log("optional IDs are",optionalIDs);
-		
 		axios.get("/courses/getMany", {params: {ids: optionalIDs}})
         .then(res => {
             this.setState({
@@ -110,8 +107,6 @@ class CourseManager extends React.Component {
 			requiredIDs.push(this.state.requiredClasses[i]._id)
 		}
 		
-		console.log("required IDs are", requiredIDs);
-		
 		axios.get("/courses/getMany", {params: {ids: requiredIDs}})
         .then(res => {
             this.setState({
@@ -129,9 +124,6 @@ class CourseManager extends React.Component {
     }
 	
 	nextgen = () => {
-		console.log("this.state.optCourseInfo is",this.state.optCourseInfo);
-        console.log("this.state.reqCourseInfo is", this.state.reqCourseInfo);
-        console.log("this.state.schedules is", this.state.schedules);
 		this.calculateScheduleStats(this.props.callback(this.state.schedules))
 	}
 	
@@ -267,16 +259,10 @@ class CourseManager extends React.Component {
 
                 return false;
             }
-            console.log(this.state.optionalClasses)
-            if(opt == undefined){
-                console.log("NOT IN REQ")
+
+            if(req == undefined && opt == undefined) {
+                newArr = newArr.concat(item)
             }
-            if(req == undefined
-             && opt == undefined) {
-                    newArr = newArr.concat(item)
-                }
-
-
             const requiredClasses = newArr
             return {
                 requiredClasses

@@ -1,5 +1,5 @@
 import React from "react"
-import "./CoursePlan.css"
+import "../../css/CoursePlan.css"
 
 class OptionalTag extends React.Component {
     constructor(props) {

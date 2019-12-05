@@ -1,5 +1,5 @@
 import React from 'react'
-import './CourseInput.css'
+import '../../css/CourseInput.css'
 
 class CourseInput extends React.Component {
     constructor(props) {
@@ -65,12 +65,11 @@ class CourseInput extends React.Component {
             search_query_dept = ""
             search_query_num = ""
         }
-
-        this.search_query_dept = search_query_dept
-        this.search_query_num = search_query_num
+        this.setState({
+            search_query_dept: search_query_dept,
+            search_query_num: search_query_num
+        })
         this.props.handleSearch(this.state.search_query, search_query_dept, search_query_num)
-        console.log("Dept is " + this.search_query_dept)
-        console.log("Num is " + this.search_query_num)
     }
 
     handleOnChange(event) {

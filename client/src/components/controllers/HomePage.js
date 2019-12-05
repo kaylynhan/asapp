@@ -1,14 +1,15 @@
-import CourseManager from "./CourseManager";
 import React from "react";
-import "./homepage.css";
-import NavigationBar from "../components/NavigationBar.js";
-import "../App.css";
-import "./CoursePlan.css";
-import "rc-slider/assets/index.css";
-import "./table.css";
-import ScheduleManager from "./ScheduleManager";
 
-import sample_schedules from '../test/sampleSchedules';
+import ScheduleManager from "./ScheduleManager";
+import CourseManager from "./CourseManager";
+import NavigationBar from "../views/NavigationBar.js";
+
+import "../../css/HomePage.css";
+import "../../App.css";
+import "../../css/CoursePlan.css";
+import "../../css/table.css";
+import "rc-slider/assets/index.css";
+
 
 class HomePage extends React.Component {
   constructor(props) {

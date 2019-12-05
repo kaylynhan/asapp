@@ -2,10 +2,7 @@ import React from 'react';
 import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
-import RequiredTag from "./RequiredTag";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
+
 
 // Also modify switch statement in sortFunction if modifying below sorts
 let SORT_OPTIONS = ["Sort by GPA", "Sort by CAPE Ratings", "Sort by Workload", "Sort by Minimum Days"];
