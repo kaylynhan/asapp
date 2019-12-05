@@ -173,31 +173,6 @@ class CourseManager extends React.Component {
                     });
                 schedule["workload"] = workload;
 
-                //calculate class_days
-
-                //Calculates total number of days for a schedule.
-                // var discoveredDays = []
-                // var addDay = true
-                //
-                // for(var k=0; k < schedule.length; k++)
-                // {
-                // 	for(var i=0;i<schedule[k].meetings.length;i++)
-                // 	{
-                // 		addDay = true
-                //
-                // 		for(var j=0; j<discoveredDays.length; j++)
-                // 		{
-                // 			if(schedule[k].meetings[i].day == discoveredDays[j])
-                // 				addDay = false
-                // 		}
-                //
-                // 		if(addDay == true)
-                // 			discoveredDays.push(schedule[k].meetings[i].day)
-                // 	}
-                // }
-                //
-                // schedule['num_days'] = discoveredDays.length;
-
                 let class_days = {
                     M: false,
                     Tu: false,
@@ -206,7 +181,6 @@ class CourseManager extends React.Component {
                     F: false
                 };
 
-                // TODO class_days
                 schedule.forEach(function(course) {
                     num_units += course['units'];
 
