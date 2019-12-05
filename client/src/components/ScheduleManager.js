@@ -81,7 +81,8 @@ class ScheduleManager extends React.Component {
             filteredSchedules: filteredSchedules,
             schedulesWereFiltered: true,
             currentScheduleIndex: currentScheduleIndex,
-            currentSchedule: currentScheduleIndex === -1 ? null : this.state.currentSchedule
+            currentSchedule: currentScheduleIndex === -1 ? null : this.state.currentSchedule,
+            grid_draggable: false,
         });
         console.log(`Number of filtered Schedules ${filteredSchedules.length}`)
     };
