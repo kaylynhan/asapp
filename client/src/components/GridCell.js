@@ -26,19 +26,25 @@ class GridCell extends React.Component {
     }
   }
 
-  onMouseDown(e) {
+  onMouseDown(e, isBlockedOut) {
+    let id = e.target.getAttribute("id")
     if (this.props.draggable) {
-      this.props.onMouseDown(e)
       this.setState({
         isBlockedOut: !this.state.isBlockedOut,
+      }, () => {
+        this.props.onMouseDown(id, isBlockedOut)
       })
     }
   }
 
-  onMouseOver(e) {
+  onMouseOver(e, isBlockedOut) {
+    let id = e.target.getAttribute("id")
     if (this.props.draggable && this.props.isMouseDown) {
-      this.props.onMouseOver(e)
-      this.setState({isBlockedOut: !this.state.isBlockedOut})
+      this.setState({
+        isBlockedOut: !this.state.isBlockedOut
+      }, () => {
+        this.props.onMouseOver(id, isBlockedOut)
+      })
     }
   }
 
@@ -57,8 +63,8 @@ class GridCell extends React.Component {
     return (
       <td style={{backgroundColor: this.getColor()}}
         id={this.props.id}
-        onMouseDown={e => this.onMouseDown(e)}
-        onMouseOver={e => this.onMouseOver(e)}
+        onMouseDown={e => this.onMouseDown(e,this.state.isBlockedOut)}
+        onMouseOver={e => this.onMouseOver(e,this.state.isBlockedOut)}
         onMouseUp={e => this.onMouseUp(e)}
       >
       </td>

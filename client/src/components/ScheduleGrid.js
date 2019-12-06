@@ -13,39 +13,30 @@ class ScheduleGrid extends React.Component {
     };
   }
  
-  trackExcludedTime = e => {
-    const EXCLUSION_COLOR = "#c56";    
-    const DEFAULT_COLOR = "#c7ecfc";
-    //const EXCLUSION_COLOR = "grey";
-    //const DEFAULT_COLOR = "#c7ecfc";
+  trackExcludedTime = (id, isBlockedOut) => {
     const outputArr = this.state.avoidHour;
-
-    if (e.target.style.backgroundColor == EXCLUSION_COLOR) {
-      // Active color vs deact color constant definition
-
-      //e.target.style.backgroundColor = DEFAULT_COLOR;
+    if (isBlockedOut) {
       let removeIndex = outputArr.findIndex(
-        elem => elem == e.target.getAttribute("id")
+        elem => elem === id
       );
       outputArr.splice(removeIndex, 1);
     } else {
-      //e.target.style.backgroundColor = EXCLUSION_COLOR;
-      outputArr.push(e.target.getAttribute("id"));
+      outputArr.push(id);
     }
   };
 
-  handleMouseDown = e => {
+  handleMouseDown = (id, setBlocked) => {
     if (this.props.draggable) {
       this.setState({ isMouseDown: true });
-      this.trackExcludedTime(e);
+      this.trackExcludedTime(id, setBlocked);
     }
   };
 
-  handleMouseOver = e => {
+  handleMouseOver = (id, setBlocked) => {
     if (this.props.draggable) {
       const outputArr = this.state.avoidHour;
       if (this.state.isMouseDown) {
-        this.trackExcludedTime(e);
+        this.trackExcludedTime(id, setBlocked);
       }
     }
   };
