@@ -6,7 +6,7 @@ let CourseSchema = new Schema({
     department: {type: String},
     number: {type: String},
     description: {type: String},
-    prereqs: {type: String},
+    prereqs: [String],
     units: {type: Number},
     gpa: {type: Number},
     workload: {type: Number},
@@ -21,16 +21,16 @@ let CourseSchema = new Schema({
         link: {type: String},
         final: {
             date: {type: String},
-            start_time: {type: String},
-            end_time: {type: String}
+            start_time: {type: Number},
+            end_time: {type: Number}
         },
         meetings: [{
             id: {type: String},
             code: {type: String},
             type: {type: String},
             day: {type: String},
-            start_time: {type: String},
-            end_time: {type: String},
+            start_time: Number,
+            end_time: Number,
             building: {type: String},
             room_num: {type: String}
         }]
