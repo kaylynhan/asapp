@@ -6,7 +6,7 @@ let CourseSchema = new Schema({
     department: {type: String},
     number: {type: String},
     description: {type: String},
-    prereqs: [String],
+    prereqs: {type: String},
     units: {type: Number},
     gpa: {type: Number},
     workload: {type: Number},
@@ -29,8 +29,8 @@ let CourseSchema = new Schema({
             code: {type: String},
             type: {type: String},
             day: {type: String},
-            start_time: Number,
-            end_time: Number,
+            start_time: {type: Number},
+            end_time: {type: Number},
             building: {type: String},
             room_num: {type: String}
         }]
