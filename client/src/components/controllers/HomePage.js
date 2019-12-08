@@ -12,38 +12,38 @@ import "rc-slider/assets/index.css";
 
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showLogin: false,
-      schedules: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            showLogin: false,
+            schedules: null
+        };
+    }
+
+    homePageCallBack = item => {
+        this.setState({ schedules: item });
     };
-  }
 
-  homePageCallBack = item => {
-    this.setState({ schedules: item });
-  };
+    toggleLogin() {
+        this.setState({
+            showLogin: !this.state.showLogin
+        });
+    }
 
-  toggleLogin() {
-    this.setState({
-      showLogin: !this.state.showLogin
-    });
-  }
-
-  render() {
-    return (
-      <div id="page_container">
-        <header>
-          <NavigationBar />
-        </header>
-        <div id="left_sidebar">
-          <CourseManager callback={this.homePageCallBack} />
-        </div>
-        <div>
-          <ScheduleManager schedule_list={this.state.schedules}/>
-        </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div id="page_container">
+                <header>
+                    <NavigationBar />
+                </header>
+                <div id="left_sidebar">
+                    <CourseManager callback={this.homePageCallBack} />
+                </div>
+                <div>
+                    <ScheduleManager schedule_list={this.state.schedules} />
+                </div>
+            </div>
+        );
+    }
 }
 export default HomePage;

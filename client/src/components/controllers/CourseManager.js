@@ -20,7 +20,11 @@ class CourseManager extends React.Component {
             search_query_num: '',
             filtered_catalogue: [],
         }
+<<<<<<< HEAD
         this.handleSearch = this.handleSearch.bind(this)
+=======
+        this.handleSearch = this.handleSearch.bind(this);
+>>>>>>> 676e27cbfe02fe2ee62248b1b15368751231c6b4
     }
 
     courseManagerCallBack = (item1FromChild, item2FromChild) => {
@@ -211,6 +215,10 @@ class CourseManager extends React.Component {
             search_query_num: search_query_num,
         })
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 676e27cbfe02fe2ee62248b1b15368751231c6b4
 
     addCourse = item => {
         this.setState(state => {
