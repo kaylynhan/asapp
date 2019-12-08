@@ -17,7 +17,7 @@ class ScheduleManager extends React.Component {
             avoidProfs: [],
             avoidHours: [],
             filteredSchedules: [],
-            schedule_list: [],//schedules, // Get schedules from generation
+            schedule_list: [],
             currentSchedule: null,
             currentScheduleIndex: -1,
             grid_draggable: true,
@@ -160,8 +160,7 @@ class ScheduleManager extends React.Component {
 
         return filteredSchedules;
     };
-
-    // Ugly quad nested loop. Pretty sure it works tho
+    
     filterOutAvoidTimes = (avoidTimes, totalSchedules) => {
         let filteredSchedules = [];
 
