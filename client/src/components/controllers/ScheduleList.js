@@ -21,7 +21,7 @@ class ScheduleList extends React.Component {
         this.setState({ schedule_list: nextProps.schedule_list })
     }
 
-    sortFunction = (event) => {
+    sortScheduleList = (event) => {
         let sort_func_name = event.target.value;
 
         let schedule_list = this.props.schedule_list;
@@ -84,7 +84,7 @@ class ScheduleList extends React.Component {
     render() {
         return (
             <List>
-                <select onChange={this.sortFunction}>
+                <select onChange={this.sortScheduleList}>
                     <option value="">Choose Sort Option</option>
                     {
                         this.state.sort_options.map(option => (
@@ -95,7 +95,7 @@ class ScheduleList extends React.Component {
 
                 {
                     this.state.schedule_list.map((item, index) => (
-                        <ListItem selected={this.props.selectedIndex === index} onClick={() => this.props.onClick(item, index)} button>
+                        <ListItem className="scheduleItem" selected={this.props.selectedIndex === index} onClick={() => this.props.onClick(item, index)} button>
                             <ListItemText primary={`GPA: ${item['gpa'] == -1 ? "N/A" : item['gpa'].toFixed(2)}\nCape: ${item['class_rating'] == -1 ? "N/A" : item['class_rating'].toFixed(2)}\n
                             Workload: ${item['workload'] == 0 ? "N/A": item['workload'].toFixed(2)}\nDays: ${item['num_days']}`}  />
                         </ListItem>

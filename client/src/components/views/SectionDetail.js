@@ -20,7 +20,7 @@ class SectionDetail extends React.Component {
         Location: {meeting.building + " " + meeting.room_num}<br/>
         
           CAPE:{" "}
-          <a href={course.link} target="_blank">
+          <a className="capeLink" href={course.link} target="_blank">
             Link to CAPE
           </a>
         <br/>
@@ -50,7 +50,7 @@ class SectionDetail extends React.Component {
         <b>{course.course}</b>
         <br></br>
         <i>{meeting.type}</i>
-        <Tooltip info={meetingDetail} style={{ margin: "0 auto" }}></Tooltip>
+        <Tooltip className="sectionTooltip" info={meetingDetail} style={{ margin: "0 auto" }}></Tooltip>
       </div>
     );
   };

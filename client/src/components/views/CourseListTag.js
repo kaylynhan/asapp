@@ -23,7 +23,7 @@ class CourseListTag extends React.Component {
                 {this.state.obj.id}
  
 				<div style={{float: "right"}}>
-				<Popup display="Details" info={
+				<Popup className="coursePopup" display="Details" info={
 				<div id="popupDisplay">
                     <h1>{this.props.courseObj.name}</h1>
                     <ul>
@@ -52,7 +52,7 @@ class CourseListTag extends React.Component {
                 </div>
                 }/>
 				</div>
-				<button className="popupBtn" onClick={() => this.props.addCourse(this.props.courseObj)}>+</button>
+				<button className="addBtn" onClick={() => this.props.addCourse(this.props.courseObj)}>+</button>
             </div>
         )
     }

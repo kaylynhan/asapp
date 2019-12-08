@@ -232,11 +232,11 @@ class ScheduleManager extends React.Component {
 
         if (prof != "") {
             this.setState(prevState => ({
-                prefProfs: [prof] // [...prevState.prefProfs, prof]
+                prefProfs: [prof]
             }));
         } else {
             this.setState(prevState => ({
-                prefProfs: [] // [...prevState.prefProfs, prof]
+                prefProfs: []
             }));
         }
     };
@@ -246,11 +246,11 @@ class ScheduleManager extends React.Component {
 
         if (prof != "") {
             this.setState(prevState => ({
-                avoidProfs: [prof] //[...prevState.avoidProfs, prof]
+                avoidProfs: [prof]
             }));
         } else {
             this.setState(prevState => ({
-                avoidProfs: [] //[...prevState.avoidProfs, prof]
+                avoidProfs: []
             }));
         }
     };
@@ -291,7 +291,6 @@ class ScheduleManager extends React.Component {
         let meetings = meeting_meetings_course.meetings;
 
         if (this.state.currentSchedule !== null) {
-            //let meeting = this.state.currentSchedule[0]["sections"][0]["meetings"][0];
             if (meeting.start_time === 0 || meeting.day === "TBA") {
                 return;
             }
@@ -351,7 +350,7 @@ class ScheduleManager extends React.Component {
                             profs={this.state.scheduleProfs}
                         />
                     </div>
-                    <button onClick={this.filterOutSchedules}>Filter</button>
+                    <button className="filterBtn" onClick={this.filterOutSchedules}>Filter</button>
                 </div>
                 <div id="sort">
                     <ScheduleList
