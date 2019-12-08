@@ -21,7 +21,6 @@ class CourseManager extends React.Component {
             filtered_catalogue: [],
         }
         this.handleSearch = this.handleSearch.bind(this)
-        this.filterCatalogue = this.filterCatalogue.bind(this)
     }
 
     courseManagerCallBack = (item1FromChild, item2FromChild) => {
@@ -210,12 +209,7 @@ class CourseManager extends React.Component {
             search_query: search_query,
             search_query_dept: search_query_dept,
             search_query_num: search_query_num,
-        },
-        this.filterCatalogue)
-    }
-
-    filterCatalogue() {
-
+        })
     }
 
     addCourse = item => {
