@@ -1,17 +1,14 @@
 import React from "react"
-import "../App.css"
-import Logo from "../images/asapp_logo_transparent.png"
-import "./NavigationBar.css"
+import "../../App.css"
+import Logo from "../../images/asapp_logo_transparent.png"
+import "../../css/NavigationBar.css"
 
-import {Link, NavLink, Route} from "react-router-dom"
-
-
- class NavigationBar extends React.Component {
-     constructor(props){
+class NavigationBar extends React.Component {
+    constructor(props) {
         super(props)
     }
-     render() {
-         return (
+    render() {
+        return (
             <div className="App-header">
                 <div className="NavbarLeft">
                 </div>
@@ -19,9 +16,9 @@ import {Link, NavLink, Route} from "react-router-dom"
                 <div className="NavbarRight">
                    ACADEMIC SCHEDULING APPLICATION
                 </div>
-             </div>
-         )
-     }
- }
+            </div>
+        )
+    }
+}
 
 export default NavigationBar

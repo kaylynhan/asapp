@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/kaylynhan/asapp/issues"
   },
-  "homepage": "https://github.com/kaylynhan/asapp#readme"
+  "homepage": "https://github.com/kaylynhan/asapp#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.7.1"
+  }
 }

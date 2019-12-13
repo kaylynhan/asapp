@@ -16,7 +16,7 @@ WITH PROPERTIES:
 */
 
 import React from "react"
-import "./Popup.css"
+import "../../css/Popup.css"
 
 class Popup extends React.Component {
 

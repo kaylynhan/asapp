@@ -1,7 +1,5 @@
-import React, { PureComponent, Fragment } from "react";
-import ReactDOM from "react-dom";
-import GridCell from "./GridCell";
-import SectionDetail from "./SectionDetail";
+import React from "react";
+import GridCell from "../views/GridCell";
 
 class ScheduleGrid extends React.Component {
   constructor(props) {

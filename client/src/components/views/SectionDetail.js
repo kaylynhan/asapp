@@ -1,21 +1,16 @@
-import React, { PureComponent } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import Tooltip from "./Tooltip.js";
-import { red } from "@material-ui/core/colors";
 
 class SectionDetail extends React.Component {
   constructor(props) {
     super(props);
   }
   state = {};
-  // props should have time, sectionLen, courseId, MeetingType
-  // Section number, Professor, Lecture Time, Building, Room Number, CAPE website
   renderSection = () => {
     // 60 minutes is 80 px on the screen
     const MIN_TO_PIX = 80 / 60;
     const course = this.props.course;
     const meeting = this.props.meeting;
-    const meetings = this.props.meetings;
 
     var meetingDetail = (
 	<div>

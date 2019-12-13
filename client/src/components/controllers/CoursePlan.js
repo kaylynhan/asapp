@@ -1,8 +1,7 @@
 import React from "react";
-import OptionalTag from "./OptionalTag";
-import RequiredTag from "./RequiredTag";
-import "./CoursePlan.css";
-import axios from "axios";
+import OptionalTag from "../views/OptionalTag";
+import RequiredTag from "../views/RequiredTag";
+import "../../css/CoursePlan.css";
 
 class CoursePlan extends React.Component {
   constructor(props) {

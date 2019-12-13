@@ -1,6 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import SectionDetail from "./SectionDetail";
 
 const TIME_EXCLUSION_COLOR = "#c56"
 const TIME_COLOR = "#5eb"
